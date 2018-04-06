@@ -10,9 +10,7 @@ const Root = (props) => {
   return (
     <Router>
       <Switch>
-        {Object.keys(examples).map((item, i) => (
-            <Route path={"/"+item} component={examples[item]}/>
-        ))}
+        {Object.keys(examples).map((item, i) => (<Route key="item" path={"/"+item} component={examples[item]}/>))}
       </Switch>
     </Router>
   );
