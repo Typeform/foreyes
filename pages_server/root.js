@@ -4,16 +4,15 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import ToggleExample from "../../KITT/src/components/toggle/toggle.visualTest.js";
-import EmptyStateExample from "../../KITT/src/components/empty-state/empty-state.layoutTest.js";
+import examples from "./examplesLoader.js"
 
 const Root = (props) => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={ToggleExample} />
-        <Route path="/toggle" component={ToggleExample} />
-        <Route path="/empty-state" component={EmptyStateExample} />
+        {Object.keys(examples).map((item, i) => (
+            <Route path={"/"+item} component={examples[item]}/>
+        ))}
       </Switch>
     </Router>
   );
