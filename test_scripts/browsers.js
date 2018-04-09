@@ -1,7 +1,7 @@
 var browsers = {
-/*     firefox: {
+    firefox: {
         name: "firefox"
-    }, */
+    },
     chrome: {
         name: "chrome"
     }
