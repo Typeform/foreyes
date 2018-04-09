@@ -1,10 +1,10 @@
 import React from "react";
+import examples from './componentsWithExamplePages.js'
 import {
   BrowserRouter as Router,
   Route,
   Switch,
 } from "react-router-dom";
-import examples from "./examplesLoader.js"
 
 const Root = (props) => {
   return (
