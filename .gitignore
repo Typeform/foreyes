@@ -22,6 +22,9 @@ lib-cov
 *.out
 *.pid
 *.gz
+componentsWithExamplePages.js
+componentsWithLayoutTest.js
+componentsWithVisualTest.js
 
 pids
 logs
