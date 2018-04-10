@@ -1,4 +1,5 @@
-COMPONENTS_PATH="../KITT/src/components"
+COMPONENTS_PATH=`cat path_to_components`
+
 declare -a COMPONENT_BLACKLIST=("__mocks__" "a-components-index")
 
 EXAMPLES_FILE="pages_server/componentsWithExamplePages.js"
@@ -43,3 +44,4 @@ VISUALS_TEXT="$VISUALS_TEXT];"
 echo $EXAMPLES_TEXT > $EXAMPLES_FILE
 echo $LAYOUTS_TEXT > $GALEN_LAYOUTS_FILE
 echo $VISUALS_TEXT > $GALEN_VISUALS_FILE
+echo "var config = {\n\tcomponentsSrcURI: '$COMPONENTS_PATH'\n};" > 'test_scripts/config.js'

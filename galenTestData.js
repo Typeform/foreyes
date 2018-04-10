@@ -1,4 +1,4 @@
-this.devices = {
+var devices = {
     mobile: {
         name: "mobile",
         size: "400x700"
@@ -10,5 +10,11 @@ this.devices = {
     desktop: {
         name: "desktop",
         size: "1280x720"
+    }
+};
+
+var browsers = {
+    chrome: {
+        name: "chrome"
     }
 };
