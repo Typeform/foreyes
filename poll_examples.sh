@@ -1,16 +1,13 @@
 COMPONENTS_PATH="../KITT/src/components"
 declare -a COMPONENT_BLACKLIST=("__mocks__" "a-components-index")
 
-EXAMPLES_FILE='pages_server/componentsWithExamplePages.js'
-GALEN_LAYOUTS_FILE='test_scripts/componentsWithLayoutTest.js'
-GALEN_VISUALS_FILE='test_scripts/componentsWithVisualTest.js'
->$GALEN_LAYOUTS_FILE
->$GALEN_VISUALS_FILE
->$EXAMPLES_FILE
+EXAMPLES_FILE="pages_server/componentsWithExamplePages.js"
+GALEN_LAYOUTS_FILE="test_scripts/componentsWithLayoutTest.js"
+GALEN_VISUALS_FILE="test_scripts/componentsWithVisualTest.js"
 
-echo "const examples={" >> $EXAMPLES_FILE
-echo "const layoutTestableComponents=[" >> $GALEN_LAYOUTS_FILE
-echo "const visualTestableComponents=[" >> $GALEN_VISUALS_FILE
+EXAMPLES_TEXT="const examples={\n"
+LAYOUTS_TEXT="const layoutTestableComponents=[\n"
+VISUALS_TEXT="const visualTestableComponents=[\n"
 
 containsElement () {
   local e match="$1"
@@ -29,18 +26,20 @@ do
   LAYOUT_TEST="$entry/$COMPONENT.layoutTest.js"
   VISUAL_TEST="$entry/$COMPONENT.visualTest.js"
   if [ -f $LAYOUT_TEST ]; then
-    echo "\t${COMPONENT//-/_}:require('../$LAYOUT_TEST').default," >> $EXAMPLES_FILE
-    echo "\t'$COMPONENT'," >> $GALEN_LAYOUTS_FILE
+    EXAMPLES_TEXT="$EXAMPLES_TEXT\t${COMPONENT//-/_}:require('../$LAYOUT_TEST').default,\n"
+    LAYOUTS_TEXT="$LAYOUTS_TEXT\t'$COMPONENT',\n"
   elif  [ -f $VISUAL_TEST ]; then
-    echo "\t${COMPONENT//-/_}:require('../$VISUAL_TEST').default," >> $EXAMPLES_FILE
-    echo "\t'$COMPONENT'," >> $GALEN_VISUALS_FILE
+    EXAMPLES_TEXT="$EXAMPLES_TEXT\t${COMPONENT//-/_}:require('../$VISUAL_TEST').default,\n"
+    VISUALS_TEXT="$VISUALS_TEXT\t'$COMPONENT',\n"
   else
     echo "WARNING: No tests written for component $COMPONENT"
   fi
 done
 
-echo "};\nexport default examples;" >> $EXAMPLES_FILE
-echo "];" >> $GALEN_LAYOUTS_FILE
-echo "];" >> $GALEN_VISUALS_FILE
+EXAMPLES_TEXT="$EXAMPLES_TEXT};\nexport default examples;"
+LAYOUTS_TEXT="$LAYOUTS_TEXT];"
+VISUALS_TEXT="$VISUALS_TEXT];"
 
-#galen test ./test_scripts/layout.js
+echo $EXAMPLES_TEXT > $EXAMPLES_FILE
+echo $LAYOUTS_TEXT > $GALEN_LAYOUTS_FILE
+echo $VISUALS_TEXT > $GALEN_VISUALS_FILE
