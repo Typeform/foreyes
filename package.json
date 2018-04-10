@@ -6,8 +6,8 @@
   "scripts": {
     "all": "yarn start && yarn visual && yarn layout && yarn stop && yarn report",
     "start": "./create_configuration_files.sh && webpack-dev-server",
-    "visual": "galen test test_scripts/visual.js",
-    "layout": "galen test test_scripts/layout.js",
+    "visual": "galen test test_scripts/visual.js --htmlreport \"logs/visual\"",
+    "layout": "galen test test_scripts/layout.js --htmlreport \"logs/layout\"",
     "stop": "echo STOP",
     "report": "echo REPORT"
   },
