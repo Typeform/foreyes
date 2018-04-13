@@ -4,10 +4,23 @@
 
 Clone this repository as a folder inside your design system
 
-KATT needs to know the path to the folder containing the components' folders. For instance, if a relative path to that folder was `../src/components/`:
+KATT needs to know some configuration variables, described in the katt.config folder:
+* Relative/absolute path to the folder containing the components and example pages, each in their own subfolder;
+* Port where the testing server will be executed;
+* And folders inside the component folders that are not components and thus should be ignored. Separated by a comma,
+
+For example:
 
 ```bash
- echo "../src/components" > path_to_components 
+PATH_TO_COMPONENTS=../src/components/
+PORT=8080
+COMPONENT_FOLDER_BLACKLIST=__mocks__,a-components-index
+```
+
+Remember to give katt.config the proper permissions:
+
+```bash
+chmod 711 katt.config
 ```
 
 Observe `galen.config`, which offers a default, but modifiable, configuration for galen. More information in its [official page.](http://galenframework.com/docs/getting-started-configuration/)
