@@ -1,5 +1,4 @@
-COMPONENTS_PATH="../KITT/src/components"
-declare -a COMPONENT_BLACKLIST=("__mocks__" "a-components-index")
+source ./katt.config
 
 EXAMPLES_FILE="pages_server/componentsWithExamplePages.js"
 GALEN_LAYOUTS_FILE="test_scripts/componentsWithLayoutTest.js"
@@ -16,7 +15,7 @@ containsElement () {
   return 1
 }
 
-for entry in "$COMPONENTS_PATH"/*
+for entry in "$PATH_TO_COMPONENTS"/*
 do
   if [ -f $entry ]; then 
     continue 
@@ -43,3 +42,4 @@ VISUALS_TEXT="$VISUALS_TEXT];"
 echo $EXAMPLES_TEXT > $EXAMPLES_FILE
 echo $LAYOUTS_TEXT > $GALEN_LAYOUTS_FILE
 echo $VISUALS_TEXT > $GALEN_VISUALS_FILE
+echo "var config = {\n\tcomponentsSrcURI: '$PATH_TO_COMPONENTS'\n};" > 'test_scripts/config.js'

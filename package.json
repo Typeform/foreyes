@@ -4,14 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "galen:all": "yarn galen:configure && yarn galen:start && yarn galen:visual && yarn galen:layout && yarn galen:stop && yarn galen:report",
-    "galen:configure": "./poll_examples.sh",
-    "galen:start": "webpack-dev-server",
-    "galen:visual": "echo VISUAL",
-    "galen:layout": "galen test test_scripts/layout.js",
-    "galen:stop": "echo STOP",
-    "galen:report": "echo REPORT",
-    "galen:test2": "galen test katt/empty-state.test.js"
+    "all": "yarn start && yarn visual && yarn layout && yarn stop && yarn report",
+    "start": "./create_configuration_files.sh && webpack-dev-server",
+    "visual": "galen test test_scripts/visual.js --htmlreport \"logs/visual\"",
+    "layout": "galen test test_scripts/layout.js --htmlreport \"logs/layout\"",
+    "stop": "echo STOP",
+    "report": "echo REPORT"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +19,7 @@
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.11",
     "galenframework": "^2.3.6",
     "html-loader": "^0.5.5",
