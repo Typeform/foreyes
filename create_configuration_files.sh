@@ -1,3 +1,15 @@
+function contains() {
+    local n=$#
+    local value=${!n}
+    for ((i=1;i < $#;i++)) {
+        if [ "${!i}" == "${value}" ]; then
+            echo "y"
+            return 0
+        fi
+    }
+    echo "n"
+    return 1
+}
 source ./katt.config
 
 EXAMPLES_FILE="pages_server/componentsWithExamplePages.js"
@@ -8,20 +20,17 @@ EXAMPLES_TEXT="const examples={\n"
 LAYOUTS_TEXT="const layoutTestableComponents=[\n"
 VISUALS_TEXT="const visualTestableComponents=[\n"
 
-containsElement () {
-  local e match="$1"
-  shift
-  for e; do [[ "$e" == "$match" ]] && return 0; done
-  return 1
-}
+COMPONENT_FOLDER_BLACKLIST=(${COMPONENT_FOLDER_BLACKLIST//,/ })
 
 for entry in "$PATH_TO_COMPONENTS"/*
 do
-  if [ -f $entry ]; then 
-    continue 
+  if [ -f $entry ]; then
+    continue
   fi
   COMPONENT=`basename $entry`
-  #TODO: continue if in blacklist
+  if [ $(contains "${COMPONENT_FOLDER_BLACKLIST[@]}" "$COMPONENT") == "y" ]; then
+    continue
+  fi
   LAYOUT_TEST="$entry/$COMPONENT.layoutTest.js"
   VISUAL_TEST="$entry/$COMPONENT.visualTest.js"
   if [ -f $LAYOUT_TEST ]; then
