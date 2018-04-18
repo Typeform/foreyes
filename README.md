@@ -2,6 +2,14 @@
 
 ## Installing
 
+Some scripts require Ruby.
+
+```bash
+brew install ruby
+```
+
+## Configuration
+
 Clone this repository as a folder inside your design system
 
 KATT needs to know some configuration variables, described in the katt.config folder:
