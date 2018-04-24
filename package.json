@@ -8,6 +8,7 @@
     "start": "./create_configuration_files.sh && webpack-dev-server",
     "visual": "galen test test_scripts/visual.js --htmlreport \"logs/visual\"",
     "layout": "galen test test_scripts/layout.js --htmlreport \"logs/layout\"",
+    "make:example": "ruby example_page_scripts/generate.rb",
     "stop": "echo STOP",
     "report": "echo REPORT"
   },
