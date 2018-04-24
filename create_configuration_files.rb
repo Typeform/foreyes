@@ -41,4 +41,4 @@ visuals_text += '];'
 File.write('pages_server/componentsWithExamplePages.js', examples_text)
 File.write('test_scripts/componentsWithLayoutTest.js', layouts_text)
 File.write('test_scripts/componentsWithVisualTest.js', visuals_text)
-File.write('test_scripts/config.js', "var config = {\n\tcomponentsSrcURI: '#{basic_vars["PATH_TO_COMPONENTS"]}'\n};")
+File.write('./config.js', "var config = {\n\tcomponentsSrcURI: '#{basic_vars["PATH_TO_COMPONENTS"]}'\n};")
