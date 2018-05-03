@@ -2,12 +2,20 @@
 
 ## Installing
 
+Some scripts require Ruby.
+
+```bash
+brew install ruby
+```
+
+## Configuration
+
 Clone this repository as a folder inside your design system
 
-KATT needs to know some configuration variables, described in the katt.config folder:
-* Relative/absolute path to the folder containing the components and example pages, each in their own subfolder;
-* Port where the testing server will be executed;
-* And folders inside the component folders that are not components and thus should be ignored. Separated by a comma,
+KATT needs to know some configuration variables. Copy `katt.config.dist` into `katt.config`.
+* PATH_TO_COMPONENTS: Relative/absolute path to the folder containing the components and example pages, each in their own subfolder;
+* PORT: Port where the testing server will be executed (just make it one you're not using);
+* COMPONENT_FOLDER_BLACKLIST: And folders inside the component folders that are not components and thus should be ignored. Separated by a comma,
 
 For example:
 
