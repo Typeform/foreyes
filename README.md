@@ -10,6 +10,8 @@ brew install ruby
 
 ## Configuration
 
+### One time
+
 Clone this repository as a folder inside your design system
 
 KATT needs to know some configuration variables. Copy `katt.config.dist` into `katt.config`.
@@ -34,3 +36,17 @@ chmod 711 katt.config
 Observe `galen.config`, which offers a default, but modifiable, configuration for galen. More information in its [official page.](http://galenframework.com/docs/getting-started-configuration/)
 
 Observer `galenTestData.js`, which offers a series of screen sizes and browsers. More information it its [official page.](http://galenframework.com/docs/reference-javascript-tests-guide/#Reusingparameterizationelementtorunonlyonce)
+
+### For each component
+For every component, you must add a `<componentName>.exampleCombinations.js` file. It must export (in default) a hash where the key is the name of the attribute and the value is an array containing all the possible values it can take. For instance, for a component button, the file `button.exampleCombinations.js` would look like:
+
+```javascript
+exports.default = {
+    size: ['xlarge', 'large', 'medium', 'small'],
+    fullWidth: [true, false],
+    iconPosition: ['left', 'right'],
+    iconSvg: [''],
+    type: ['level0', 'level1', 'level2', 'warning'],
+    children: ['Click here!'] //Special attribute to add text
+};
+```
