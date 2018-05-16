@@ -1,23 +1,14 @@
 const file = require("fs");
 const path = require("path");
-
-const configuration = () => {
-  return file.readFileSync('katt.config').toString().split("\n")
-    .reduce((acc,variable) => {
-      const v = variable.split('=')
-      acc[v[0]] = v[1]
-      if(v[0]==="COMPONENT_FOLDER_BLACKLIST") acc[v[0]] = v[1].split(",")
-      return acc;
-    }, {});
-};
+require("dotenv").config({path: "katt.config"})
 
 const componentList = () => {
-  const configVars = configuration();
-  const isntBlacklisted = dir => !configVars.COMPONENT_FOLDER_BLACKLIST.includes(dir);
+  const blacklist = process.env.COMPONENT_FOLDER_BLACKLIST.split(",");
+  const isntBlacklisted = dir => !blacklist.includes(path.basename(dir));
   const isFolder = path => file.lstatSync(path).isDirectory();
 
-  return file.readdirSync(configVars.PATH_TO_COMPONENTS)
-  .map(name => `${configVars.PATH_TO_COMPONENTS}${name}`)
+  return file.readdirSync(process.env.PATH_TO_COMPONENTS)
+  .map(name => `${process.env.PATH_TO_COMPONENTS}${name}`)
   .filter(isFolder)
   .filter(isntBlacklisted);
 };
