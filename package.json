@@ -7,8 +7,6 @@
     "all": "yarn start && yarn visual && yarn layout && yarn stop && yarn report",
     "start": "ruby ./create_configuration_files.rb && webpack-dev-server",
     "visual": "galen test test_scripts/visual.js --htmlreport \"logs/visual\"",
-    "layout": "galen test test_scripts/layout.js --htmlreport \"logs/layout\"",
-    "make:example": "ruby example_page_scripts/generate.rb",
     "stop": "echo STOP",
     "report": "echo REPORT"
   },
@@ -21,6 +19,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "cartesian-product": "^2.1.2",
     "css-loader": "^0.28.11",
     "galenframework": "^2.3.6",
     "html-loader": "^0.5.5",

@@ -6,7 +6,7 @@ def read_config
 end
 
 def add_example(name, page)
-    "\t#{name.tr('-','_')}: require('../#{page}').default,\n"
+    "\t#{name.tr('-','_')}: { component: require('../#{page}').default, combinations: require('../#{page}/#{name}.exampleCombinations.js').default },\n"
 end
 
 basic_vars = read_config
@@ -21,16 +21,13 @@ end
 
 components.each do |component|
     name = File.basename(component)
-    layout_page = "#{component}/#{name}.layoutTest.js"
-    visual_page = "#{component}/#{name}.visualTest.js"
-    if File.exists? layout_page
-        examples_text += add_example(name, layout_page)
-        layouts_text += "\t'#{name}',\n"
-    elsif File.exists? visual_page
-        examples_text += add_example(name, visual_page)
+    visual_page = "#{component}/#{name}.exampleCombinations.js"
+    main_page =  "#{component}"
+    if File.exists? visual_page
+        examples_text += add_example(name, main_page)
         visuals_text += "\t'#{name}',\n"
     else
-        p "WARNING: No tests written for component #{name}"
+        p "WARNING: No visual tests written for component #{name}"
     end
 end
 
