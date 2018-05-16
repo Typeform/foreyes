@@ -29,6 +29,8 @@ const allExamplePages = components => {
     const componentName = path.basename(directory);
     if(file.existsSync(`${directory}/${componentName}.exampleCombinations.js`)){
       acc.push(`\n\t${componentName.replace(/-/g,'_')}: { component: require('../${directory}').default, combinations: require('../${directory}/${componentName}.exampleCombinations.js').default }`);
+    }else{
+      console.log(`No exampleCombinations file for ${componentName}`);
     }
     return acc;
   }, []);
