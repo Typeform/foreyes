@@ -1,0 +1,50 @@
+const file = require("fs");
+const path = require("path");
+
+const configuration = () => {
+  return file.readFileSync('katt.config').toString().split("\n")
+    .reduce((acc,variable) => {
+      const v = variable.split('=')
+      acc[v[0]] = v[1]
+      if(v[0]==="COMPONENT_FOLDER_BLACKLIST") acc[v[0]] = v[1].split(",")
+      return acc;
+    }, {});
+};
+
+const componentList = () => {
+  const configVars = configuration();
+  const isntBlacklisted = dir => !configVars.COMPONENT_FOLDER_BLACKLIST.includes(dir);
+  const isFolder = path => file.lstatSync(path).isDirectory();
+
+  return file.readdirSync(configVars.PATH_TO_COMPONENTS)
+  .map(name => `${configVars.PATH_TO_COMPONENTS}${name}`)
+  .filter(isFolder)
+  .filter(isntBlacklisted);
+};
+
+const visualExamplePages = (components, variableName) => {
+  const examples = components.reduce((acc, directory) => {
+    const componentName = path.basename(directory);
+    if(file.existsSync(`${directory}/${componentName}.exampleCombinations.js`)){
+      acc.push(`'${componentName}'`);
+    }
+    return acc;
+  }, []);
+  return `const examples = [${examples}]`;
+};
+
+const allExamplePages = components => {
+  const examples = components.reduce((acc, directory) => {
+    const componentName = path.basename(directory);
+    if(file.existsSync(`${directory}/${componentName}.exampleCombinations.js`)){
+      acc.push(`\n\t${componentName.replace(/-/g,'_')}: { component: require('../${directory}').default, combinations: require('../${directory}/${componentName}.exampleCombinations.js').default }`);
+    }
+    return acc;
+  }, []);
+
+  return `const examples = {${examples}\n}; \nexport default examples;`;
+}
+
+const components = componentList();
+file.writeFileSync("pages_server/componentsWithExamplePages.js", allExamplePages(components), {flag: "w"});
+file.writeFileSync("test_scripts/componentsWithVisualTest.js", visualExamplePages(components), {flag: "w"});

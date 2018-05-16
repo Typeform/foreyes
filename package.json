@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "all": "yarn start && yarn visual && yarn layout && yarn stop && yarn report",
-    "start": "ruby ./create_configuration_files.rb && webpack-dev-server",
+    "start": "node ./createConfigurationFiles.js && webpack-dev-server",
     "visual": "galen test test_scripts/visual.js --htmlreport \"logs/visual\"",
     "stop": "echo STOP",
     "report": "echo REPORT"
