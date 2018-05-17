@@ -8,7 +8,7 @@
     "prepush": "yarn test",
     "start": "node ./createConfigurationFiles.js && webpack-dev-server",
     "test": "yarn run jest",
-    "visual": "galen test test_scripts/visual.js --htmlreport \"logs/visual\"",
+    "visual": "galen test test_scripts/visual.js --htmlreport \"logs/visual\""
   },
   "keywords": [],
   "author": "",
