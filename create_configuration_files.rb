@@ -25,19 +25,16 @@ end
 
 def all_example_pages(components)
   add_example = proc do |name, page|
-    "\t#{name.tr('-', '_')}: require('../#{page}').default,\n"
+    "\t#{name.tr('-','_')}: { component: require('../#{page}').default, combinations: require('../#{page}/#{name}.exampleCombinations.js').default },\n"
   end
 
   out = "const examples = {\n"
 
   components.each do |component|
     name = File.basename(component)
-    layout_page = "#{component}/#{name}.layoutTest.js"
-    visual_page = "#{component}/#{name}.visualTest.js"
-    if File.exist? layout_page
-      out += add_example.call(name, layout_page)
-    elsif File.exist? visual_page
-      out += add_example.call(name, visual_page)
+    visual_page = "#{component}/#{name}.exampleCombinations.js"
+    if File.exist? visual_page
+      out += add_example.call(name, component)
     else
       p "WARNING: No tests written for component #{name}"
     end
