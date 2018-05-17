@@ -6,7 +6,7 @@
   "scripts": {
     "all": "yarn start && yarn visual && yarn layout && yarn stop && yarn report",
     "prepush": "yarn test",
-    "start": "ruby ./create_configuration_files.rb && webpack-dev-server",
+    "start": "node ./createConfigurationFiles.js && webpack-dev-server",
     "test": "yarn run jest",
     "visual": "galen test test_scripts/visual.js --htmlreport \"logs/visual\""
   },
@@ -21,6 +21,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "cartesian-product": "^2.1.2",
     "css-loader": "^0.28.11",
+    "dotenv": "^5.0.1",
     "galenframework": "^2.3.6",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",

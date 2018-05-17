@@ -2,11 +2,7 @@
 
 ## Installing
 
-Some scripts require Ruby.
-
-```bash
-brew install ruby
-```
+This testing tool uses node.js and yarn.
 
 ## Configuration
 
