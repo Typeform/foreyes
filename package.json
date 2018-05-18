@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "all": "yarn start && yarn visual && yarn layout && yarn stop && yarn report",
+    "generate-combinations-for": "node template_scripts/generateCombinationsFor.js",
+    "mass-generate-combinations": "node template_scripts/generateAllCombinations.js",
     "prepush": "yarn test",
     "start": "node ./createConfigurationFiles.js && webpack-dev-server",
     "test": "yarn run jest",
