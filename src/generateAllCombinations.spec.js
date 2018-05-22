@@ -3,8 +3,8 @@ const generateAllCombinations = require("./generateAllCombinations");
 jest.mock("fs");
 jest.mock("dotenv");
 
-describe("generateCombinationsFor", () => {
-    it("should generate the one file per component", () => {
+describe("generateAllCombinations", () => {
+    it("generates one file per component", () => {
         const filesCreated = generateAllCombinations()
             .reduce((acc, result) => {
                 if (result.result === 0) acc++;

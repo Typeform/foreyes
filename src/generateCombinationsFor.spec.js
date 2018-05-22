@@ -6,7 +6,7 @@ const fs = require("fs");
 
 describe("generateCombinationsFor", () => {
     describe("given a component name", () => {
-        it("should create a combinations file", () => {
+        it("creates a combinations file", () => {
             const raw = require("./__fixtures__/reactComponentFullyAutomatable");
             fs.__setMockFile(raw);
 
@@ -27,14 +27,14 @@ describe("generateCombinationsFor", () => {
             expect(fs.__writtenContent).toBe(expected);
         })
 
-        it("shouldn't overwrite the combinations file", () => {
+        it("doesn't overwrite the combinations file", () => {
             fs.__fileExists = true;
             const result = generateCombinationsFor("button");
             expect(result).toBe(2);
             expect(fs.__writtenContent).toBeUndefined();
         })
 
-        it("should notify if some combinations couldn't be generated automatically", () => {
+        it("notifies if some combinations couldn't be generated automatically", () => {
             const raw = require("./__fixtures__/reactComponent");
             fs.__setMockFile(raw);
             const result = generateCombinationsFor("input");

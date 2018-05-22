@@ -4,7 +4,7 @@ jest.mock("fs");
 const fs = require("fs");
 
 describe("getPropTypesAsArray", () => {
-    it("should list a component's proptypes in an array", () => {
+    it("lists a component's proptypes in an array", () => {
         const raw = require("./__fixtures__/reactComponent");
         fs.__setMockFile(raw);
 
@@ -17,14 +17,14 @@ describe("getPropTypesAsArray", () => {
             .toEqual(expected);
     });
 
-    it("should return empty if there are no proptypes", () => {
+    it("returns empty if there are no proptypes", () => {
         const raw = "const nonParsedVar = \"This should not be parsed\"";
         fs.__setMockFile(raw);
 
         expect(getPropTypesAsArray("input", `${__dirname}/`)).toEqual([]);
     });
 
-    it("should throw if there's no such component", () => {
+    it("throws if there's no such component", () => {
         fs.__setFileNotFound();
 
         expect(() => getPropTypesAsArray("button", `${__dirname}/`)).toThrow();
