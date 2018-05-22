@@ -1,35 +1,32 @@
-const path = require("path");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const path = require('path')
+const HtmlWebPackPlugin = require('html-webpack-plugin')
 module.exports = {
-  entry: ["./pages_server/app.js"],
+  entry: ['./pages_server/app.js'],
   output: {
-    filename: "[name].js",
-    publicPath: "/"
+    filename: '[name].js',
+    publicPath: '/'
   },
-  mode: "none",
+  mode: 'none',
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: 'babel-loader'
         }
       },
       {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader"
+            loader: 'html-loader'
           }
         ]
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.svg$/,
@@ -42,12 +39,12 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: path.join(__dirname, "/pages_server"),
+    contentBase: path.join(__dirname, '/pages_server'),
     historyApiFallback: true
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./pages_server/index.html",
+      template: './pages_server/index.html'
     })
   ]
-};
+}
