@@ -50,10 +50,13 @@
     "rootDir": "src"
   },
   "lint-staged": {
-    "./*.js": [
-      "prettier-standard",
-      "standard --fix",
-      "git add"
-    ]
+    "linters": {
+      "./*.js": [
+        "prettier-standard",
+        "standard --fix",
+        "git add"
+      ]
+    },
+    "ignore": ["galenTestData.js"]
   }
 }

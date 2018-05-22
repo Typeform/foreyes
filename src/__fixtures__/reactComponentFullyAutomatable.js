@@ -5,4 +5,4 @@ let propTypes = {
     colorScheme: propTypes.oneOf([1, 2, 3])
 };
 
-exports.default = "No javascript should be activated."`;
+exports.default = "No javascript should be activated."`

@@ -7,4 +7,4 @@ let propTypes = {
     enabled: propTypes.bool
 };
 
-exports.default = "No javascript should be activated."`;
+exports.default = "No javascript should be activated."`
