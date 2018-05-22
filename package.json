@@ -43,6 +43,7 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/logs/"
-    ]
+    ],
+    "rootDir": "src"
   }
 }

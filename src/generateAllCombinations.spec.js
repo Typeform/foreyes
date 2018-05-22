@@ -1,11 +1,11 @@
-const generateAllCombinationsFunction = require("./generateAllCombinationsFunction");
+const generateAllCombinations = require("./generateAllCombinations");
 
 jest.mock("fs");
 jest.mock("dotenv");
 
-describe("generateAllCombinationsFunction", () => {
+describe("generateCombinationsFor", () => {
     it("should generate the one file per component", () => {
-        const filesCreated = generateAllCombinationsFunction()
+        const filesCreated = generateAllCombinations()
             .reduce((acc, result) => {
                 if (result.result === 0) acc++;
                 return acc;

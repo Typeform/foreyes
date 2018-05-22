@@ -1,10 +1,10 @@
-const generateCombinationsForFunction = require("./generateCombinationsForFunction");
+const generateCombinationsFor = require("./generateCombinationsFor");
 
 jest.mock("fs");
 jest.mock("dotenv");
 const fs = require("fs");
 
-describe("generateCombinationsForFunction", () => {
+describe("generateCombinationsFor", () => {
     describe("given a component name", () => {
         it("should create a combinations file", () => {
             const raw = require("./__fixtures__/reactComponentFullyAutomatable");
@@ -22,14 +22,14 @@ describe("generateCombinationsForFunction", () => {
     ]
 }`;
 
-            const result = generateCombinationsForFunction("input");
+            const result = generateCombinationsFor("input");
             expect(result).toBe(0);            
             expect(fs.__writtenContent).toBe(expected);
         })
 
         it("shouldn't overwrite the combinations file", () => {
             fs.__fileExists = true;
-            const result = generateCombinationsForFunction("button");
+            const result = generateCombinationsFor("button");
             expect(result).toBe(2);
             expect(fs.__writtenContent).toBeUndefined();
         })
@@ -37,7 +37,7 @@ describe("generateCombinationsForFunction", () => {
         it("should notify if some combinations couldn't be generated automatically", () => {
             const raw = require("./__fixtures__/reactComponent");
             fs.__setMockFile(raw);
-            const result = generateCombinationsForFunction("input");
+            const result = generateCombinationsFor("input");
             expect(result).toBe(1);
         })
     })

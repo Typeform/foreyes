@@ -1,4 +1,4 @@
-const generateCombinationsFor = require("./generateCombinationsForFunction");
+const generateCombinationsFor = require("./generateCombinationsFor");
 const getComponentList = require("./getComponentList");
 
 module.exports = () => {
