@@ -12,5 +12,4 @@ describe("generateCombinationsFor", () => {
             }, 0);
         expect(filesCreated).toBe(4);
     })
-    // rm */*.exampleCombinations.js
 })
