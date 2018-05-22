@@ -39,6 +39,9 @@
     "webpack-cli": "^2.0.14",
     "webpack-dev-server": "^3.1.1"
   },
+  "babel": {
+    "presets": ["env", "stage-2", "react"]
+  },  
   "jest": {
     "testPathIgnorePatterns": [
       "/node_modules/",
