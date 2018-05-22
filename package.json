@@ -7,7 +7,7 @@
     "all": "yarn start && yarn visual && yarn layout && yarn stop && yarn report",
     "generate-combinations-for": "node template_scripts/generateCombinationsFor.js",
     "mass-generate-combinations": "node template_scripts/generateAllCombinations.js",
-    "prepush": "yarn test",
+    "precommit": "lint-staged && yarn test",
     "start": "node ./createConfigurationFiles.js && webpack-dev-server",
     "test": "yarn run jest",
     "visual": "galen test test_scripts/visual.js --htmlreport \"logs/visual\""
@@ -29,10 +29,13 @@
     "html-webpack-plugin": "^3.2.0",
     "husky": "^0.14.3",
     "jest": "^22.4.3",
+    "lint-staged": "^7.1.2",
     "normalize.css": "^8.0.0",
+    "prettier-standard": "^8.0.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-router-dom": "^4.2.2",
+    "standard": "^11.0.1",
     "style-loader": "^0.20.3",
     "url-loader": "^1.0.1",
     "webpack": "^4.5.0",
@@ -45,5 +48,12 @@
       "/logs/"
     ],
     "rootDir": "src"
+  },
+  "lint-staged": {
+    "./*.js": [
+      "prettier-standard",
+      "standard --fix",
+      "git add"
+    ]
   }
 }
