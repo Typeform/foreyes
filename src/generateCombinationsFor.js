@@ -8,7 +8,7 @@ module.exports = (componentName) => {
     var somePropTypeWasUnparseable = false;
 
     const examplePath = `${componentPath}${componentName}.exampleCombinations.js`;
-    if(file.existsSync(examplePath)) return 2;
+    if(file.existsSync(examplePath)) return new Error(`File for ${componentName} already exists and would be overwritten`);
     
     const propTypes = getPropTypesAsArray(componentName, componentPath);
     const output = propTypes.reduce((acc,item) => {
@@ -21,6 +21,6 @@ module.exports = (componentName) => {
     
     file.writeFileSync(examplePath, `exports.default = ${JSON.stringify(output, null, 4)}`, {flag: "w"});
 
-    if(somePropTypeWasUnparseable) return 1;
+    if(somePropTypeWasUnparseable) return new Error(`Some attribute combinations for ${componentName} could not be filled automatically. Please manually fill the rest of the file.`);
     return 0;
 }

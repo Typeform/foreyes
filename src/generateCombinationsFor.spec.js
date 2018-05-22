@@ -30,7 +30,7 @@ describe("generateCombinationsFor", () => {
         it("doesn't overwrite the combinations file", () => {
             fs.__fileExists = true;
             const result = generateCombinationsFor("button");
-            expect(result).toBe(2);
+            expect(result).toEqual(Error('File for button already exists and would be overwritten'));
             expect(fs.__writtenContent).toBeUndefined();
         })
 
@@ -38,7 +38,7 @@ describe("generateCombinationsFor", () => {
             const raw = require("./__fixtures__/reactComponent");
             fs.__setMockFile(raw);
             const result = generateCombinationsFor("input");
-            expect(result).toBe(1);
+            expect(result).toEqual(Error('Some attribute combinations for input could not be filled automatically. Please manually fill the rest of the file.'));
         })
     })
     
