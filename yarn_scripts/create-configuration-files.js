@@ -1,6 +1,6 @@
 const file = require("fs");
-const componentList = require("../template_scripts/getComponentList");
-const allExamplePages = require("./getAllExamplePages");
+const componentList = require("../src/getComponentList");
+const allExamplePages = require("../src/getAllExamplePages");
 require("dotenv").config({path: "katt.config"})
 
 const componentsPath = componentList().map(name => `${process.env.PATH_TO_COMPONENTS}${name}`);

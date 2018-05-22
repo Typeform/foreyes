@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "generate-combinations-for": "node template_scripts/generateCombinationsFor.js",
-    "mass-generate-combinations": "node template_scripts/generateAllCombinations.js",
+    "generate-combinations-for": "node yarn_scripts/generate-combinations-for.js",
+    "mass-generate-combinations": "node yarn_scripts/mass-generate-combinations.js",
     "precommit": "lint-staged && yarn test",
     "start": "node ./yarn_scripts/create-configuration-files.js && webpack-dev-server",
     "test": "yarn run jest",

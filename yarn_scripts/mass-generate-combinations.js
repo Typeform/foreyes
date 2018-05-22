@@ -1,6 +1,4 @@
-const generateCombinationsFor = require('../src/generateCombinationsForFunction')
-const getComponentFromStdin = require('../src/getComponentFromStdin')
+const generateAllCombinations = require('../src/generateAllCombinations')
 
-const componentName = getComponentFromStdin()
-const result = generateCombinationsFor(componentName)
-console.log(result)
+const result = generateAllCombinations()
+console.log(`\n${result.notCreated}/${result.nComponents} components with no propTypes (${(100 * result.notCreated / result.nComponents).toFixed(2)}%)`)
