@@ -21,7 +21,7 @@ const stringToArray = (cleanString) => {
         },[])
 }
 
-const cleanString = (rawComponent) => {
+const cleanString = (rawComponent) => { //return a string ready to be split into an array
     const beginning = "propTypes={";
     const ending = "}";
     try {
