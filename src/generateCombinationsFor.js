@@ -6,8 +6,8 @@ require('dotenv').config({path: 'katt.config'})
 module.exports = (componentName) => {
   var componentPath = `${__dirname}/../${process.env.PATH_TO_COMPONENTS}${componentName}/`
   var somePropTypeWasUnparseable = false
-
-  const examplePath = `${componentPath}${componentName}.exampleCombinations.js`
+  
+  const examplePath = `${__dirname}/../${process.env.PATH_TO_EXAMPLES}${componentName}.exampleCombinations.js`
   if (file.existsSync(examplePath)) return new Error(`File for ${componentName} already exists and would be overwritten`)
 
   const propTypes = getPropTypesAsArray(componentName, componentPath)

@@ -20,6 +20,7 @@ Clone this repository as a folder inside your design system.
 
 KATT needs to know some configuration variables. Copy `katt.config.dist` into `katt.config`.
 * PATH_TO_COMPONENTS: Relative/absolute path to the folder containing the components and example pages, each in their own subfolder;
+* PATH_TO_EXAMPLES: This is where the files that create the testing pages should be.
 * PORT: Port where the testing server will be executed (just make it one you're not using);
 * COMPONENT_FOLDER_BLACKLIST: And folders inside the component folders that are not components and thus should be ignored. Separated by a comma,
 
@@ -27,6 +28,7 @@ For example:
 
 ```bash
 PATH_TO_COMPONENTS=../src/components/
+PATH_TO_EXAMPLES=../tests/
 PORT=8080
 COMPONENT_FOLDER_BLACKLIST=__mocks__,a-components-index,demos,panel-settings
 ```
@@ -40,7 +42,7 @@ chmod 711 katt.config
 ## Testing a component
 To have a kitchen sink page, you'll use `yarn generate-combinations-for <componentName>`. This script will attempt -automatically- to create a file with all possible combinations of every attribute of a component.
 
-Most likely, there will be attributes that won't be filled (a string has almost infinite values), and you will be asked to fill the combinations yourself. The file will be `<PATH_TO_COMPONENTS>/<componentName>/<componentName>.exampleCombinations.js`.
+Most likely, there will be attributes that won't be filled (a string has almost infinite values), and you will be asked to fill the combinations yourself. The file will be `<PATH_TO_EXAMPLES>/<componentName>.exampleCombinations.js`.
 
 For instance, for a component button, the file should be:
 
