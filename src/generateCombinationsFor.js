@@ -1,13 +1,13 @@
 const getPropTypesAsArray = require('./getPropTypesAsArray')
 const getAttributeCombinationsFromArray = require('./getAttributeCombinationsFromArray')
 const file = require('fs')
-require('dotenv').config({path: 'katt.config'})
+const config = require('../katt.config')
 
 module.exports = (componentName) => {
-  var componentPath = `${__dirname}/../${process.env.PATH_TO_COMPONENTS}${componentName}/`
+  var componentPath = `${__dirname}/../${config.path_to_components}${componentName}/`
   var somePropTypeWasUnparseable = false
   
-  const examplePath = `${__dirname}/../${process.env.PATH_TO_EXAMPLES}${componentName}.exampleCombinations.js`
+  const examplePath = `${__dirname}/../${config.path_to_examples}${componentName}.exampleCombinations.js`
   if (file.existsSync(examplePath)) return new Error(`File for ${componentName} already exists and would be overwritten`)
 
   const propTypes = getPropTypesAsArray(componentName, componentPath)
