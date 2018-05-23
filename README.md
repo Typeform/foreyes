@@ -18,25 +18,25 @@ _(TBD: how to turn it into a @typeform npm package in order to add it to the Des
 
 Clone this repository as a folder inside your design system.
 
-KATT needs to know some configuration variables. Copy `katt.config.dist` into `katt.config`.
-* PATH_TO_COMPONENTS: Relative/absolute path to the folder containing the components and example pages, each in their own subfolder;
-* PATH_TO_EXAMPLES: This is where the files that create the testing pages should be.
-* PORT: Port where the testing server will be executed (just make it one you're not using);
-* COMPONENT_FOLDER_BLACKLIST: And folders inside the component folders that are not components and thus should be ignored. Separated by a comma,
+KATT needs to know some configuration variables. Fill `katt.config.js`:
+* path_to_components: Relative/absolute path to the folder containing the components in the design system, each in their own subfolder;
+* path_to_examples: This is where the files that create the testing pages should be.
+* component_folder_blacklist: Folders inside the component folders (in the design system) that are not components and thus should be ignored.
 
 For example:
 
-```bash
-PATH_TO_COMPONENTS=../src/components/
-PATH_TO_EXAMPLES=../tests/
-PORT=8080
-COMPONENT_FOLDER_BLACKLIST=__mocks__,a-components-index,demos,panel-settings
+```javascript
+module.exports = {
+    path_to_components: '../src/components/',
+    path_to_examples: '../tests/',
+    component_folder_blacklist: ['__mocks__','a-components-index','demos','panel-settings','base-styles'],
+}
 ```
 
-Remember to give katt.config the proper permissions:
+Remember to give katt.config.js the proper permissions:
 
 ```bash
-chmod 711 katt.config
+chmod 711 katt.config.js
 ```
 
 ## Testing a component

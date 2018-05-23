@@ -1,7 +1,7 @@
 const generateAllCombinations = require('./generateAllCombinations')
 
 jest.mock('fs')
-jest.mock('dotenv')
+jest.mock('../katt.config.js')
 
 describe('generateAllCombinations', () => {
   it('generates one file per component', () => {

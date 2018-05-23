@@ -1,10 +1,10 @@
-require('dotenv').config({ path: 'katt.config' })
+const config = require('../katt.config')
 const file = require('fs')
 const path = require('path')
 
 module.exports = () => {
-  const basePath = process.env.PATH_TO_COMPONENTS
-  const blacklist = process.env.COMPONENT_FOLDER_BLACKLIST.split(',')
+  const basePath = config.path_to_components
+  const blacklist = config.component_folder_blacklist
   const isntBlacklisted = name => !blacklist.includes(path.basename(name))
   const isFolder = name => file.lstatSync(`${basePath}${name}`).isDirectory()
 
