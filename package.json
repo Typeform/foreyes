@@ -33,8 +33,7 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/logs/"
-    ],
-    "rootDir": "src"
+    ]
   },
   "lint-staged": {
     "linters": {
