@@ -23,6 +23,7 @@ lib-cov
 *.pid
 *.gz
 componentsWithExamplePages.js
+componentsWithCustomExamplePages.js
 componentsWithLayoutTest.js
 componentsWithVisualTest.js
 path_to_components
