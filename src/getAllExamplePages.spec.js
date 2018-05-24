@@ -8,10 +8,10 @@ describe("getAllExamplePages", () => {
             require("fs").__fileExists = true;
             const output = getAllExamplePages(input);
             const expected = `const examples = {
-button: { component: require('../././button').default, combinations: require('../././button/button.exampleCombinations.js').default },
-input: { component: require('../././input').default, combinations: require('../././input/input.exampleCombinations.js').default },
-headline: { component: require('../././headline').default, combinations: require('../././headline/headline.exampleCombinations.js').default },
-label: { component: require('../././label').default, combinations: require('../././label/label.exampleCombinations.js').default }
+button: { component: require('.././../src/button').default, combinations: require('.././../test/button.exampleCombinations.js').default },
+input: { component: require('.././../src/input').default, combinations: require('.././../test/input.exampleCombinations.js').default },
+headline: { component: require('.././../src/headline').default, combinations: require('.././../test/headline.exampleCombinations.js').default },
+label: { component: require('.././../src/label').default, combinations: require('.././../test/label.exampleCombinations.js').default }
 };
 export default examples;`;
             expect(output.replace(/ |\t/g,"")).toMatch(expected.replace(/ |\t/g,""));

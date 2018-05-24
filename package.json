@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "generate-combinations-for": "node template_scripts/generateCombinationsFor.js",
-    "mass-generate-combinations": "node template_scripts/generateAllCombinations.js",
+    "generate-combinations-for": "node scripts/generate-combinations-for.js",
+    "mass-generate-combinations": "node scripts/mass-generate-combinations.js",
     "precommit": "lint-staged && yarn test",
-    "start": "node ./yarn_scripts/create-configuration-files.js && webpack-dev-server",
+    "start": "node scripts/create-configuration-files.js && webpack-dev-server",
     "test": "yarn run jest",
     "visual": "galen test test_scripts/visual.js --htmlreport \"logs/visual\""
   },
@@ -41,9 +41,6 @@
     "webpack-cli": "^2.0.14",
     "webpack-dev-server": "^3.1.1"
   },
-  "babel": {
-    "presets": ["env", "stage-2", "react"]
-  },  
   "jest": {
     "testPathIgnorePatterns": [
       "/node_modules/",

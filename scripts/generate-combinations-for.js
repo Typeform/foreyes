@@ -1,4 +1,4 @@
-const generateCombinationsFor = require('../src/generateCombinationsForFunction')
+const generateCombinationsFor = require('../src/generateCombinationsFor')
 const getComponentFromStdin = require('../src/getComponentFromStdin')
 
 const componentName = getComponentFromStdin()
