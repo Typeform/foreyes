@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "generate-combinations-for": "node yarn_scripts/generate-combinations-for.js",
-    "mass-generate-combinations": "node yarn_scripts/mass-generate-combinations.js",
+    "generate-combinations-for": "node scripts/generate-combinations-for.js",
+    "mass-generate-combinations": "node scripts/mass-generate-combinations.js",
     "precommit": "lint-staged && yarn test",
-    "start": "node ./yarn_scripts/create-configuration-files.js && webpack-dev-server",
+    "start": "node scripts/create-configuration-files.js && webpack-dev-server",
     "test": "yarn run jest",
     "visual": "galen test test_scripts/visual.js --htmlreport \"logs/visual\""
   },
