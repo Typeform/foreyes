@@ -1,12 +1,4 @@
-const path = require('path')
-const HtmlWebPackPlugin = require('html-webpack-plugin')
 module.exports = {
-  entry: ['./pages_server/app.js'],
-  output: {
-    filename: '[name].js',
-    publicPath: '/'
-  },
-  mode: 'none',
   module: {
     rules: [
       {
@@ -37,14 +29,5 @@ module.exports = {
         use: 'url-loader'
       }
     ]
-  },
-  devServer: {
-    contentBase: path.join(__dirname, '/pages_server'),
-    historyApiFallback: true
-  },
-  plugins: [
-    new HtmlWebPackPlugin({
-      template: './pages_server/index.html'
-    })
-  ]
+  }
 }
