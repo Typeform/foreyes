@@ -1,7 +1,7 @@
 const getPropTypesAsArray = require('./getPropTypesAsArray')
 const getAttributeCombinationsFromArray = require('./getAttributeCombinationsFromArray')
 const file = require('fs')
-const config = require('../katt.config')
+const config = require('../../katt.config')
 
 module.exports = (componentName) => {
   var componentPath = `${__dirname}/../${config.path_to_components}${componentName}/`
