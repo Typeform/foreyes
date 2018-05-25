@@ -5,7 +5,7 @@ const fs = require('fs')
 
 describe('getPropTypesAsArray', () => {
   it("lists a component's proptypes in an array", () => {
-    const raw = require('./__fixtures__/reactComponent')
+    const raw = require('../__fixtures__/reactComponent')
     fs.__setMockFile(raw)
 
     const expected = [{ attribute: 'maxChars', propType: 'bool' },
