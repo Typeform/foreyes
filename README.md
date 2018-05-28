@@ -2,6 +2,8 @@
 
 # KATT
 
+[![Build Status](https://travis-ci.com/Typeform/kitt.svg?token=axsNaJqw6sjfoKFeCyDk&branch=master)](https://travis-ci.com/Typeform/kitt)
+
 KATT is the testing tool for all of Typeform's Design Systems.
 
 At this moment, KATT allows you to easily mount pages where all design-valid combinations of a component appear \([kitchen sink pages](https://medium.com/eightshapes-llc/component-qa-in-design-systems-b18cb4decb9c)). There are also helpers to create these pages. For the moment you can manually test the visuals of a component without having to leave the page.
@@ -88,21 +90,15 @@ If you've just installed KATT on your design system and there are already many u
 
 The development team serves this script as is and does not take responsibility for any gargantuan PRs which may derive from using this power unwisely.
 
-## On galen
-
-(TBD)
-
-Observe `galen.config`, which offers a default, but modifiable, configuration for galen. More information in its [official page.](http://galenframework.com/docs/getting-started-configuration/)
-
-Observer `galenTestData.js`, which offers a series of screen sizes and browsers. More information it its [official page.](http://galenframework.com/docs/reference-javascript-tests-guide/#Reusingparameterizationelementtorunonlyonce)
-
 ## Contributing
 
-(TBD)
+Please contact one of the authors to see how you can help! In the future, we hope we can open source this tool and make it public use. 
+
+If you're still lost don't hesitate to join our #moonshots Slack channel!
 
 ## Versioning
 
-(TBD)
+Until this tool moves out of Alpha, no versioning will be done.
 
 ## Authors
 
