@@ -1,7 +1,8 @@
 const file = require("fs");
 const componentList = require("../src/getComponentList");
 const allExamplePages = require("../src/getAllExamplePages");
-require("dotenv").config({path: "katt.config"})
+const customExamplePages = require("../src/getCustomExamplePages");
 
 const componentPaths = componentList();
-file.writeFileSync("pages_server/componentsWithExamplePages.js", allExamplePages(componentPaths), {flag: "w"});
+file.writeFileSync(".storybook/componentsWithExamplePages.js", allExamplePages(componentPaths), {flag: "w"});
+file.writeFileSync(".storybook/componentsWithCustomExamplePages.js", customExamplePages(componentPaths), {flag: "w"});

@@ -1,5 +1,4 @@
 import React from 'react'
-import BaseStyles from '../../src/components/base-styles'
 const cartesianProduct = require('cartesian-product')
 
 const separateKeysAndValues = (combinations) => {
@@ -24,9 +23,9 @@ const mountAllComponentInstances = (Component, combinations) => {
 
 const ComponentExample = (props) => {
   return (
-    <BaseStyles>
+    <div>
       {mountAllComponentInstances(props.reactComponent, props.possibleAttributesValues)}
-    </BaseStyles>
+    </div>
   )
 }
 

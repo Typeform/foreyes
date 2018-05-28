@@ -1,7 +1,7 @@
 const getComponentList = require('./getComponentList')
 
-jest.mock('dotenv')
 jest.mock('fs')
+jest.mock('../katt.config.js')
 
 describe('getComponentList', () => {
   it('returns all non-blacklisted subfolders', () => {

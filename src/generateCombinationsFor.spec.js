@@ -1,7 +1,7 @@
 const generateCombinationsFor = require('./generateCombinationsFor')
 
 jest.mock('fs')
-jest.mock('dotenv')
+jest.mock('../katt.config.js')
 const fs = require('fs')
 
 describe('generateCombinationsFor', () => {

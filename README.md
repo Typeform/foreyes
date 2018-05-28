@@ -18,28 +18,33 @@ _(TBD: how to turn it into a @typeform npm package in order to add it to the Des
 
 Clone this repository as a folder inside your design system.
 
-KATT needs to know some configuration variables. Copy `katt.config.dist` into `katt.config`.
-* PATH_TO_COMPONENTS: Relative/absolute path to the folder containing the components and example pages, each in their own subfolder;
-* PATH_TO_EXAMPLES: This is where the files that create the testing pages should be.
-* PORT: Port where the testing server will be executed (just make it one you're not using);
-* COMPONENT_FOLDER_BLACKLIST: And folders inside the component folders that are not components and thus should be ignored. Separated by a comma,
+KATT needs to know some configuration variables. Fill `katt.config.js`:
+* path_to_components: Relative/absolute path to the folder containing the components in the design system, each in their own subfolder;
+* path_to_examples: This is where the files that create the testing pages should be.
+* component_folder_blacklist: Folders inside the component folders (in the design system) that are not components and thus should be ignored.
 
 For example:
 
-```bash
-PATH_TO_COMPONENTS=../src/components/
-PATH_TO_EXAMPLES=../tests/
-PORT=8080
-COMPONENT_FOLDER_BLACKLIST=__mocks__,a-components-index,demos,panel-settings
+```javascript
+module.exports = {
+    path_to_components: '../src/components/',
+    path_to_examples: '../tests/',
+    component_folder_blacklist: ['__mocks__','a-components-index','demos','panel-settings','base-styles'],
+}
 ```
 
-Remember to give katt.config the proper permissions:
+Remember to give katt.config.js the proper permissions:
 
 ```bash
-chmod 711 katt.config
+chmod 711 katt.config.js
 ```
 
 ## Testing a component
+
+In order to test a component you must first provide a page in which it lives. There's two pages you can create (one component can have both!)
+
+### Kitchen sink page
+
 To have a kitchen sink page, you'll use `yarn generate-combinations-for <componentName>`. This script will attempt -automatically- to create a file with all possible combinations of every attribute of a component.
 
 Most likely, there will be attributes that won't be filled (a string has almost infinite values), and you will be asked to fill the combinations yourself. The file will be `<PATH_TO_EXAMPLES>/<componentName>.exampleCombinations.js`.
@@ -55,6 +60,25 @@ exports.default = {
     type: ['level0', 'level1', 'level2', 'warning'],
     children: ['Click here!'] //Special attribute to add text
 };
+```
+
+### Custom page
+
+If you want to test a very specific component configuration (with some very specific children), simply create the file `<PATH_TO_EXAMPLES>/<componentName>.customExample.js` and fill with a React component. This would work: 
+
+```javascript
+import React from 'react'
+import Split from '../src/split'
+
+const SplitExample = () => {
+  return (
+    <Split>
+     <div>very specific child.</div>
+    </Split>
+  )
+}
+
+export default SplitExample
 ```
 
 That's it! All you need to do is go to the KATT folder and use `yarn start`. Then you can go to your kitchen sink page under `localhost:<PORT>/<componentName>` ("localhost:8080/button"). Repeat for all components you with to test.

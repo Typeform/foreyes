@@ -7,46 +7,33 @@
     "generate-combinations-for": "node scripts/generate-combinations-for.js",
     "mass-generate-combinations": "node scripts/mass-generate-combinations.js",
     "precommit": "lint-staged && yarn test",
-    "start": "node scripts/create-configuration-files.js && webpack-dev-server",
+    "start": "node scripts/create-configuration-files.js && start-storybook -p 8080 -c .storybook",
     "test": "yarn run jest",
     "visual": "galen test test_scripts/visual.js --htmlreport \"logs/visual\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
+  "dependencies": {
     "cartesian-product": "^2.1.2",
-    "css-loader": "^0.28.11",
     "dotenv": "^5.0.1",
-    "galenframework": "^2.3.6",
-    "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "@storybook/react": "^3.4.5"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
     "husky": "^0.14.3",
     "jest": "^22.4.3",
     "lint-staged": "^7.1.2",
-    "normalize.css": "^8.0.0",
     "prettier-standard": "^8.0.1",
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",
-    "react-router-dom": "^4.2.2",
-    "standard": "^11.0.1",
-    "style-loader": "^0.20.3",
-    "url-loader": "^1.0.1",
-    "webpack": "^4.5.0",
-    "webpack-cli": "^2.0.14",
-    "webpack-dev-server": "^3.1.1"
+    "standard": "^11.0.1"
   },
   "jest": {
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/logs/"
-    ],
-    "rootDir": "src"
+    ]
   },
   "lint-staged": {
     "linters": {
@@ -56,6 +43,8 @@
         "git add"
       ]
     },
-    "ignore": ["galenTestData.js"]
+    "ignore": [
+      "galenTestData.js"
+    ]
   }
 }
