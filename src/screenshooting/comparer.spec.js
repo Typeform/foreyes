@@ -7,7 +7,7 @@ describe('Comparing technology', () => {
         const masterImage = './screenshots/img1.png' //simplified
         const studentImage = './screenshots/img2.png'
         it('compares images and creates a diff image if different', () => {
-             const diffPaths = Array(68).map(() => comparer(masterImage, studentImage))
+             const diffPaths = [...new Array(5)].map(() => comparer(masterImage, studentImage))
              //this should create actual diff images, for you to see if they're created properly
              diffPaths.forEach((path) => expect(path).not.toBeFalsy())
         })
