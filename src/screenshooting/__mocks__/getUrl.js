@@ -1,0 +1,1 @@
+module.exports = (component) => 'http://www.google.com'

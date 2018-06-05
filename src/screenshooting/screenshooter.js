@@ -1,28 +1,30 @@
 const getUrl = require('./getUrl')
 const webdriverio = require('webdriverio');
-const wdio = require('wdio-screenshot')
-const fs = require('fs')
-const screenshoot = require('wdio-screenshot').makeViewportScreenshot;
-const options = {
-    desiredCapabilities: {
-        browserName: 'firefox'
-    },
-    screenshotPath: './screenshots/taken/' //ensure your screenshots are put under here
-};
+const webdriverioScreenshot = require('wdio-screenshot');
 
-thething = async (componentName,i,max) => {
-    if(i == max) return;
-    console.log(`${i} until ${max}`)
-    const url = getUrl(componentName);
-    const savePath = `./screenshots/taken/${componentName}${i}.png`;
+module.exports = (componentName, browserName) => {
+    const url = getUrl(componentName)
+    const savePath = `./screenshots/${componentName}_${browserName}.png`
 
-    let browser = webdriverio.remote(options).init().url(url)
-    const base64Image = await wdio.makeViewportScreenshot(browser);
-    fs.writeFile(savePath, base64Image, 'base64', () => thething(componentName,i+1, max))
-    browser.end()
-    
+    const options = {
+        desiredCapabilities: {
+            browserName: browserName
+        },
+    };
+
+    const client = webdriverio.remote(options)
+    webdriverioScreenshot.init(client);
+
+
+    return client
+        .init()
+        .url(url)
+        .saveDocumentScreenshot(savePath)
+        .end()
+        .catch(err => console.log(err))
+/*         .setViewportSize({
+            width: 500,
+            height: 500
+        })
+        .saveScreenshot(savePath) */
 }
-thething('button',0,5)
-thething('button',5,10)
-thething('button',10,15)
-thething('button',15,20)
