@@ -1,15 +1,28 @@
-const getUrl = require('./getUrl')
+jest.mock('./getUrl.js')
+
 const screenshooter = require('./screenshooter')
+const fs = require('fs')
+
+jest.setTimeout(100000)
 
 describe('Screenshooting technology', () => {
-    describe('given 68 components in firefox', () => {
-        const times = 1 //put 1 at the beginning in order to test the technology
-        const componentList = Array(times).fill('button') //simplified
-        const browser = 'firefox'
-        it('takes one picture per component page', () => {
-             const imagePaths = componentList.map((component) => screenshooter(browser, component))
-             //this should create actual diff images, for you to see if they're created properly             
-             //imagePaths.forEach((path) => expect(path).not.toBeFalsy())
+    describe('given a url', () => {
+        const component = 'button'
+        it('takes one picture in firefox', async () => {
+            return screenshooter(component, 'firefox').then(result => {
+                expect(fs.existsSync(`./screenshots/${component}_firefox.png`)).toBe(true);
+            })
+        })
+        it('takes one picture in chrome', () => {
+            return screenshooter(component, 'chrome').then(result => {
+                expect(fs.existsSync(`./screenshots/${component}_chrome.png`)).toBe(true);
+            })
+        })
+        afterEach(() => {
+
+            return
+            fs.unlink(`./screenshots/${component}_firefox.png`, () => {})
+            fs.unlink(`./screenshots/${component}_chrome.png`, () => {})
         })
     })
 })
