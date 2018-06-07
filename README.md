@@ -83,7 +83,9 @@ const SplitExample = () => {
 export default SplitExample
 ```
 
-That's it! All you need to do is go to the KATT folder and use `yarn start`. Then you can go to your kitchen sink page under `localhost:<PORT>/<componentName>` ("localhost:8080/button"). Repeat for all components you with to test.
+Now to the KATT folder and use `yarn start`. Then you should be able to see your kitchen sink page under `localhost:<PORT>/<componentName>` ("localhost:8080/button").
+
+Now, in order to automatically visually test the component you're working on, stay in the katt folder and use `yarn visual-test <componentName>`. The console will output whether the images in both browsers are the same or not. A diff will appear under katt/screenshots for you to review.
 
 ### Starting the hard way
 If you've just installed KATT on your design system and there are already many untested components, you can use `yarn mass-generate-combinations`. This will call `yarn generate-combinations-for` for every component in your project.
