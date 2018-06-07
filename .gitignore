@@ -11,6 +11,7 @@ nbproject
 *.sublime-workspace
 *.sublime-*
 .idea
+screenshots/*
 
 #  common node files and folders
 #  https://github.com/github/gitignore/blob/master/Node.gitignore

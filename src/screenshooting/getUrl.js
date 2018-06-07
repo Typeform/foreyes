@@ -1,1 +1,0 @@
-module.exports = (component) => `http://localhost:8080?selectedKind=${component}&full=1`;
