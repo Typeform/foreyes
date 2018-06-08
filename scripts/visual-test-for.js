@@ -1,5 +1,5 @@
 const path = require('path')
-const getComponentFromStdin = require(path.resolve(__dirname, '../src/examples/getComponentFromStdin'))
+const getComponentFromStdin = require(path.resolve(__dirname, '../src/getComponentFromStdin'))
 const componentName = getComponentFromStdin()
 
 const { execSync } = require('child_process')
