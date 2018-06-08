@@ -1,5 +1,5 @@
 const path = require('path')
-const generateCombinationsFor = require(path.resolve(__dirname,'./generateCombinationsFor'))
+const generateCombinationsFor = require(path.resolve(__dirname, './generateCombinationsFor'))
 
 jest.mock('fs')
 jest.mock('../../katt.config.js')

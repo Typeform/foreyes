@@ -1,5 +1,5 @@
 module.exports = [
-    'button',
-    'input',
-    'headline',
-    'label'];
+  'button',
+  'input',
+  'headline',
+  'label']

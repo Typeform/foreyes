@@ -1,5 +1,5 @@
 const path = require('path')
-const getComponentList = require(path.resolve(__dirname,'./getComponentList'))
+const getComponentList = require(path.resolve(__dirname, './getComponentList'))
 
 jest.mock('fs')
 jest.mock('../../katt.config.js')
