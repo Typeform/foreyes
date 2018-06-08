@@ -1,6 +1,6 @@
-const config = require('../../katt.config')
-const file = require('fs')
 const path = require('path')
+const config = require(path.resolve(__dirname,'../../katt.config'))
+const file = require('fs')
 
 module.exports = () => {
   const basePath = config.path_to_components
