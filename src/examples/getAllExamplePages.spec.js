@@ -1,4 +1,5 @@
-const getAllExamplePages = require("./getAllExamplePages");
+const path = require('path')
+const getAllExamplePages = require(path.resolve(__dirname,"./getAllExamplePages"));
 
 jest.mock("fs")
 jest.mock("../../katt.config")
