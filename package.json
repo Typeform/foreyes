@@ -49,7 +49,7 @@
       ]
     },
     "ignore": [
-      "galenTestData.js"
+      "*spec.js"
     ]
   }
 }

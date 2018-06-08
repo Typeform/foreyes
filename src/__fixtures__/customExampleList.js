@@ -1,4 +1,4 @@
 module.exports = [
-    'button',
-    'input',
-    'label'];
+  'button',
+  'input',
+  'label']

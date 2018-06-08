@@ -7,7 +7,7 @@ fs.__setMockFile = (newMockFile) => {
 }
 fs.readFileSync = (directoryPath) => mockFile
 fs.__setFileNotFound = () => {
-  fs.readFileSync = () => { throw 'Exception' }
+  fs.readFileSync = () => { throw new Error('Exception') }
 }
 fs.existsSync = () => fs.__fileExists === true
 

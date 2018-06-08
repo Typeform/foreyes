@@ -1,5 +1,5 @@
 const path = require('path')
-const getPropTypesAsArray = require(path.resolve(__dirname,'./getPropTypesAsArray'))
+const getPropTypesAsArray = require(path.resolve(__dirname, './getPropTypesAsArray'))
 
 jest.mock('fs')
 const fs = require('fs')
