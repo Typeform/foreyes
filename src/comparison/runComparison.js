@@ -13,7 +13,7 @@ describe(`${browser.desiredCapabilities.browserName}_`, function () {
                 console.error(`Difference against ${referenceBrowser} (master) is too big (${result.misMatchPercentage}% mismatch)`)
                 return process.exit(1);
             } else {
-                console.log(`Finished image comparison.`)
+                console.log(`Finished image comparison: Pass!.`)
                 return process.exit(0);
             }
         })
