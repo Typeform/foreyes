@@ -1,5 +1,5 @@
 const file = require("fs");
-const config = require('../katt.config')
+const config = require('../../katt.config')
 
 module.exports = components => {
     const examplePath = config.path_to_examples

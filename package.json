@@ -9,17 +9,21 @@
     "precommit": "lint-staged && yarn test",
     "start": "node scripts/create-configuration-files.js && start-storybook -p 8080 -c .storybook",
     "test": "yarn run jest",
-    "visual": "galen test test_scripts/visual.js --htmlreport \"logs/visual\""
+    "visual-test": "clear && wdio wdio.reference.conf.js --spec src/comparison/runBaseline.js && wdio wdio.compare.conf.js --spec src/comparison/runComparison.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@storybook/react": "^3.4.5",
     "cartesian-product": "^2.1.2",
     "dotenv": "^5.0.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "@storybook/react": "^3.4.5"
+    "wdio-mocha-framework": "^0.5.13",
+    "wdio-selenium-standalone-service": "^0.0.10",
+    "wdio-visual-regression-service": "^0.9.0",
+    "webdriverio": "^4.12.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

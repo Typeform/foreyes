@@ -1,3 +1,3 @@
-const generateAllCombinations = require('../src/generateAllCombinations')
+const generateAllCombinations = require('../src/examples/generateAllCombinations')
 
 generateAllCombinations()

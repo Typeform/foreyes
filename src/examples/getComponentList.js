@@ -1,4 +1,4 @@
-const config = require('../katt.config')
+const config = require('../../katt.config')
 const file = require('fs')
 const path = require('path')
 

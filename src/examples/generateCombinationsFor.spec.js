@@ -1,13 +1,13 @@
 const generateCombinationsFor = require('./generateCombinationsFor')
 
 jest.mock('fs')
-jest.mock('../katt.config.js')
+jest.mock('../../katt.config.js')
 const fs = require('fs')
 
 describe('generateCombinationsFor', () => {
   describe('given a component name', () => {
     it('creates a combinations file', () => {
-      const raw = require('./__fixtures__/reactComponentFullyAutomatable')
+      const raw = require('../__fixtures__/reactComponentFullyAutomatable')
       fs.__setMockFile(raw)
 
       const expected = `exports.default = {
@@ -35,7 +35,7 @@ describe('generateCombinationsFor', () => {
     })
 
     it("notifies if some combinations couldn't be generated automatically", () => {
-      const raw = require('./__fixtures__/reactComponent')
+      const raw = require('../__fixtures__/reactComponent')
       fs.__setMockFile(raw)
       const result = generateCombinationsFor('input')
       expect(result).toEqual(Error('Some attribute combinations for input could not be filled automatically. Please manually fill the rest of the file.'))
