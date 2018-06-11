@@ -1,5 +1,4 @@
-const path = require('path')
-const getComponentFromStdin = require(path.resolve(__dirname, 'getComponentFromStdin'))
+const getComponentFromStdin = require('./getComponentFromStdin')
 
 let actualArgvs
 describe('getComponentFromStdin', () => {

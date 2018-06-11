@@ -9,8 +9,7 @@
     "precommit": "lint-staged && yarn test",
     "start": "node scripts/create-configuration-files.js && start-storybook -p 8080 -c .storybook",
     "test": "yarn run jest",
-    "visual-test": "clear && wdio wdio.reference.conf.js --spec src/comparison/runBaseline.js && wdio wdio.compare.conf.js --spec src/comparison/runComparison.js",
-    "visual-test-for": "node ./scripts/visual-test-for.js"
+    "visual-test": "clear && wdio wdio.reference.conf.js --spec src/comparison/runBaseline.js && wdio wdio.compare.conf.js --spec src/comparison/runComparison.js"
   },
   "keywords": [],
   "author": "",
@@ -49,7 +48,7 @@
       ]
     },
     "ignore": [
-      "*spec.js"
+      "galenTestData.js"
     ]
   }
 }

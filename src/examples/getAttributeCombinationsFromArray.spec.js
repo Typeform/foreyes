@@ -1,5 +1,4 @@
-const path = require('path')
-const getAttributeCombinationsFromArray = require(path.resolve(__dirname, './getAttributeCombinationsFromArray'))
+const getAttributeCombinationsFromArray = require('./getAttributeCombinationsFromArray')
 
 describe('getAttributeCombinationsFromArray', () => {
   it('parses a boolean', () => {

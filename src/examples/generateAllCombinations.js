@@ -1,6 +1,5 @@
-const path = require('path')
-const generateCombinationsFor = require(path.resolve(__dirname, './generateCombinationsFor'))
-const getComponentList = require(path.resolve(__dirname, './getComponentList'))
+const generateCombinationsFor = require('./generateCombinationsFor')
+const getComponentList = require('./getComponentList')
 
 module.exports = () => {
   return getComponentList()

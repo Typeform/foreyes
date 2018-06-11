@@ -1,6 +1,5 @@
-const path = require('path')
-const generateCombinationsFor = require(path.resolve(__dirname, '../src/examples/generateCombinationsFor'))
-const getComponentFromStdin = require(path.resolve(__dirname, '../src/getComponentFromStdin'))
+const generateCombinationsFor = require('../src/examples/generateCombinationsFor')
+const getComponentFromStdin = require('../src/examples/getComponentFromStdin')
 
 const componentName = getComponentFromStdin()
 const result = generateCombinationsFor(componentName)
