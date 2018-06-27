@@ -30,6 +30,7 @@ componentsWithVisualTest.js
 componentsWithCustomExamplePages.js
 path_to_components
 katt.config.clean.js
+decorator.js
 katt.config.try.js
 
 pids

@@ -83,24 +83,23 @@ const SplitExample = () => {
 export default SplitExample
 ```
 
-Now to the KATT folder and use `yarn start`. Then you should be able to see your kitchen sink page under `localhost:<PORT>/<componentName>` ("localhost:8080/button").
 
-Now, in order to automatically visually test the component you're working on, stay in the katt folder and use `yarn visual-test <componentName>`. The console will output whether the images in both browsers are the same or not. A diff will appear under katt/screenshots for you to review.
+That's it! All you need to do is go to the KATT folder and use `yarn start`. Then you can go to your kitchen sink page under `localhost:<PORT>/<componentName>` ("localhost:8080/button"). Repeat for all components you with to test.
 
 ### Starting the hard way
 If you've just installed KATT on your design system and there are already many untested components, you can use `yarn mass-generate-combinations`. This will call `yarn generate-combinations-for` for every component in your project.
 
 The development team serves this script as is and does not take responsibility for any gargantuan PRs which may derive from using this power unwisely.
 
+### Decorators
+
+You can put additional [Storybook decorations](https://storybook.js.org/basics/writing-stories/#using-decorators) around a component. Copy `decorator.dist.js` into `decorator.js` and fill accordingly. This is especially useful if you have React components that add supporting code such as font styles and families.
+
 ## Contributing
 
 Please contact one of the authors to see how you can help! In the future, we hope we can open source this tool and make it public use. 
 
 If you're still lost don't hesitate to join our #moonshots Slack channel!
-
-## Versioning
-
-Until this tool moves out of Alpha, no versioning will be done.
 
 ## Authors
 
