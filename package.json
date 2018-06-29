@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "install:token": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc",
     "generate-combinations-for": "node scripts/generate-combinations-for.js",
     "mass-generate-combinations": "node scripts/mass-generate-combinations.js",
     "precommit": "lint-staged && yarn test",
