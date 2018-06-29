@@ -11,8 +11,6 @@ cache:
   directories:
     - node_modules
 
-before_script:
-  - yarn install:token
-
 after_success:
-  - yarn publish --non-interactive
+  - yarn install:token
+  - yarn publish --new-version patch
