@@ -1,6 +1,6 @@
 {
-  "name": "KATT",
-  "version": "1.0.0",
+  "name": "@typeform/katt",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
