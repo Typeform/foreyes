@@ -1,5 +1,5 @@
-exports.command = 'generate-combinations-for'
-exports.desc = 'Create a base example file.'
+exports.command = 'visual-test-for'
+exports.desc = 'Test Chrome against Firefox'
 exports.builder = {
   component: {
     default: undefined

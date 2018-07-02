@@ -101,9 +101,9 @@ You can put additional [Storybook decorations](https://storybook.js.org/basics/w
 
 ## Running the tests
 
-While the [pages are being served](#serving-pages), execute `katt visual-test-for <component-folder-name>`.
+While the [pages are being served](#serving-pages), execute `katt visual-test-for <component-folder-name>`. Pay no mind to the opening browsers, that's expected.
 
-This should output three screenshots
+This should output three screenshots:
 * Chrome screenshot as the baseline (we assume developers develop in Chrome and thus Chrome visuals are correct)
 * Firefox screenshot
 * Diff screenshot.
