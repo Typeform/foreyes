@@ -50,7 +50,7 @@ In order to test a component you must first provide a page in which it lives. Th
 
 ### Kitchen sink page
 
-To have a kitchen sink page, you'll use `katt generate-combinations-for <componentName>`. This script will attempt -automatically- to create a file with all possible combinations of every attribute of a component. These attributes must be **documented in the PropTypes**.
+To have a kitchen sink page, you'll use `katt generate-combinations-for -- --component <componentName>`. This script will attempt -automatically- to create a file with all possible combinations of every attribute of a component. These attributes must be **documented in the PropTypes**.
 
 Most likely, there will be attributes that won't be filled automatically (a string has almost infinite values), and you will be asked to fill the combinations yourself. The file will be `<PATH_TO_EXAMPLES>/<componentName>.exampleCombinations.js`.
 
@@ -101,7 +101,7 @@ You can put additional [Storybook decorations](https://storybook.js.org/basics/w
 
 ## Running the tests
 
-While the [pages are being served](#serving-pages), execute `katt visual-test-for <component-folder-name>`. Pay no mind to the opening browsers, that's expected.
+While the [pages are being served](#serving-pages), execute `katt visual-test-for -- --component <component-folder-name>`. Pay no mind to the opening browsers, that's expected.
 
 This should output three screenshots:
 * Chrome screenshot as the baseline (we assume developers develop in Chrome and thus Chrome visuals are correct)
