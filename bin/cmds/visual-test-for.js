@@ -7,7 +7,8 @@ exports.builder = {
 }
 exports.handler = ({ component }) => {
   const { execSync } = require('child_process')
-
-  execSync(`COMPONENT_NAME=${component} wdio wdio.reference.conf.js --spec src/comparison/runBaseline.js`)
-  execSync(`COMPONENT_NAME=${component} wdio wdio.compare.conf.js --spec src/comparison/runComparison.js`)
+  const localPath = `${__dirname}/../..`
+  const path = require('path')
+  execSync(`COMPONENT_NAME=${component} wdio ${path.resolve(localPath,'wdio.reference.conf.js')} --spec ${path.resolve(localPath,'src/comparison/runBaseline.js')}`)
+  execSync(`COMPONENT_NAME=${component} wdio ${path.resolve(localPath,'wdio.compare.conf.js')} --spec ${path.resolve(localPath,'src/comparison/runComparison.js')}`)
 }
