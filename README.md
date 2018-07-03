@@ -6,7 +6,7 @@
 
 KATT is the testing tool for all of Typeform's Design Systems.
 
-At this moment, KATT allows you to easily mount pages where all design-valid combinations of a component appear \([kitchen sink pages](https://medium.com/eightshapes-llc/component-qa-in-design-systems-b18cb4decb9c)). There are also helpers to create these pages. After creating the pages, they will be visually compared across browsers: currently Chrome (master) against Firefox.
+At this moment, KATT allows you to mount pages where all design-valid combinations of a component appear \([kitchen sink pages](https://medium.com/eightshapes-llc/component-qa-in-design-systems-b18cb4decb9c)). There are also helpers to create these pages. After creating the pages, they will be visually compared across browsers: currently Chrome (master) against Firefox.
 
 ## Getting Started
 
@@ -101,9 +101,9 @@ You can put additional [Storybook decorations](https://storybook.js.org/basics/w
 
 ## Running the tests
 
-While the [pages are being served](#serving-pages), execute `katt visual-test-for -- --component <component-folder-name>`. Pay no mind to the opening browsers, that's expected.
+While the [pages are being served](#serving-pages), execute `katt visual-test-for -- --component <component-folder-name>`. Browsers will start opening, that's expected.
 
-This should output three screenshots:
+This will output three screenshots:
 * Chrome screenshot as the baseline (we assume developers develop in Chrome and thus Chrome visuals are correct)
 * Firefox screenshot
 * Diff screenshot.
