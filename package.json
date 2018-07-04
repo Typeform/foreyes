@@ -1,6 +1,6 @@
 {
   "name": "@typeform/katt",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "description": "testing suite for typeform's design systems",
   "bin": {
     "katt": "bin/index.js",
@@ -31,6 +31,7 @@
   "dependencies": {
     "@storybook/react": "^3.4.5",
     "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
     "cartesian-product": "^2.1.2",
     "dotenv": "^5.0.1",
     "react": "^16.3.2",
