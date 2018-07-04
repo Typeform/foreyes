@@ -1,9 +1,10 @@
 {
   "name": "@typeform/katt",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "testing suite for typeform's design systems",
   "bin": {
-    "katt": "bin/index.js"
+    "katt": "bin/index.js",
+    "katt-start-server": "bin/start-server.js"
   },
   "scripts": {
     "install:token": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc",
