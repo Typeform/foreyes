@@ -3,8 +3,7 @@
   "version": "1.2.18",
   "description": "testing suite for typeform's design systems",
   "bin": {
-    "katt": "bin/index.js",
-    "katt-start-server": "bin/start-server.js"
+    "katt": "bin/index.js"
   },
   "scripts": {
     "install:token": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc",

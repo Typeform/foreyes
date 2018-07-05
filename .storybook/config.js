@@ -1,9 +1,9 @@
 import React from 'react';
-import { configure, storiesOf, addDecorator } from '@storybook/react';
+import { configure, storiesOf } from '@storybook/react';
 import examples from './componentsWithExamplePages'
 import customExamples from './componentsWithCustomExamplePages'
 import ComponentExample from './componentExample'
-try{require('../decorator')}catch(e){}
+require(`${__dirname}/../decorator`)
 
 function loadStories() {
     loadExamples()
