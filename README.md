@@ -21,9 +21,10 @@ KATT is a Typeform's NPM package. So configure your NPM token in your project, t
 ```bash
 echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
 yarn add @typeform/katt
+yarn katt setup
 ```
 
-KATT needs to know some configuration variables. Copy `katt.config.dist.js` into `katt.config.js`. Here's how to fill the information:
+KATT needs to know some configuration variables. The previous command should have copied `katt.config.js` into your project's root. Here's how to fill the information:
 * **path_to_components**: Relative/absolute path to the folder containing the components in the design system, each in their own subfolder;
 * **path_to_examples**: Where the files that create the test pages should be.
 * **component_folder_blacklist**: Folders inside the component folders (in the design system) that are not components and thus should be ignored.
