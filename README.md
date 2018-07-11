@@ -68,24 +68,28 @@ exports.default = {
 };
 ```
 
-### Custom page
+### Custom template
 
 If you want to test a very specific component configuration (a container with some very specific children), create the file `<PATH_TO_EXAMPLES>/<componentName>.customExample.js` and fill with a React component. This would work: 
 
 ```javascript
 import React from 'react'
 import Split from '../src/split'
+import Button from '../src/button'
 
 const SplitExample = () => {
   return (
     <Split>
-     <div>very specific child.</div>
+     <div>very specific child. You can also have other components in this template</div>
+     <Button> New component! </Button>
     </Split>
   )
 }
 
 export default SplitExample
 ```
+
+*Automatically testing these template pages is TBD.*
 
 ### Alternative: Starting the hard way
 If you've just installed KATT on your design system and there are already many untested components, you can use `katt mass-generate-combinations`. This will call `katt generate-combinations-for` for every component in your project, **thus creating a file for each one**.
