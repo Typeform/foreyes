@@ -1,5 +1,6 @@
-const addDecorator = require('@storybook/react').addDecorator;
+import addDecorator from '@storybook/react';
+import React from 'react'
 
-addDecorator(story => (
+addDecorator(story => (<span>
   {story()}
-))
+</span>))

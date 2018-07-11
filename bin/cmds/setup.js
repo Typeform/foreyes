@@ -10,7 +10,7 @@ exports.handler = () => {
   fs.mkdirSync(configFolderName)
   fs.copyFileSync(
     path.resolve(packagePath, 'katt.config.dist.js'), 
-    path.resolve(configFolderName, 'katt.config.js')
+    'katt.config.js'
   )
   fs.copyFileSync(path.resolve(packagePath, 'decorator.dist.js'), path.resolve(configFolderName, 'decorator.js'))
   require('ncp').ncp(path.resolve(packagePath, '.storybook/'), path.resolve(configFolderName, '.storybook/'))
