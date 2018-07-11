@@ -1,5 +1,5 @@
 const path = require('path')
-const config = require(path.resolve(__dirname, '../../katt.config'))
+const config = require(path.resolve(process.cwd(), 'katt.config'))
 const file = require('fs')
 
 module.exports = () => {

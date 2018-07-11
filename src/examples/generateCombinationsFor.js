@@ -2,13 +2,13 @@ const path = require('path')
 const getPropTypesAsArray = require(path.resolve(__dirname, './getPropTypesAsArray'))
 const getAttributeCombinationsFromArray = require(path.resolve(__dirname, './getAttributeCombinationsFromArray'))
 const file = require('fs')
-const config = require(path.resolve(__dirname, '../../katt.config'))
+const config = require(path.resolve(process.cwd(), 'katt.config'))
 
 module.exports = (componentName) => {
-  var componentPath = `${__dirname}/../../${config.path_to_components}${componentName}/`
+  var componentPath = `${process.cwd()}/${config.path_to_components}${componentName}/`
   var somePropTypeWasUnparseable = false
 
-  const examplePath = `${__dirname}/../../${config.path_to_examples}${componentName}.exampleCombinations.js`
+  const examplePath = `${process.cwd()}/${config.path_to_examples}${componentName}.exampleCombinations.js`
   if (file.existsSync(examplePath)) return new Error(`File for ${componentName} already exists and would be overwritten`)
 
   const propTypes = getPropTypesAsArray(componentName, componentPath)

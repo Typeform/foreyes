@@ -6,7 +6,7 @@
 
 KATT is the testing tool for all of Typeform's Design Systems.
 
-At this moment, KATT allows you to easily mount pages where all design-valid combinations of a component appear \([kitchen sink pages](https://medium.com/eightshapes-llc/component-qa-in-design-systems-b18cb4decb9c)). There are also helpers to create these pages. For the moment you can manually test the visuals of a component without having to leave the page.
+At this moment, KATT allows you to mount pages where all design-valid combinations of a component appear \([kitchen sink pages](https://medium.com/eightshapes-llc/component-qa-in-design-systems-b18cb4decb9c)). There are also helpers to create these pages. After creating the pages, they will be visually compared across browsers: currently Chrome (master) against Firefox.
 
 ## Getting Started
 
@@ -16,14 +16,18 @@ KATT tests `React` components, so it also uses `node.js` and `yarn`. Your Design
 
 ### Installing
 
-_(TBD: how to turn it into a @typeform npm package in order to add it to the Design System project)_
+KATT is a Typeform's NPM package. So configure your NPM token in your project, then add the package:
 
-Clone this repository as a folder inside your design system.
+```bash
+echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
+yarn add @typeform/katt
+yarn katt setup
+```
 
-KATT needs to know some configuration variables. Fill `katt.config.js`:
-* path_to_components: Relative/absolute path to the folder containing the components in the design system, each in their own subfolder;
-* path_to_examples: This is where the files that create the testing pages should be.
-* component_folder_blacklist: Folders inside the component folders (in the design system) that are not components and thus should be ignored.
+KATT needs to know some configuration variables. The previous command should have copied `katt.config.js` into your project's root. Here's how to fill the information:
+* **path_to_components**: Relative/absolute path to the folder containing the components in the design system, each in their own subfolder;
+* **path_to_examples**: Where the files that create the test pages should be.
+* **component_folder_blacklist**: Folders inside the component folders (in the design system) that are not components and thus should be ignored.
 
 For example:
 
@@ -41,15 +45,15 @@ Remember to give katt.config.js the proper permissions:
 chmod 711 katt.config.js
 ```
 
-## Testing a component
+## Preparing the pages
 
 In order to test a component you must first provide a page in which it lives. There's two pages you can create (one component can have both!)
 
 ### Kitchen sink page
 
-To have a kitchen sink page, you'll use `yarn generate-combinations-for <componentName>`. This script will attempt -automatically- to create a file with all possible combinations of every attribute of a component.
+To have a kitchen sink page, you'll use `katt generate-combinations-for -- --component <componentName>`. This script will attempt -automatically- to create a file with all possible combinations of every attribute of a component. These attributes must be **documented in the PropTypes**.
 
-Most likely, there will be attributes that won't be filled (a string has almost infinite values), and you will be asked to fill the combinations yourself. The file will be `<PATH_TO_EXAMPLES>/<componentName>.exampleCombinations.js`.
+Most likely, there will be attributes that won't be filled automatically (a string has almost infinite values), and you will be asked to fill the combinations yourself. The file will be `<PATH_TO_EXAMPLES>/<componentName>.exampleCombinations.js`.
 
 For instance, for a component button, the file should be:
 
@@ -64,18 +68,20 @@ exports.default = {
 };
 ```
 
-### Custom page
+### Custom template
 
-If you want to test a very specific component configuration (with some very specific children), simply create the file `<PATH_TO_EXAMPLES>/<componentName>.customExample.js` and fill with a React component. This would work: 
+If you want to test a very specific component configuration (a container with some very specific children), create the file `<PATH_TO_EXAMPLES>/<componentName>.customExample.js` and fill with a React component. This would work: 
 
 ```javascript
 import React from 'react'
 import Split from '../src/split'
+import Button from '../src/button'
 
 const SplitExample = () => {
   return (
     <Split>
-     <div>very specific child.</div>
+     <div>very specific child. You can also have other components in this template</div>
+     <Button> New component! </Button>
     </Split>
   )
 }
@@ -83,24 +89,33 @@ const SplitExample = () => {
 export default SplitExample
 ```
 
-Now to the KATT folder and use `yarn start`. Then you should be able to see your kitchen sink page under `localhost:<PORT>/<componentName>` ("localhost:8080/button").
+*Automatically testing these template pages is TBD.*
 
-Now, in order to automatically visually test the component you're working on, stay in the katt folder and use `yarn visual-test <componentName>`. The console will output whether the images in both browsers are the same or not. A diff will appear under katt/screenshots for you to review.
+### Alternative: Starting the hard way
+If you've just installed KATT on your design system and there are already many untested components, you can use `katt mass-generate-combinations`. This will call `katt generate-combinations-for` for every component in your project, **thus creating a file for each one**.
 
-### Starting the hard way
-If you've just installed KATT on your design system and there are already many untested components, you can use `yarn mass-generate-combinations`. This will call `yarn generate-combinations-for` for every component in your project.
+KATT's development team serves this script as is and does not take responsibility for any gargantuan PRs which may derive from using this power unwisely.
 
-The development team serves this script as is and does not take responsibility for any gargantuan PRs which may derive from using this power unwisely.
+## <a name="serving-pages"></a>Serving the pages
 
-## Contributing
+Once the examples files are written, use `katt start`. The pages will be live under `localhost:8080` as a [Storybook](https://storybook.js.org).
 
-Please contact one of the authors to see how you can help! In the future, we hope we can open source this tool and make it public use. 
+### Decorators
 
-If you're still lost don't hesitate to join our #moonshots Slack channel!
+You can put additional [Storybook decorations](https://storybook.js.org/basics/writing-stories/#using-decorators) around a component. Copy `decorator.dist.js` into `decorator.js` and fill accordingly. This is especially useful if you have React components that add supporting code such as font styles and families.
 
-## Versioning
+## Running the tests
 
-Until this tool moves out of Alpha, no versioning will be done.
+While the [pages are being served](#serving-pages), execute `katt visual-test-for -- --component <component-folder-name>`. Browsers will start opening, that's expected.
+
+This will output three screenshots:
+* Chrome screenshot as the baseline (we assume developers develop in Chrome and thus Chrome visuals are correct)
+* Firefox screenshot
+* Diff screenshot.
+
+Additionally the console will output the mismatch percentage, if any.
+
+*Next steps: Run all available tests in succession*
 
 ## Authors
 

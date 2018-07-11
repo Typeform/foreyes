@@ -1,23 +1,36 @@
 {
   "name": "@typeform/katt",
-  "version": "1.2.0",
-  "description": "",
-  "main": "index.js",
+  "version": "1.2.21",
+  "description": "testing suite for typeform's design systems",
+  "bin": {
+    "katt": "bin/index.js"
+  },
   "scripts": {
     "install:token": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc",
     "generate-combinations-for": "node scripts/generate-combinations-for.js",
     "mass-generate-combinations": "node scripts/mass-generate-combinations.js",
-    "precommit": "lint-staged && yarn test",
     "start": "node scripts/create-configuration-files.js && start-storybook -p 8080 -c .storybook",
     "test": "yarn run jest",
-    "visual-test": "clear && wdio wdio.reference.conf.js --spec src/comparison/runBaseline.js && wdio wdio.compare.conf.js --spec src/comparison/runComparison.js",
     "visual-test-for": "node ./scripts/visual-test-for.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "testing",
+    "visual regression",
+    "typeform",
+    "cross browser"
+  ],
+  "contributors": [
+    "Typeform (http://typeform.com)",
+    "Daniel Giralt Len <daniel.giralt@typeform.com>",
+    "Jordi Pons <jordi.pons@typeform.com>",
+    "Pau Boix <pau@typeform.com>",
+    "Toni Feliu <toni.feliu@typeform.com>"
+  ],
+  "license": "Apache-2.0",
   "dependencies": {
     "@storybook/react": "^3.4.5",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
     "cartesian-product": "^2.1.2",
     "dotenv": "^5.0.1",
     "react": "^16.3.2",
@@ -25,10 +38,11 @@
     "wdio-mocha-framework": "^0.5.13",
     "wdio-selenium-standalone-service": "^0.0.10",
     "wdio-visual-regression-service": "^0.9.0",
-    "webdriverio": "^4.12.0"
+    "webdriverio": "^4.12.0",
+    "webpack": "^4.14.0",
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
     "husky": "^0.14.3",
     "jest": "^22.4.3",
     "lint-staged": "^7.1.2",

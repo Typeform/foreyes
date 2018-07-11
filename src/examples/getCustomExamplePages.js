@@ -1,6 +1,6 @@
 const path = require('path')
 const file = require('fs')
-const config = require(path.resolve(__dirname, '../../katt.config'))
+const config = require(path.resolve(process.cwd(), 'katt.config'))
 
 module.exports = components => {
   const examplePath = config.path_to_examples
