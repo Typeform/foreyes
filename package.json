@@ -1,6 +1,6 @@
 {
   "name": "@typeform/katt",
-  "version": "1.2.18",
+  "version": "1.2.21",
   "description": "testing suite for typeform's design systems",
   "bin": {
     "katt": "bin/index.js"
