@@ -8,7 +8,7 @@ module.exports = components => {
     const p = path.resolve(process.cwd(),
       examplePath, `${componentName}.exampleCombinations.js`)
     if (file.existsSync(p)) {
-      acc.push(`\n\t${componentName.replace(/-/g, '_')}: { component: require('${process.cwd()}/${sourcePath}${componentName}').default, combinations: require('${process.cwd()}/${examplePath}${componentName}.exampleCombinations.js').default }`)
+      acc.push(`\n\t${componentName.replace(/-/g, '_')}: { component: require('../../${sourcePath}${componentName}').default, combinations: require('${process.cwd()}/${examplePath}${componentName}.exampleCombinations.js').default }`)
     }
     return acc
   }, [])
