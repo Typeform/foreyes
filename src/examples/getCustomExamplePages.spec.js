@@ -14,9 +14,9 @@ describe('getCustomExamplePages', () => {
       require('fs').__fileExists = true
       const output = getCustomExamplePages(input)
       const expected = `const examples = {
-button: require('../test/button.customExample.js').default,
-input: require('../test/input.customExample.js').default,
-label: require('../test/label.customExample.js').default
+button: require('../../test/button.customExample.js').default,
+input: require('../../test/input.customExample.js').default,
+label: require('../../test/label.customExample.js').default
 };
 export default examples;`
       expect(output.replace(/ |\t/g, '')).toMatch(expected.replace(/ |\t/g, ''))
