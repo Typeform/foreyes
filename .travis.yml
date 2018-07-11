@@ -15,4 +15,4 @@ cache:
 
 after_success:
   - yarn install:token
-  - yarn publish --new-version patch
+  - yarn semantic-release
