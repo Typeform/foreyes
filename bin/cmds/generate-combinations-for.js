@@ -2,7 +2,8 @@ exports.command = 'generate-combinations-for'
 exports.desc = 'Create a base example file.'
 exports.builder = {
   component: {
-    default: undefined
+    default: undefined,
+    required: true
   }
 }
 exports.handler = ({ component }) => {
