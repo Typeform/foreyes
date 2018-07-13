@@ -2,10 +2,12 @@ exports.command = 'visual-test-for'
 exports.desc = 'Test Chrome against Firefox'
 exports.builder = {
   component: {
-    default: undefined
+    default: undefined,
+    required: true
   },
   isTemplate: {
-    default: false
+    default: false,
+    description: "Do you want to test a custom example?"
   }
 }
 exports.handler = ({ component, isTemplate }) => {
@@ -22,10 +24,7 @@ exports.handler = ({ component, isTemplate }) => {
   }
 
   const baselineConfig = path.resolve(localPath, 'wdio.reference.conf.js')
-  const baselineOpts = {
-    spec: path.resolve(localPath,'src/comparison/runBaseline.js'),
-    logLevel: 
-  }
+  const baselineOpts = {spec: path.resolve(localPath,'src/comparison/runBaseline.js')}
 
   const comparisonConfig = path.resolve(localPath, 'wdio.compare.conf.js')
   const comparisonOpts = {spec: path.resolve(localPath,'src/comparison/runComparison.js')}
