@@ -1,11 +1,12 @@
 const componentName = process.env.COMPONENT_NAME
+const storyType = process.env.EXAMPLE_TYPE
 
 const referenceBrowser = 'chrome' // TODO: get from wdio.reference.conf.js
 describe(`${browser.desiredCapabilities.browserName}_`, function () {
   it(componentName, function () {
     const report = browser
       .url(
-        `/iframe.html?full=1&selectedStory=default&selectedKind=${componentName}`
+        `/iframe.html?full=1&selectedStory=${storyType}&selectedKind=${componentName}`
       )
       .checkDocument()
 
