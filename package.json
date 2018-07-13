@@ -7,11 +7,8 @@
   },
   "scripts": {
     "install:token": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc",
-    "generate-combinations-for": "node scripts/generate-combinations-for.js",
-    "mass-generate-combinations": "node scripts/mass-generate-combinations.js",
-    "start": "node scripts/create-configuration-files.js && start-storybook -p 8080 -c .storybook",
-    "test": "yarn run jest",
-    "visual-test-for": "node ./scripts/visual-test-for.js"
+    "precommit": "yarn lint-staged && yarn test",
+    "test": "yarn run jest"
   },
   "keywords": [
     "testing",
@@ -57,7 +54,7 @@
   },
   "lint-staged": {
     "linters": {
-      "./*.js": [
+      "*.js": [
         "prettier-standard",
         "standard --fix",
         "git add"
