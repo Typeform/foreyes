@@ -1,7 +1,8 @@
-var merge = require('deepmerge')
-var wdioConf = require('./wdio.conf.js')
+const merge = require('deepmerge')
+const wdioConf = require('./wdio.conf.js')
 
-var VisualRegressionCompare = require('wdio-visual-regression-service/compare')
+const VisualRegressionCompare = require('wdio-visual-regression-service/compare')
+const screenshot_name = `${process.env.COMPONENT_NAME}_${process.env.EXAMPLE_TYPE}`
 
 exports.config = merge(
   wdioConf.config,
@@ -14,7 +15,7 @@ exports.config = merge(
     ],
     visualRegression: {
       compare: new VisualRegressionCompare.SaveScreenshot({
-        screenshotName: context => `./screenshots/${process.env.COMPONENT_NAME}.png`
+        screenshotName: context => `./screenshots/${screenshot_name}_baseline.png`
       })
     }
   },
