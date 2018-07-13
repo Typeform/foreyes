@@ -2,7 +2,7 @@ const merge = require('deepmerge')
 const wdioConf = require('./wdio.conf.js')
 
 const VisualRegressionCompare = require('wdio-visual-regression-service/compare')
-const screenshot_name = `${process.env.COMPONENT_NAME}_${process.env.EXAMPLE_TYPE}`
+const screenshot_name = process.env.SCREENSHOT_NAME
 
 exports.config = merge(
   wdioConf.config,
