@@ -15,7 +15,7 @@ exports.config = merge(
     ],
     visualRegression: {
       compare: new VisualRegressionCompare.SaveScreenshot({
-        screenshotName: context => `./screenshots/${screenshot_name}_baseline.png`
+        screenshotName: context => `./screenshots/${process.env.COMPONENT_NAME}.png`
       })
     }
   },

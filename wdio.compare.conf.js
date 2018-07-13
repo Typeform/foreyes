@@ -15,9 +15,9 @@ exports.config = merge(
     ],
     visualRegression: {
       compare: new VisualRegressionCompare.LocalCompare({
-        referenceName: () => `./screenshots/${screenshot_name}_baseline.png`,
-        screenshotName: () => `./screenshots/${screenshot_name}_firefox.png`,
-        diffName: () => `./screenshots/${screenshot_name}_diff.png`,
+        referenceName: () => `./screenshots/${process.env.COMPONENT_NAME}.png`,
+        screenshotName: () => `./screenshots/${process.env.COMPONENT_NAME}_actual.png`,
+        diffName: () => `./screenshots/${process.env.COMPONENT_NAME}_diff.png`,
         misMatchTolerance: 0,
         ignoreComparison: "antialiasing"
       })
