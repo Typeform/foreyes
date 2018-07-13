@@ -7,7 +7,10 @@ module.exports = components => {
   const examples = components.reduce((acc, componentName) => {
     if (file.existsSync(`${examplePath}/${componentName}.customExample.js`)) {
       acc.push(`
-    ${componentName.replace(/-/g, '_')}: require('../${examplePath}${componentName}.customExample.js').default`)
+    ${componentName.replace(
+    /-/g,
+    '_'
+  )}: require('../${examplePath}${componentName}.customExample.js').default`)
     }
     return acc
   }, [])

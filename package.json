@@ -8,7 +8,7 @@
   "scripts": {
     "install:token": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc",
     "precommit": "yarn lint-staged && yarn test",
-    "test": "yarn run jest"
+    "test": "touch katt.config.js; yarn run jest; rm katt.config.js"
   },
   "keywords": [
     "testing",
@@ -61,7 +61,10 @@
       ]
     },
     "ignore": [
-      "*spec.js"
+      "*spec.js",
+      "*/__fixtures__/*",
+      "*/__mocks__/*",
+      "src/comparison/*"
     ]
   }
 }

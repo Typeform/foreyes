@@ -8,7 +8,8 @@ module.exports = () => {
   const isntBlacklisted = name => !blacklist.includes(path.basename(name))
   const isFolder = name => file.lstatSync(`${basePath}${name}`).isDirectory()
 
-  return file.readdirSync(basePath)
+  return file
+    .readdirSync(basePath)
     .filter(isFolder)
     .filter(isntBlacklisted)
 }

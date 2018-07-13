@@ -1,11 +1,14 @@
 const path = require('path')
-const getCustomExamplePages = require(path.resolve(__dirname, './getCustomExamplePages'))
+const getCustomExamplePages = require(path.resolve(
+  __dirname,
+  './getCustomExamplePages'
+))
 
 jest.mock('fs')
 jest.mock('../../katt.config')
 
 describe('getCustomExamplePages', () => {
-  describe('given a path to the components\' folder', () => {
+  describe("given a path to the components' folder", () => {
     it('returns a js-readable list of custom pages', () => {
       const input = require('../__fixtures__/customExampleList')
       require('fs').__fileExists = true

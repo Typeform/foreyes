@@ -1,9 +1,14 @@
 const path = require('path')
-const getComponentFromStdin = require(path.resolve(__dirname, 'getComponentFromStdin'))
+const getComponentFromStdin = require(path.resolve(
+  __dirname,
+  'getComponentFromStdin'
+))
 
 let actualArgvs
 describe('getComponentFromStdin', () => {
-  beforeEach(() => { actualArgvs = process.argv })
+  beforeEach(() => {
+    actualArgvs = process.argv
+  })
 
   it('interprets the first CLI parameter as a component name', () => {
     const componentName = 'input'
@@ -16,5 +21,7 @@ describe('getComponentFromStdin', () => {
     expect(() => getComponentFromStdin()).toThrow()
   })
 
-  afterEach(() => { process.argv = actualArgvs })
+  afterEach(() => {
+    process.argv = actualArgvs
+  })
 })

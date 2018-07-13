@@ -1,5 +1,8 @@
 const path = require('path')
-const getPropTypesAsArray = require(path.resolve(__dirname, './getPropTypesAsArray'))
+const getPropTypesAsArray = require(path.resolve(
+  __dirname,
+  './getPropTypesAsArray'
+))
 
 jest.mock('fs')
 const fs = require('fs')
@@ -9,13 +12,14 @@ describe('getPropTypesAsArray', () => {
     const raw = require('../__fixtures__/reactComponent')
     fs.__setMockFile(raw)
 
-    const expected = [{ attribute: 'maxChars', propType: 'bool' },
+    const expected = [
+      { attribute: 'maxChars', propType: 'bool' },
       { attribute: 'colorScheme', propType: 'oneOf([1,2,3])' },
       { attribute: 'width', propType: 'number' },
-      { attribute: 'enabled', propType: 'bool' }]
+      { attribute: 'enabled', propType: 'bool' }
+    ]
 
-    expect(getPropTypesAsArray('input', `${__dirname}/`))
-      .toEqual(expected)
+    expect(getPropTypesAsArray('input', `${__dirname}/`)).toEqual(expected)
   })
 
   it('returns empty if there are no proptypes', () => {

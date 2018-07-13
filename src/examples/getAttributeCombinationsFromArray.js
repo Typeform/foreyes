@@ -1,6 +1,10 @@
-module.exports = (propType) => {
+module.exports = propType => {
   const types = [
-    { name: 'boolean', matches: propType => propType === 'bool', getCombination: () => [true, false] },
+    {
+      name: 'boolean',
+      matches: propType => propType === 'bool',
+      getCombination: () => [true, false]
+    },
     {
       name: 'oneOf',
       matches: propType => propType.indexOf('oneOf(') !== -1,

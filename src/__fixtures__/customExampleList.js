@@ -1,4 +1,1 @@
-module.exports = [
-  'button',
-  'input',
-  'label']
+module.exports = ['button', 'input', 'label']
