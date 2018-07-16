@@ -16,12 +16,38 @@ KATT tests `React` components, so it also uses `node.js` and `yarn`. Your Design
 
 ### Installing
 
-KATT is a Typeform's NPM package. So configure your NPM token in your project, then add the package:
+KATT is a Typeform's **private** NPM package. So configure your NPM token in your project, then add the package:
 
 ```bash
 echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
 yarn add @typeform/katt
 yarn katt setup
+```
+
+### (Optional) Configuring in Travis
+
+In package.json, add:
+```
+scripts: {
+    "katt-start-server": "yarn katt start-server &",
+    "katt-run-tests": "yarn katt visual-test-all"
+    //...
+```
+
+In .travis.yml, add:
+```
+addons:
+  chrome: stable
+
+before_install:
+  - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+  - export MOZ_HEADLESS=1
+
+before_script:
+  - yarn katt-start-server
+
+script:
+  - yarn katt-run-tests
 ```
 
 ## Preparing the pages
@@ -70,7 +96,7 @@ export default SplitExample
 
 *Automatically testing these template pages is TBD.*
 
-### Alternative: Starting the hard way
+### (Alternative) Starting the hard way
 If you've just installed KATT on your design system and there are already many untested components, you can use `yarn katt mass-generate-combinations`. This will create an example file **for each component in your project** that doesn't already have one.
 
 *KATT's development team serves this script as is and does not take responsibility for any gargantuan PRs which may derive from using this power unwisely.*
@@ -81,22 +107,31 @@ Once the examples files are written, use `yarn katt start-server`. The pages wil
 
 ### Decorators
 
-You can put additional [Storybook decorations](https://storybook.js.org/basics/writing-stories/#using-decorators) around a component. Copy `decorator.dist.js` into `decorator.js` and fill accordingly. This is useful if you have React components that add supporting code such as font styles and families.
+You can put additional [Storybook decorations](https://storybook.js.org/basics/writing-stories/#using-decorators) around a component. Use `kattConfig/decorator.js` accordingly. This is useful if you have React wrapper components that add supporting code such as font styles and families.
 
 ## Running the tests
 
-While the [pages are being served](#serving-pages), execute `yarn katt visual-test-for -- --component <component-folder-name> --isTemplate <are you testing a custom page?>`. Browsers will start opening, that's expected.
+### Running one test
 
-This will output three screenshots:
+While the [pages are being served](#serving-pages), execute `yarn katt visual-test-for --component <component-folder-name> --isTemplate <are you testing a custom page?>`. (Browsers will start opening, that's expected)
+
+This will output three screenshots, found in `screenshots/`:
 * Chrome screenshot as the baseline (we assume developers develop in Chrome and thus Chrome visuals are correct)
 * Firefox screenshot.
 * Diff screenshot. Pixels in fuchsia represent difference.
 
 Additionally the console will output the mismatch percentage, if any.
 
-*Next steps: Run all available tests in succession*
+### Running all tests
+
+Use `yarn katt visual-test-all`. Screenshots will be aptly named for every component and whether it's a kitchen sink or a custom template.
+
+Note that with **many** components this may take a while and take some space (~1MB/10 components)
+
 *Next steps: Allow changing tolerance*
 *Next steps: Allow changing viewport size*
+*Next steps: Host pages in travis somewhere to be grabbed*
+*Next steps: Refactor so .storybook config folder doesn't need to be pasted into the root*
 
 ## Authors
 
