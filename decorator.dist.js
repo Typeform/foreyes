@@ -1,6 +1,4 @@
-import addDecorator from '@storybook/react';
+import addDecorator from '@storybook/react'
 import React from 'react'
 
-addDecorator(story => (<span>
-  {story()}
-</span>))
+addDecorator(story => <span>{story()}</span>)

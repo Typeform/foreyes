@@ -18,7 +18,7 @@ exports.config = merge(
         screenshotName: () => `./screenshots/button_actual.png`,
         diffName: () => `./screenshots/button_diff.png`,
         misMatchTolerance: 2,
-        ignoreComparison: "antialiasing"
+        ignoreComparison: 'antialiasing'
       })
     }
   },

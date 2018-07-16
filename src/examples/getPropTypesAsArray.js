@@ -7,10 +7,10 @@ module.exports = (componentName, componentPath) => {
   return stringToArray(clean)
 }
 
-const stringToArray = (cleanString) => {
+const stringToArray = cleanString => {
   return cleanString
     .split(',\n')
-    .filter((i) => (i !== ''))
+    .filter(i => i !== '')
     .reduce((acc, value) => {
       try {
         if (value.substring(-1) === ',') value = value.slice(0, -1)
@@ -21,7 +21,8 @@ const stringToArray = (cleanString) => {
     }, [])
 }
 
-const cleanString = (rawComponent) => { // return a string ready to be split into an array
+const cleanString = rawComponent => {
+  // return a string ready to be split into an array
   const beginning = 'propTypes={'
   const ending = '}'
   try {
