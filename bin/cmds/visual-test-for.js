@@ -13,10 +13,12 @@ exports.builder = {
 exports.handler = ({ component, isTemplate }) => {
   const path = require('path')
   const Launcher = require('webdriverio').Launcher
-  
-  process.env.COMPONENT_NAME = component
-  process.env.EXAMPLE_TYPE = isTemplate ? "custom" : "default"
   const localPath = `${__dirname}/../..`
+  
+  process.env.COMPONENTS = JSON.stringify([{
+    componentName: component,
+    type: isTemplate ? 'custom' : 'default'
+  }])
 
   const onPromiseFailed = (error) => {
     console.error(error.stacktrace);
@@ -36,7 +38,7 @@ exports.handler = ({ component, isTemplate }) => {
 
       new Launcher(comparisonConfig, comparisonOpts)
       .run().then( 
-        (code) => process.exit(code),
+        code => process.exit(code),
         onPromiseFailed
       )
     },
