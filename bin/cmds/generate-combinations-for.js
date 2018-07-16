@@ -8,7 +8,5 @@ exports.builder = {
 exports.handler = ({ component }) => {
   const path = require('path')
   const generateCombinationsFor = require(path.resolve(__dirname, '../../src/examples/generateCombinationsFor'))
-
-  const result = generateCombinationsFor(component)
-  console.log(result)
+  console.log(generateCombinationsFor(component))
 }
