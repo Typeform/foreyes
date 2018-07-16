@@ -9,7 +9,10 @@ exports.config = merge(
     capabilities: [
       {
         maxInstances: 1,
-        browserName: 'chrome'
+        browserName: 'chrome',
+        chromeOptions: {
+          args: ['--headless', '--no-sandbox', '--disable-dev-shm-usage']
+        }
       }
     ],
     visualRegression: {
