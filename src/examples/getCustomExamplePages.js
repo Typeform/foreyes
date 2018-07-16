@@ -10,7 +10,7 @@ module.exports = components => {
     ${componentName.replace(
     /-/g,
     '_'
-  )}: require('../${examplePath}${componentName}.customExample.js').default`)
+  )}: require('../../${examplePath}${componentName}.customExample.js').default`)
     }
     return acc
   }, [])
