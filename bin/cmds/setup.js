@@ -11,10 +11,15 @@ exports.handler = () => {
   if (!fs.existsSync(configFolderName)) {
     fs.mkdirSync(configFolderName)
   }
-  fs.copyFileSync(
-    path.resolve(packagePath, 'decorator.dist.js'),
-    path.resolve(configFolderName, 'decorator.js')
-  )
+
+  const decoratorPath = path.resolve(configFolderName, 'decorator.js')
+  if (!fs.existsSync(decoratorPath)) {
+    fs.copyFileSync(
+      path.resolve(packagePath, 'decorator.dist.js'),
+      decoratorPath
+    )
+  }
+
   require('ncp').ncp(
     path.resolve(packagePath, '.storybook/'),
     path.resolve(configFolderName, '.storybook/')
@@ -49,13 +54,19 @@ const interactiveConfigSetup = () => {
       misMatchTolerance: {
         description:
           'In %, how many pixels of difference do we allow between browsers',
-        default: 2
+        default: 2,
+        type: 'number'
       },
       ignoreComparison: {
         description:
           'Choose what details to ignore from: nothing, colors, antialiasing',
         default: 'antialiasing',
         pattern: /^nothing|colors|antialiasing$/
+      },
+      viewports: {
+        description:
+          'One or more screen sizes the browser should take: 1024,600;1280;720.',
+        default: '1024,600'
       }
     }
   }
@@ -64,9 +75,25 @@ const interactiveConfigSetup = () => {
     if (err) {
       return err
     }
+
     result.component_folder_blacklist = result.component_folder_blacklist
       .trim()
       .split(',')
+
+    result.viewports = result.viewports
+      .trim()
+      .split(';')
+      .map(viewport => {
+        const [width, height] = viewport.split(',')
+        if (!width || !height) {
+          return
+        }
+        return {
+          width: parseInt(width),
+          height: parseInt(height)
+        }
+      })
+
     require('fs').writeFileSync(
       'katt.config.js',
       `module.exports=${JSON.stringify(result, null, ' ')}`

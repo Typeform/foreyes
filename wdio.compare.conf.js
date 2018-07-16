@@ -5,20 +5,23 @@ const VisualRegressionCompare = require('wdio-visual-regression-service/compare'
 const path = require('path')
 const config = require(path.resolve(process.cwd(), 'katt.config'))
 
+const getBaseName = ({test, meta}) => `${test.title}_${meta.viewport.width}x${meta.viewport.height}`
+
 exports.config = merge(
   wdioConf.config,
   {
     capabilities: [
       {
-        maxInstances: 5,
-        browserName: 'firefox'
+        maxInstances: 1,
+        browserName: 'firefox',
+        "moz:firefoxOptions":{"args":["-headless"]}
       }
     ],
     visualRegression: {
       compare: new VisualRegressionCompare.LocalCompare({
-        referenceName: context => `./screenshots/${context.test.title}.png`,
-        screenshotName: context => `./screenshots/${context.test.title}_actual.png`,
-        diffName: context => `./screenshots/${context.test.title}_diff.png`,
+        referenceName: context => `./screenshots/${getBaseName(context)}.png`,
+        screenshotName: context => `./screenshots/${getBaseName(context)}_actual.png`,
+        diffName: context => `./screenshots/${getBaseName(context)}_diff.png`,
         misMatchTolerance: config.misMatchTolerance,
         ignoreComparison: config.ignoreComparison
       })
