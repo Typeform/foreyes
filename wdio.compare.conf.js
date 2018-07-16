@@ -14,11 +14,11 @@ exports.config = merge(
     ],
     visualRegression: {
       compare: new VisualRegressionCompare.LocalCompare({
-        referenceName: () => `./screenshots/${context.test.title}.png`,
-        screenshotName: () => `./screenshots/${context.test.title}_actual.png`,
-        diffName: () => `./screenshots/${context.test.title}_diff.png`,
-        misMatchTolerance: 0,
-        ignoreComparison: "antialiasing"
+        referenceName: context => `./screenshots/${context.test.title}.png`,
+        screenshotName: context => `./screenshots/${context.test.title}_actual.png`,
+        diffName: context => `./screenshots/${context.test.title}_diff.png`,
+        misMatchTolerance: 2,
+        ignoreComparison: 'antialiasing'
       })
     }
   },
