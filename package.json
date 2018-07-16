@@ -30,6 +30,7 @@
     "babel-loader": "^7.1.4",
     "cartesian-product": "^2.1.2",
     "dotenv": "^5.0.1",
+    "prompt": "^1.0.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "wdio-mocha-framework": "^0.5.13",
