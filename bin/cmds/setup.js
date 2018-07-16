@@ -39,7 +39,7 @@ const interactiveConfigSetup = () => {
 
   prompt.get(schema, function (err, result) {
     if (err) { return onErr(err); }
-    result.component_folder_blacklist = result.component_folder_blacklist.split(',')
+    result.component_folder_blacklist = result.component_folder_blacklist.trim().split(',')
     require('fs').writeFileSync('katt.config.js', `module.exports=${JSON.stringify(result)}`)
   });
 }
