@@ -1,10 +1,13 @@
 const path = require('path')
-const getAllExamplePages = require(path.resolve(__dirname, "./getAllExamplePages"));
+const getAllExamplePages = require(path.resolve(
+  __dirname,
+  './getAllExamplePages'
+))
 
 jest.mock('fs')
 jest.mock('../../katt.config')
 describe('getAllExamplePages', () => {
-  describe('given a path to the components\' folder', () => {
+  describe("given a path to the components' folder", () => {
     it('returns a js-readable list of component paths and combination paths', () => {
       const input = require('../__fixtures__/exampleList')
       require('fs').__fileExists = true
