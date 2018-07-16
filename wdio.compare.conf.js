@@ -1,7 +1,7 @@
-var merge = require('deepmerge')
-var wdioConf = require('./wdio.conf.js')
+const merge = require('deepmerge')
+const wdioConf = require('./wdio.conf.js')
 
-var VisualRegressionCompare = require('wdio-visual-regression-service/compare')
+const VisualRegressionCompare = require('wdio-visual-regression-service/compare')
 
 exports.config = merge(
   wdioConf.config,
@@ -14,11 +14,11 @@ exports.config = merge(
     ],
     visualRegression: {
       compare: new VisualRegressionCompare.LocalCompare({
-        referenceName: () => `./screenshots/button.png`,
-        screenshotName: () => `./screenshots/button_actual.png`,
-        diffName: () => `./screenshots/button_diff.png`,
-        misMatchTolerance: 2,
-        ignoreComparison: 'antialiasing'
+        referenceName: () => `./screenshots/${context.test.title}.png`,
+        screenshotName: () => `./screenshots/${context.test.title}_actual.png`,
+        diffName: () => `./screenshots/${context.test.title}_diff.png`,
+        misMatchTolerance: 0,
+        ignoreComparison: "antialiasing"
       })
     }
   },

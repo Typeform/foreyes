@@ -119,7 +119,7 @@ exports.config = {
   // See the full list at http://mochajs.org/
   mochaOpts: {
     ui: 'bdd',
-    timeout: 100000
+    timeout: 100000,
   },
   visualRegression: {
     viewportChangePause: 500,
