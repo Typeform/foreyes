@@ -85,7 +85,7 @@ You can put additional [Storybook decorations](https://storybook.js.org/basics/w
 
 ## Running the tests
 
-While the [pages are being served](#serving-pages), execute `yarn katt visual-test-for -- --component <component-folder-name> --isTemplate <are you testing a custom page?>`. Browsers will start opening, that's expected.
+While the [pages are being served](#serving-pages), execute `yarn katt visual-test-for -- --component <component-folder-name> --isTemplate <are you testing a custom page?>`. Browsers may start opening, that's expected.
 
 This will output three screenshots:
 * Chrome screenshot as the baseline (we assume developers develop in Chrome and thus Chrome visuals are correct)
@@ -94,9 +94,10 @@ This will output three screenshots:
 
 Additionally the console will output the mismatch percentage, if any.
 
-*Next steps: Run all available tests in succession*
-*Next steps: Allow changing tolerance*
-*Next steps: Allow changing viewport size*
+ *Next steps: Host pages in travis somewhere to be grabbed*
+ *Next steps: Refactor so .storybook config folder doesn't need to be pasted into the root*
+
+
 
 ## Authors
 

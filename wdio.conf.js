@@ -1,3 +1,6 @@
+const path = require('path')
+const config = require(path.resolve(process.cwd(), 'katt.config'))
+
 exports.config = {
   //
   // ==================
@@ -123,7 +126,7 @@ exports.config = {
   },
   visualRegression: {
     viewportChangePause: 500,
-    viewports: [{ width: 1024, height: 600 }]
+    viewports: config.viewports
   }
   //
   // =====
