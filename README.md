@@ -109,11 +109,9 @@ Once the examples files are written, use `yarn katt start-server`. The pages wil
 
 You can put additional [Storybook decorations](https://storybook.js.org/basics/writing-stories/#using-decorators) around a component. Use `kattConfig/decorator.js` accordingly. This is useful if you have React wrapper components that add supporting code such as font styles and families.
 
-## Running the tests
-
 ### Running one test
 
-While the [pages are being served](#serving-pages), execute `yarn katt visual-test-for --component <component-folder-name> --isTemplate <are you testing a custom page?>`. (Browsers will start opening, that's expected)
+While the [pages are being served](#serving-pages), execute `yarn katt visual-test-for --component <component-folder-name> --isTemplate <are you testing a custom page?>`. (Browsers may start opening, that's expected)
 
 This will output three screenshots, found in `screenshots/`:
 * Chrome screenshot as the baseline (we assume developers develop in Chrome and thus Chrome visuals are correct)

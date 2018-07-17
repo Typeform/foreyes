@@ -10,10 +10,10 @@ describe(`${browser.desiredCapabilities.browserName}_`, () => {
 
       report.forEach(result => {
         if (!result.isWithinMisMatchTolerance) {
-          console.error(`TEST FAIL: ${componentName} is ${result.misMatchPercentage}% different in Firefox.`)
+          console.error(`TEST FAIL: ${componentName} (${type}) is ${result.misMatchPercentage}% different in Firefox.`)
           failed = true
         } else {
-          console.log(`TEST PASS: ${componentName} in Firefox.`)
+          console.log(`TEST PASS: ${componentName} (${type}) in Firefox.`)
         }
       })
     })
