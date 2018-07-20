@@ -52,7 +52,8 @@
   "jest": {
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "/logs/"
+      "/logs/",
+      "/bin/"
     ]
   },
   "lint-staged": {

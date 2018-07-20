@@ -29,8 +29,8 @@ yarn katt setup
 In package.json, add:
 ```
 scripts: {
-    "katt-start-server": "yarn katt start-server &",
-    "katt-run-tests": "yarn katt visual-test-all"
+    "katt-start-server": "yarn katt run-server &",
+    "katt-run-tests": "yarn katt test-all"
     //...
 ```
 
@@ -56,7 +56,7 @@ In order to test a component you must first provide a page in which it lives. Th
 
 ### Kitchen sink page
 
-To have a kitchen sink page, you'll use `yarn katt generate-combinations-for --component <componentName>`. This script will attempt -automatically- to create a file with all possible combinations of every attribute of a component. These attributes must be **documented in the PropTypes**.
+To have a kitchen sink page, you'll use `yarn katt create-file --component <componentName>`. This script will attempt -automatically- to create a file with all possible combinations of every attribute of a component. These attributes must be **documented in the PropTypes**.
 
 Most likely, there will be attributes that won't be filled automatically (a string has almost infinite values), and you will be asked to fill the combinations yourself. The file will be `<path_to_examples>/<componentName>.exampleCombinations.js`.
 
@@ -97,7 +97,7 @@ export default SplitExample
 *Automatically testing these template pages is TBD.*
 
 ### (Alternative) Starting the hard way
-If you've just installed KATT on your design system and there are already many untested components, you can use `yarn katt mass-generate-combinations`. This will create an example file **for each component in your project** that doesn't already have one.
+If you've just installed KATT on your design system and there are already many untested components, you can use `yarn katt create-all-files`. This will create an example file **for each component in your project** that doesn't already have one.
 
 *KATT's development team serves this script as is and does not take responsibility for any gargantuan PRs which may derive from using this power unwisely.*
 
@@ -111,7 +111,7 @@ You can put additional [Storybook decorations](https://storybook.js.org/basics/w
 
 ### Running one test
 
-While the [pages are being served](#serving-pages), execute `yarn katt visual-test-for --component <component-folder-name> --isTemplate <are you testing a custom page?>`. (Browsers may start opening, that's expected)
+While the [pages are being served](#serving-pages), execute `yarn katt test --component <component-folder-name> --isTemplate <are you testing a custom page?>`. (Browsers may start opening, that's expected)
 
 This will output three screenshots, found in `screenshots/`:
 * Chrome screenshot as the baseline (we assume developers develop in Chrome and thus Chrome visuals are correct)
@@ -122,7 +122,7 @@ Additionally the console will output the mismatch percentage, if any.
 
 ### Running all tests
 
-Use `yarn katt visual-test-all`. Screenshots will be aptly named for every component and whether it's a kitchen sink or a custom template.
+Use `yarn katt test-all`. Screenshots will be aptly named for every component and whether it's a kitchen sink or a custom template.
 
 Note that with **many** components this may take a while and take some space (~1MB/10 components)
 
