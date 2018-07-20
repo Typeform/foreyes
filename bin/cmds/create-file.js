@@ -1,4 +1,4 @@
-exports.command = 'generate-combinations-for'
+exports.command = 'create-file'
 exports.desc = 'Create a base example file.'
 exports.builder = {
   component: {
@@ -8,6 +8,9 @@ exports.builder = {
 }
 exports.handler = ({ component }) => {
   const path = require('path')
-  const generateCombinationsFor = require(path.resolve(__dirname, '../../src/examples/generateCombinationsFor'))
+  const generateCombinationsFor = require(path.resolve(
+    __dirname,
+    '../../src/examples/generateCombinationsFor'
+  ))
   console.log(generateCombinationsFor(component))
 }

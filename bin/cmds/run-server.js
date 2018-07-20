@@ -1,4 +1,4 @@
-exports.command = 'start-server'
+exports.command = 'run-server'
 exports.desc = 'Serve example pages'
 exports.builder = {}
 exports.handler = () => {
