@@ -1,7 +1,11 @@
 exports.command = 'start-server'
 exports.desc = 'Serve example pages'
-exports.builder = {}
-exports.handler = () => {
+exports.builder = {
+  port: {
+    default: '8080'
+  }
+}
+exports.handler = ({ port }) => {
   const localPath = `${__dirname}/../..`
   const file = require('fs')
   const path = require('path')
@@ -33,7 +37,7 @@ exports.handler = () => {
   )
 
   require('child_process').execSync(
-    'yarn start-storybook -p 8080 -c kattConfig/.storybook',
+    `yarn start-storybook -p ${port} -c kattConfig/.storybook`,
     { stdio: [0, 1, 2] }
   )
 }
