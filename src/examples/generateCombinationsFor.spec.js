@@ -45,9 +45,7 @@ describe('generateCombinationsFor', () => {
       fs.__setMockFile(raw)
       const result = generateCombinationsFor('input')
       expect(result).toEqual(
-        Error(
-          0
-        )
+        0
       )
     })
   })
