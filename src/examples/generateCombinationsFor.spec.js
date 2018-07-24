@@ -35,7 +35,7 @@ describe('generateCombinationsFor', () => {
       fs.__fileExists = true
       const result = generateCombinationsFor('button')
       expect(result).toEqual(
-        Error('File for button already exists and would be overwritten')
+        1
       )
       expect(fs.__writtenContent).toBeUndefined()
     })
@@ -46,7 +46,7 @@ describe('generateCombinationsFor', () => {
       const result = generateCombinationsFor('input')
       expect(result).toEqual(
         Error(
-          'Some attribute combinations for input could not be filled automatically. Please manually fill the rest of the file.'
+          0
         )
       )
     })
