@@ -11,28 +11,33 @@ const file = require('fs')
 const config = require(path.resolve(process.cwd(), 'katt.config'))
 
 module.exports = componentName => {
-  var componentPath = `${process.cwd()}/${
-    config.path_to_components
-  }${componentName}/`
-  var somePropTypeWasUnparseable = false
+  const componentPath = path.resolve(
+    process.cwd(),
+    config.path_to_components,
+    componentName,
+    `${componentName}.js`
+  )
+  const examplePath = path.resolve(
+    process.cwd(),
+    config.path_to_examples,
+    `${componentName}.exampleCombinations.js`
+  )
+  let somePropTypeWasUnparseable = false
 
-  const examplePath = `${process.cwd()}/${
-    config.path_to_examples
-  }${componentName}.exampleCombinations.js`
   if (file.existsSync(examplePath)) {
-    return new Error(
-      `File for ${componentName} already exists and would be overwritten`
-    )
+    const existsMsg = `File for ${componentName} already exists and would be overwritten`
+    console.log(existsMsg)
+    return existsMsg
   }
 
-  const propTypes = getPropTypesAsArray(componentName, componentPath)
-  const output = propTypes.reduce((acc, item) => {
-    const { attribute, propType } = item
-    const combinations = getAttributeCombinationsFromArray(propType)
-    acc[attribute] = combinations
-    if (combinations.length === 0) somePropTypeWasUnparseable = true
-    return acc
-  }, {})
+  const output = getPropTypesAsArray(componentPath).reduce(
+    (acc, { attribute, propType }) => {
+      const combinations = getAttributeCombinationsFromArray(propType)
+      if (combinations.length === 0) somePropTypeWasUnparseable = true
+      return { ...acc, [attribute]: combinations }
+    },
+    {}
+  )
 
   file.writeFileSync(
     examplePath,
@@ -41,9 +46,8 @@ module.exports = componentName => {
   )
 
   if (somePropTypeWasUnparseable) {
-    return new Error(
+    console.log(
       `Some attribute combinations for ${componentName} could not be filled automatically. Please manually fill the rest of the file.`
     )
   }
-  return 0
 }

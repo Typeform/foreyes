@@ -1,8 +1,7 @@
 const file = require('fs')
 
-module.exports = (componentName, componentPath) => {
-  const rawComponentPath = `${componentPath}${componentName}.js`
-  const rawString = file.readFileSync(rawComponentPath).toString()
+module.exports = componentPath => {
+  const rawString = file.readFileSync(componentPath).toString()
   const clean = cleanString(rawString)
   return stringToArray(clean)
 }
