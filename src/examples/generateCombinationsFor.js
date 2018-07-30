@@ -25,10 +25,9 @@ module.exports = componentName => {
   let somePropTypeWasUnparseable = false
 
   if (file.existsSync(examplePath)) {
-    console.log(
-      `File for ${componentName} already exists and would be overwritten`
-    )
-    return 1
+    const existsMsg = `File for ${componentName} already exists and would be overwritten`
+    console.log(existsMsg)
+    return existsMsg
   }
 
   const output = getPropTypesAsArray(componentPath).reduce(
@@ -51,5 +50,4 @@ module.exports = componentName => {
       `Some attribute combinations for ${componentName} could not be filled automatically. Please manually fill the rest of the file.`
     )
   }
-  return 0
 }

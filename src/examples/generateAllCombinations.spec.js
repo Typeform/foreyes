@@ -10,7 +10,7 @@ jest.mock('../../katt.config.js')
 describe('generateAllCombinations', () => {
   it('generates one file per component', () => {
     const filesCreated = generateAllCombinations().reduce((acc, result) => {
-      if (result.result === 0) acc++
+      if (!result.result) acc++
       return acc
     }, 0)
     expect(filesCreated).toBe(4)

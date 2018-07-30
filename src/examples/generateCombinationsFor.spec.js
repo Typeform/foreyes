@@ -27,7 +27,7 @@ describe('generateCombinationsFor', () => {
 }`
 
       const result = generateCombinationsFor('input')
-      expect(result).toBe(0)
+      expect(!result).toBe(true)
       expect(fs.__writtenContent).toBe(expected)
     })
 
@@ -35,7 +35,7 @@ describe('generateCombinationsFor', () => {
       fs.__fileExists = true
       const result = generateCombinationsFor('button')
       expect(result).toEqual(
-        1
+        `File for button already exists and would be overwritten`
       )
       expect(fs.__writtenContent).toBeUndefined()
     })
@@ -44,9 +44,7 @@ describe('generateCombinationsFor', () => {
       const raw = require('../__fixtures__/reactComponent')
       fs.__setMockFile(raw)
       const result = generateCombinationsFor('input')
-      expect(result).toEqual(
-        0
-      )
+      expect(!result).toBe(true)
     })
   })
 
