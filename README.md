@@ -2,7 +2,7 @@
 
 # KATT
 
-[![Build Status](https://travis-ci.com/Typeform/kitt.svg?token=axsNaJqw6sjfoKFeCyDk&branch=master)](https://travis-ci.com/Typeform/kitt)
+[![Build Status](https://travis-ci.com/Typeform/kitt.svg?token=axsNaJqw6sjfoKFeCyDk&branch=master)](https://travis-ci.com/Typeform/katt)
 
 KATT is the testing tool for all of Typeform's Design Systems. 
 
