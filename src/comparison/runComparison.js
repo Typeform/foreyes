@@ -5,7 +5,7 @@ describe(`${browser.desiredCapabilities.browserName}_`, () => {
     it(`${componentName}_${type}`, () => {
       process.env.SCREENSHOT_NAME = `${componentName}_${type}`
       const report = browser
-        .url(`/iframe.html?full=1&selectedStory=${type}&selectedKind=${componentName}`)
+        .url(`/iframe.html?full=1&selectedStory=${type}&selectedKind=${componentName.replace(/-/g, "_")}`)
         .checkDocument()
 
       report.forEach(result => {
