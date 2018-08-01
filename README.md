@@ -14,6 +14,12 @@ KATT allows you to mount pages with any component's every visual combination \([
 
 KATT tests `React` components, so it also uses `node.js` and `yarn`. Your Design System project should work with these 3 technologies.
 
+At the moment, IE11 is run on browserstack. Be sure to add these ENV vars on your machine with your data.
+```
+BROWSERSTACK_USERNAME
+BROWSERSTACK_KEY
+```
+
 ### Installing
 
 KATT is a Typeform's **private** NPM package. So configure your NPM token in your project, then add the package:
