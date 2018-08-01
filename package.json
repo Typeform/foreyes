@@ -56,7 +56,7 @@
       "/logs/",
       "/bin/"
     ],
-    "testUrl": "http://localhost/"
+    "testURL": "http://localhost/"
   },
   "lint-staged": {
     "linters": {
