@@ -55,7 +55,8 @@
       "/node_modules/",
       "/logs/",
       "/bin/"
-    ]
+    ],
+    "testUrl": "http://localhost/"
   },
   "lint-staged": {
     "linters": {
