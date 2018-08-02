@@ -32,7 +32,7 @@ exports.handler = ({ component, isTemplate }) => {
     spec: path.resolve(localPath, 'src/comparison/runBaseline.js')
   }
 
-  const comparisonConfig = path.resolve(localPath, 'wdio.firefox.conf.js')
+  const firefoxConfig = path.resolve(localPath, 'wdio.firefox.conf.js')
   const comparisonOpts = {
     spec: path.resolve(localPath, 'src/comparison/runComparison.js')
   }
@@ -41,7 +41,7 @@ exports.handler = ({ component, isTemplate }) => {
   new Launcher(baselineConfig, baselineOpts).run().then(() => {
     console.log(`Saved baseline for ${component} on chrome`)
 
-    new Launcher(comparisonConfig, comparisonOpts)
+    new Launcher(firefoxConfig, comparisonOpts)
       .run()
       .then(() => new Launcher(ie11Config, comparisonOpts).run())
       .then(code => process.exit(code), onPromiseFailed)
