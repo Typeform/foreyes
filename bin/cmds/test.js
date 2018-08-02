@@ -38,12 +38,9 @@ exports.handler = ({ component, isTemplate }) => {
   }
   const ie11Config = path.resolve(localPath, 'wdio.ie11Browserstack.conf.js')
 
-  new Launcher(baselineConfig, baselineOpts).run().then(() => {
-    console.log(`Saved baseline for ${component} on chrome`)
-
-    new Launcher(firefoxConfig, comparisonOpts)
-      .run()
-      .then(() => new Launcher(ie11Config, comparisonOpts).run())
-      .then(code => process.exit(code), onPromiseFailed)
-  }, onPromiseFailed)
+  new Launcher(baselineConfig, baselineOpts)
+    .run()
+    .then(() => new Launcher(firefoxConfig, comparisonOpts).run())
+    .then(() => new Launcher(ie11Config, comparisonOpts).run())
+    .then(code => process.exit(code), onPromiseFailed)
 }
