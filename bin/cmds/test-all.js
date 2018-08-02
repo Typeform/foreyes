@@ -29,14 +29,15 @@ exports.handler = () => {
     spec: path.resolve(localPath, 'src/comparison/runBaseline.js')
   }
 
-  const comparisonConfig = path.resolve(localPath, 'wdio.compare.conf.js')
+  const firefoxConfig = path.resolve(localPath, 'wdio.compare.conf.js')
   const comparisonOpts = {
     spec: path.resolve(localPath, 'src/comparison/runComparison.js')
   }
+  const ie11Config = path.resolve(localPath, 'wdio.ie11Browserstack.conf.js')
 
-  new Launcher(baselineConfig, baselineOpts).run().then(() => {
-    new Launcher(comparisonConfig, comparisonOpts)
-      .run()
-      .then(code => process.exit(code), onPromiseFailed)
-  }, onPromiseFailed)
+  new Launcher(baselineConfig, baselineOpts)
+    .run()
+    .then(() => new Launcher(firefoxConfig, comparisonOpts).run())
+    .then(() => new Launcher(ie11Config, comparisonOpts).run())
+    .then(code => process.exit(code), onPromiseFailed)
 }
