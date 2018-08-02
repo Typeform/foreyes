@@ -20,8 +20,8 @@ exports.config = merge(
     visualRegression: {
       compare: new VisualRegressionCompare.LocalCompare({
         referenceName: context => `./screenshots/${getBaseName(context)}.png`,
-        screenshotName: context => `./screenshots/${getBaseName(context)}_actual.png`,
-        diffName: context => `./screenshots/${getBaseName(context)}_diff.png`,
+        screenshotName: context => `./screenshots/${getBaseName(context)}_actual_firefox.png`,
+        diffName: context => `./screenshots/${getBaseName(context)}_diff_with_firefox.png`,
         misMatchTolerance: config.misMatchTolerance,
         ignoreComparison: config.ignoreComparison
       })
