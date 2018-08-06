@@ -6,12 +6,18 @@ language: node_js
 node_js:
   - "10"
 
-before_script: touch katt.config.js
+before_script: 
+  - touch katt.config.js
+  - cd tests && yarn
+
+script:
+  - cd tests && yarn test
 
 cache:
   yarn: true
   directories:
     - node_modules
+    - tests/node_modules
 
 after_success:
   - yarn install:token
