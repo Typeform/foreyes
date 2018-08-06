@@ -11,7 +11,7 @@ before_script:
   - cd tests && yarn
 
 script:
-  - cd tests && yarn test
+  - cd tests && yarn install:token && yarn test
 
 cache:
   yarn: true
