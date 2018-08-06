@@ -4,8 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "install:token": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc",
     "server": "yarn katt run-server &",
-    "start-development": "npm link @typeform/katt",
+    "link-katt": "npm link @typeform/katt",
     "test": "yarn server && yarn katt test-all"
   },
   "devDependencies": {
