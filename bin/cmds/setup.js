@@ -67,6 +67,10 @@ const interactiveConfigSetup = () => {
         description:
           'One or more screen sizes the browser should take: 1024,600;1280;720.',
         default: '1024,600'
+      },
+      serverPort: {
+        description: 'Port in which the example pages will be mounted',
+        default: '8080'
       }
     }
   }

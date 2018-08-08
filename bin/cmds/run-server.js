@@ -1,14 +1,12 @@
 exports.command = 'run-server'
 exports.desc = 'Serve example pages'
-exports.builder = {
-  port: {
-    default: '8080'
-  }
-}
-exports.handler = ({ port }) => {
+exports.builder = {}
+exports.handler = () => {
   const localPath = `${__dirname}/../..`
   const file = require('fs')
   const path = require('path')
+  const port = require(path.resolve(process.cwd(), 'katt.config')).serverPort
+
   const componentList = require(path.resolve(
     localPath,
     'src/examples/getComponentList'
