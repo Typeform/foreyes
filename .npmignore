@@ -1,0 +1,11 @@
+.npmrc
+.travis.yml
+katt.config.js
+yarn-error.log
+.gitignore
+*spec.js
+/__mocks__/
+/__fixtures__/
+/node_modules/
+package-lock.json
+/tests/
