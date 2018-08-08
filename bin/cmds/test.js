@@ -1,5 +1,5 @@
 exports.command = 'test'
-exports.desc = 'Test Chrome against Firefox and'
+exports.desc = 'Test Chrome against Firefox and IE11'
 exports.builder = {
   component: {
     default: undefined
