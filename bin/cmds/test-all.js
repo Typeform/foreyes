@@ -15,5 +15,12 @@ exports.handler = () => {
     }
   })
 
-  require(path.resolve(__dirname, 'support', 'runWdio.js'))(components, [])
+  const urls = fs.readFileSync(
+    path.resolve(process.cwd(), 'kattConfig/fixtureUrls.json')
+  )
+
+  require(path.resolve(__dirname, 'support', 'runWdio.js'))(
+    components,
+    JSON.parse(urls)
+  )
 }
