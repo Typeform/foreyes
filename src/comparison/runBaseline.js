@@ -1,6 +1,6 @@
-const components = JSON.parse(process.env.COMPONENTS)
-const componentsToStorybookUrls = require('./componentsToStorybookUrls')
-const urls = JSON.parse(process.env.KATT_URLS).concat(componentsToStorybookUrls(components))
+const path = require('path')
+const urls = require(path.resolve(__dirname, 'getComparisonUrls'))
+
 describe('baseline_', () => {
   urls.forEach((url) => {
     it(url, () => {

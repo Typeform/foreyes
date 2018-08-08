@@ -20,6 +20,14 @@ exports.handler = () => {
     )
   }
 
+  const fixtureUrlsPath = path.resolve(configFolderName, 'fixtureUrls.json')
+  if (!fs.existsSync(fixtureUrlsPath)) {
+    fs.copyFileSync(
+      path.resolve(packagePath, 'fixtureUrls.dist.json'),
+      fixtureUrlsPath
+    )
+  }
+
   require('ncp').ncp(
     path.resolve(packagePath, '.storybook/'),
     path.resolve(configFolderName, '.storybook/')

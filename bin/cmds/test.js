@@ -21,17 +21,15 @@ exports.handler = ({ component, isTemplate, urls }) => {
   }
   const path = require('path')
 
-  process.env.COMPONENTS = JSON.stringify(
-    component
-      ? [
-        {
-          componentName: component,
-          type: isTemplate ? 'custom' : 'default'
-        }
-      ]
-      : []
-  )
-  process.env.KATT_URLS = JSON.stringify(urls ? urls.split(',') : [])
+  const components = component
+    ? [
+      {
+        componentName: component,
+        type: isTemplate ? 'custom' : 'default'
+      }
+    ]
+    : []
+  const url = urls ? urls.split(',') : []
 
-  require(path.resolve(__dirname, 'support', 'runWdio.js'))()
+  require(path.resolve(__dirname, 'support', 'runWdio.js'))(components, url)
 }

@@ -15,7 +15,5 @@ exports.handler = () => {
     }
   })
 
-  process.env.COMPONENTS = JSON.stringify(components)
-
-  require(path.resolve(__dirname, 'support', 'runWdio.js'))()
+  require(path.resolve(__dirname, 'support', 'runWdio.js'))(components, [])
 }

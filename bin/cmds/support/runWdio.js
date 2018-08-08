@@ -1,4 +1,7 @@
-module.exports = () => {
+module.exports = (components, urls) => {
+  process.env.COMPONENTS = JSON.stringify(components)
+  process.env.KATT_URLS = JSON.stringify(urls)
+
   const path = require('path')
   const Launcher = require('webdriverio').Launcher
   const localPath = `${__dirname}/../../..`
