@@ -9,25 +9,29 @@ exports.builder = {
     description: 'Do you want to test a custom example?'
   },
   urls: {
-    default: [],
+    default: undefined,
     description:
       'Do you instead want to test specific URLs? Separated by comma.'
   }
 }
 exports.handler = ({ component, isTemplate, urls }) => {
-  if (!component && urls.split(',').length < 0) {
+  if (!component && !urls) {
     console.log('Either use the component parameter or the urls component')
     process.exit(1)
   }
   const path = require('path')
 
-  process.env.COMPONENTS = JSON.stringify([
-    {
-      componentName: component,
-      type: isTemplate ? 'custom' : 'default'
-    }
-  ])
-  process.env.KATT_URLS = JSON.stringify(urls.split(','))
+  process.env.COMPONENTS = JSON.stringify(
+    component
+      ? [
+        {
+          componentName: component,
+          type: isTemplate ? 'custom' : 'default'
+        }
+      ]
+      : []
+  )
+  process.env.KATT_URLS = JSON.stringify(urls ? urls.split(',') : [])
 
   require(path.resolve(__dirname, 'support', 'runWdio.js'))()
 }
