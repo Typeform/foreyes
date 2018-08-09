@@ -1,11 +1,8 @@
-.npmrc
 .travis.yml
 katt.config.js
 yarn-error.log
-.gitignore
 *spec.js
-/__mocks__/
-/__fixtures__/
-/node_modules/
+__mocks__
+__fixtures__
 package-lock.json
 /tests/
