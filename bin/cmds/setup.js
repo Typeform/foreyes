@@ -20,6 +20,14 @@ exports.handler = () => {
     )
   }
 
+  const fixtureUrlsPath = path.resolve(configFolderName, 'fixtureUrls.json')
+  if (!fs.existsSync(fixtureUrlsPath)) {
+    fs.copyFileSync(
+      path.resolve(packagePath, 'fixtureUrls.dist.json'),
+      fixtureUrlsPath
+    )
+  }
+
   require('ncp').ncp(
     path.resolve(packagePath, '.storybook/'),
     path.resolve(configFolderName, '.storybook/')
@@ -67,6 +75,10 @@ const interactiveConfigSetup = () => {
         description:
           'One or more screen sizes the browser should take: 1024,600;1280;720.',
         default: '1024,600'
+      },
+      serverPort: {
+        description: 'Port in which the example pages will be mounted',
+        default: '8080'
       }
     }
   }

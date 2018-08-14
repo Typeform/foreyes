@@ -1,46 +1,35 @@
 exports.command = 'test'
-exports.desc = 'Test Chrome against Firefox'
+exports.desc = 'Test Chrome against Firefox and IE11'
 exports.builder = {
   component: {
-    default: undefined,
-    required: true
+    default: undefined
   },
   isTemplate: {
     default: false,
     description: 'Do you want to test a custom example?'
+  },
+  urls: {
+    default: undefined,
+    description:
+      'Do you instead want to test specific URLs? Separated by comma.'
   }
 }
-exports.handler = ({ component, isTemplate }) => {
-  const path = require('path')
-  const Launcher = require('webdriverio').Launcher
-  const localPath = `${__dirname}/../..`
-
-  process.env.COMPONENTS = JSON.stringify([
-    {
-      componentName: component,
-      type: isTemplate ? 'custom' : 'default'
-    }
-  ])
-
-  const onPromiseFailed = error => {
-    console.error(error.stacktrace)
+exports.handler = ({ component, isTemplate, urls }) => {
+  if (!component && !urls) {
+    console.log('Either use the component parameter or the urls component')
     process.exit(1)
   }
+  const path = require('path')
 
-  const baselineConfig = path.resolve(localPath, 'wdio.reference.conf.js')
-  const baselineOpts = {
-    spec: path.resolve(localPath, 'src/comparison/runBaseline.js')
-  }
+  const components = component
+    ? [
+      {
+        componentName: component,
+        type: isTemplate ? 'custom' : 'default'
+      }
+    ]
+    : []
+  const url = urls ? urls.split(',') : []
 
-  const firefoxConfig = path.resolve(localPath, 'wdio.firefox.conf.js')
-  const comparisonOpts = {
-    spec: path.resolve(localPath, 'src/comparison/runComparison.js')
-  }
-  const ie11Config = path.resolve(localPath, 'wdio.ie11Browserstack.conf.js')
-
-  new Launcher(baselineConfig, baselineOpts)
-    .run()
-    .then(() => new Launcher(firefoxConfig, comparisonOpts).run())
-    .then(() => new Launcher(ie11Config, comparisonOpts).run())
-    .then(code => process.exit(code), onPromiseFailed)
+  require(path.resolve(__dirname, 'support', 'runWdio.js'))(components, url)
 }

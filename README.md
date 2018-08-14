@@ -132,9 +132,10 @@ Use `yarn katt test-all`. Screenshots will be aptly named for every component an
 
 Note that with **many** components this may take a while and take some space (~1MB/10 components)
 
-*Next steps: Allow changing tolerance*
-*Next steps: Allow changing viewport size*
-*Next steps: Host pages in travis somewhere to be grabbed*
+## URLs
+
+KATT can also test URLs directly. Add URLs to the list in the `kattConfig/fixturesUrls.json`. Then use `yarn katt test-urls`
+
 *Next steps: Refactor so .storybook config folder doesn't need to be pasted into the root*
 
 ## Authors
