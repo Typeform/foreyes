@@ -35,6 +35,10 @@ exports.handler = () => {
     path.resolve(packagePath, '.storybook', 'webpack.config.js'),
     path.resolve(storyBookPath, 'webpack.config.js')
   )
+  copyFile(
+    path.resolve(packagePath, 'fixtureUrls.dist.json'),
+    path.resolve(destinationConfigPath, 'fixtureUrls.json')
+  )
 
   const configPath = path.resolve(destinationConfigPath, '.storybook/config.js')
   if (!fs.existsSync(configPath)) {
@@ -94,6 +98,10 @@ const interactiveConfigSetup = () => {
         description:
           'One or more screen sizes the browser should take: 1024,600;1280;720.',
         default: '1024,600'
+      },
+      serverPort: {
+        description: 'Port in which the example pages will be mounted',
+        default: '8080'
       }
     }
   }

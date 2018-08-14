@@ -1,13 +1,13 @@
-const components = JSON.parse(process.env.COMPONENTS)
+const path = require('path')
+const urls = require(path.resolve(__dirname, 'getComparisonUrls'))
 
 describe('baseline_', () => {
-  components.forEach(({ componentName, type }) => {
-    it(`${componentName}_${type}`, () => {
-      process.env.SCREENSHOT_NAME = `${componentName}_${type}`
+  urls.forEach((url) => {
+    it(url, () => {
       browser
-        .url(`/iframe.html?full=1&selectedStory=${type}&selectedKind=${componentName.replace(/-/g, "_")}`)
+        .url(url)
         .checkDocument()
-        console.log(`Saved chrome baseline for ${componentName} (${type})`)
+      console.log(`Saved chrome baseline for ${url}`)
     })
   })
 })
