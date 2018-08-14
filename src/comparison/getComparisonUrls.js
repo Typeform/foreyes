@@ -1,9 +1,15 @@
 const path = require('path')
-const config = require(path.resolve(process.cwd(), 'katt.config'))
+const port = require(path.resolve(process.cwd(), 'katt.config')).serverPort
+const URL = require('url').URL
 
-componentsToStorybookUrls = (components) => {
+componentsToStorybookUrls = components => {
   return components.map(({componentName, type}) => {
-    return `http://localhost:${config.serverPort}/iframe.html?full=1&selectedStory=${type}&selectedKind=${componentName.replace(/-/g, "_")}`
+    const name = componentName.replace(/-/g, "_")
+    let outUrl = new URL('http://localhost')
+    outUrl.port = port
+    outUrl.pathname = "iframe.html"
+    outUrl.search = `full=1&selectedStory=${type}&selectedKind=${name}`
+    return outUrl.toString()
   })
 }
 
