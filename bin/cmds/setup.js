@@ -6,32 +6,55 @@ exports.handler = () => {
   const path = require('path')
   const fs = require('fs')
   const packagePath = path.resolve(__dirname, '..', '..')
-  const configFolderName = 'kattConfig'
+  const destinationConfigPath = 'kattConfig'
+  const storyBookPath = 'kattConfig/.storybook'
 
-  if (!fs.existsSync(configFolderName)) {
-    fs.mkdirSync(configFolderName)
+  const copyFile = (from, to) => {
+    if (!fs.existsSync(to)) {
+      fs.copyFileSync(from, to)
+    }
+  }
+  const makeDirectory = dir => {
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir)
+    }
   }
 
-  const decoratorPath = path.resolve(configFolderName, 'decorator.js')
-  if (!fs.existsSync(decoratorPath)) {
-    fs.copyFileSync(
-      path.resolve(packagePath, 'decorator.dist.js'),
-      decoratorPath
-    )
-  }
-
-  const fixtureUrlsPath = path.resolve(configFolderName, 'fixtureUrls.json')
-  if (!fs.existsSync(fixtureUrlsPath)) {
-    fs.copyFileSync(
-      path.resolve(packagePath, 'fixtureUrls.dist.json'),
-      fixtureUrlsPath
-    )
-  }
-
-  require('ncp').ncp(
-    path.resolve(packagePath, '.storybook/'),
-    path.resolve(configFolderName, '.storybook/')
+  makeDirectory(destinationConfigPath)
+  copyFile(
+    path.resolve(packagePath, 'decorator.dist.js'),
+    path.resolve(destinationConfigPath, 'decorator.js')
   )
+
+  makeDirectory(storyBookPath)
+  copyFile(
+    path.resolve(packagePath, '.storybook', '.babelrc'),
+    path.resolve(storyBookPath, '.babelrc')
+  )
+  copyFile(
+    path.resolve(packagePath, '.storybook', 'webpack.config.js'),
+    path.resolve(storyBookPath, 'webpack.config.js')
+  )
+  copyFile(
+    path.resolve(packagePath, 'fixtureUrls.dist.json'),
+    path.resolve(destinationConfigPath, 'fixtureUrls.json')
+  )
+
+  const configPath = path.resolve(destinationConfigPath, '.storybook/config.js')
+  if (!fs.existsSync(configPath)) {
+    fs.writeFileSync(
+      configPath,
+      `import examples from './componentsWithExamplePages'
+import customExamples from './componentsWithCustomExamplePages'
+import '../decorator'
+import configure from '${path.resolve(
+    __dirname,
+    '../../',
+    '.storybook/config.js'
+  )}'
+configure(examples, customExamples)`
+    )
+  }
 
   interactiveConfigSetup()
 }
