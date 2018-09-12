@@ -8,7 +8,7 @@ describe('baseline_', () => {
       browser
         .url(url)
         .checkDocument()
-      console.log(green(`${url}: saved chrome baseline`))
+      console.log(green(`📸 ${url}: saved chrome baseline`))
     })
   })
 })
