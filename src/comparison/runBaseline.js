@@ -1,5 +1,6 @@
 const path = require('path')
 const urls = require(path.resolve(__dirname, 'getComparisonUrls'))
+const chalk = require('chalk')
 
 describe('baseline_', () => {
   urls.forEach((url) => {
@@ -7,7 +8,7 @@ describe('baseline_', () => {
       browser
         .url(url)
         .checkDocument()
-      console.log(`Saved chrome baseline for ${url}`)
+      console.log(chalk.green(`${url}: saved chrome baseline`))
     })
   })
 })

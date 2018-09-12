@@ -2,6 +2,7 @@ module.exports = (components, urls) => {
   process.env.COMPONENTS = JSON.stringify(components)
   process.env.KATT_URLS = JSON.stringify(urls)
 
+  const fs = require('fs')
   const path = require('path')
   const Launcher = require('webdriverio').Launcher
   const localPath = `${__dirname}/../../..`
@@ -20,6 +21,15 @@ module.exports = (components, urls) => {
     spec: path.resolve(localPath, 'src/comparison/runComparison.js')
   }
   const ie11Config = path.resolve(localPath, 'wdio.ie11Browserstack.conf.js')
+
+  console.log(
+    require('chalk').blue(
+      'Look into kattConfig/logs.log for more information of the execution.'
+    )
+  )
+  fs.writeFileSync('kattConfig/logs.log')
+  const access = fs.createWriteStream('kattConfig/logs.log')
+  process.stdout.write = process.stderr.write = access.write.bind(access)
 
   new Launcher(baselineConfig, baselineOpts)
     .run()
