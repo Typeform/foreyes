@@ -13,8 +13,9 @@ describe(`${browser.desiredCapabilities.browserName}_`, () => {
         if (result.isWithinMisMatchTolerance) {
           console.log(chalk.green(`PASS: ${url} in ${browser.desiredCapabilities.browserName}.`))
         } else {
-          console.log(chalk.red(`FAIL: ${url} in ${browser.desiredCapabilities.browserName} is ${result.misMatchPercentage}% different.`))
-          throw new Error(`FAIL: ${url} in ${browser.desiredCapabilities.browserName} is ${result.misMatchPercentage}% different.`)
+          const errorMsg = `FAIL: ${url} in ${browser.desiredCapabilities.browserName} is ${result.misMatchPercentage}% different.`
+          console.log(chalk.red(errorMsg))
+          throw new Error(errorMsg)
         }
       })
     })
