@@ -1,7 +1,7 @@
 {
   "name": "@typeform/foreyes",
   "version": "1.2.1",
-  "description": "testing suite for typeform's design systems",
+  "description": "Visually compare urls (or react components) across browsers",
   "bin": {
     "foreyes": "bin/index.js"
   },
