@@ -3,12 +3,12 @@ const urls = require(path.resolve(__dirname, 'getComparisonUrls'))
 const green = require('chalk').green
 
 describe('baseline_', () => {
-  urls.forEach((url) => {
-    it(url, () => {
+  urls.forEach(({name, url}) => {
+    it(name, () => {
       browser
         .url(url)
         .checkDocument()
-      console.log(green(`📸  ${url}: saved chrome baseline`))
+      console.log(green(`📸  ${name}: saved chrome baseline`))
     })
   })
 })
