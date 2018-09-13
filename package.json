@@ -1,14 +1,14 @@
 {
-  "name": "@typeform/katt",
+  "name": "@typeform/foreyes",
   "version": "1.2.1",
   "description": "testing suite for typeform's design systems",
   "bin": {
-    "katt": "bin/index.js"
+    "foreyes": "bin/index.js"
   },
   "scripts": {
     "install:token": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc",
     "precommit": "yarn lint-staged && yarn test",
-    "test": "touch katt.config.js; yarn run jest; rm katt.config.js"
+    "test": "touch foreyes.config.js; yarn run jest; rm foreyes.config.js"
   },
   "keywords": [
     "testing",

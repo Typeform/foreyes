@@ -8,7 +8,7 @@ const getAttributeCombinationsFromArray = require(path.resolve(
   './getAttributeCombinationsFromArray'
 ))
 const file = require('fs')
-const config = require(path.resolve(process.cwd(), 'katt.config'))
+const config = require(path.resolve(process.cwd(), 'foreyes.config'))
 
 module.exports = componentName => {
   const componentPath = path.resolve(

@@ -5,7 +5,7 @@ exports.handler = () => {
   const localPath = `${__dirname}/../..`
   const file = require('fs')
   const path = require('path')
-  const port = require(path.resolve(process.cwd(), 'katt.config')).serverPort
+  const port = require(path.resolve(process.cwd(), 'foreyes.config')).serverPort
 
   const componentList = require(path.resolve(
     localPath,
@@ -21,13 +21,13 @@ exports.handler = () => {
   ))
   const componentPaths = componentList()
   file.writeFileSync(
-    path.resolve('kattConfig', '.storybook/componentsWithExamplePages.js'),
+    path.resolve('foreyesConfig', '.storybook/componentsWithExamplePages.js'),
     allExamplePages(componentPaths),
     { flag: 'w' }
   )
   file.writeFileSync(
     path.resolve(
-      'kattConfig',
+      'foreyesConfig',
       '.storybook/componentsWithCustomExamplePages.js'
     ),
     customExamplePages(componentPaths),
@@ -35,7 +35,7 @@ exports.handler = () => {
   )
 
   require('child_process').execSync(
-    `yarn start-storybook -p ${port} -c kattConfig/.storybook`,
+    `yarn start-storybook -p ${port} -c foreyesConfig/.storybook`,
     { stdio: [0, 1, 2] }
   )
 }

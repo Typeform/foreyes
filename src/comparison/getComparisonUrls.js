@@ -1,5 +1,5 @@
 const path = require('path')
-const port = require(path.resolve(process.cwd(), 'katt.config')).serverPort
+const port = require(path.resolve(process.cwd(), 'foreyes.config')).serverPort
 const URL = require('url').URL
 
 componentsToStorybookUrls = components => {
@@ -14,4 +14,4 @@ componentsToStorybookUrls = components => {
 }
 
 const components = JSON.parse(process.env.COMPONENTS)
-module.exports = JSON.parse(process.env.KATT_URLS).concat(componentsToStorybookUrls(components))
+module.exports = JSON.parse(process.env.FOREYES_URLS).concat(componentsToStorybookUrls(components))

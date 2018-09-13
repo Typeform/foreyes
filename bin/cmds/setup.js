@@ -1,13 +1,13 @@
 exports.command = 'setup'
 exports.desc =
-  'Copies necessary config files into your root, under kattConfig folder'
+  'Copies necessary config files into your root, under foreyesConfig folder'
 exports.builder = {}
 exports.handler = () => {
   const path = require('path')
   const fs = require('fs')
   const packagePath = path.resolve(__dirname, '..', '..')
-  const destinationConfigPath = 'kattConfig'
-  const storyBookPath = 'kattConfig/.storybook'
+  const destinationConfigPath = 'foreyesConfig'
+  const storyBookPath = 'foreyesConfig/.storybook'
 
   const copyFile = (from, to) => {
     if (!fs.existsSync(to)) {
@@ -73,7 +73,7 @@ const interactiveConfigSetup = () => {
         required: true
       },
       path_to_examples: {
-        description: 'Where will your KATT examples be?',
+        description: 'Where will your Foreyes examples be?',
         default: 'tests/',
         required: true
       },
@@ -130,7 +130,7 @@ const interactiveConfigSetup = () => {
       })
 
     require('fs').writeFileSync(
-      'katt.config.js',
+      'foreyes.config.js',
       `module.exports=${JSON.stringify(result, null, ' ')}`
     )
   })

@@ -1,5 +1,5 @@
 .travis.yml
-katt.config.js
+foreyes.config.js
 yarn-error.log
 *spec.js
 __mocks__

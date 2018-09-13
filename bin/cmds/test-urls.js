@@ -6,7 +6,7 @@ exports.handler = () => {
   const path = require('path')
 
   const urls = fs.readFileSync(
-    path.resolve(process.cwd(), 'kattConfig/fixtureUrls.json')
+    path.resolve(process.cwd(), 'foreyesConfig/fixtureUrls.json')
   )
 
   require(path.resolve(__dirname, 'support', 'runWdio.js'))(

@@ -1,5 +1,5 @@
 const path = require('path')
-const config = require(path.resolve(process.cwd(), 'katt.config'))
+const config = require(path.resolve(process.cwd(), 'foreyes.config'))
 
 exports.config = {
   //

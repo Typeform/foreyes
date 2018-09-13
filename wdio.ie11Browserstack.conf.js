@@ -3,7 +3,7 @@ const wdioConf = require('./wdio.conf.js')
 const VisualRegressionCompare = require('wdio-visual-regression-service/compare')
 
 const path = require('path')
-const config = require(path.resolve(process.cwd(), 'katt.config'))
+const config = require(path.resolve(process.cwd(), 'foreyes.config'))
 
 const getBaseName = ({ test, meta }) => `${test.title}_${meta.viewport.width}x${meta.viewport.height}`
 
@@ -22,7 +22,7 @@ exports.config = merge(
       'browser': 'IE',
       'browser_version': '11.0',
       'resolution': '1680x1050',
-      'project': 'KATT',
+      'project': 'Foreyes',
       'browserstack.ie.enablePopups': false,
       'browserstack.debug': true,
       'browserstack.video': false,
