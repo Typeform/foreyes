@@ -1,6 +1,6 @@
 module.exports = (components, urls) => {
   process.env.COMPONENTS = JSON.stringify(components)
-  process.env.KATT_URLS = JSON.stringify(urls)
+  process.env.FOREYES_URLS = JSON.stringify(urls)
 
   const fs = require('fs')
   const path = require('path')
@@ -24,10 +24,12 @@ module.exports = (components, urls) => {
   const ie11Config = path.resolve(localPath, 'wdio.ie11Browserstack.conf.js')
 
   console.log(
-    blue('Look into kattConfig/logs.log for more information on the execution.')
+    blue(
+      'Look into foreyesConfig/logs.log for more information on the execution.'
+    )
   )
-  fs.writeFileSync('kattConfig/logs.log')
-  const logFile = fs.createWriteStream('kattConfig/logs.log')
+  fs.writeFileSync('foreyesConfig/logs.log')
+  const logFile = fs.createWriteStream('foreyesConfig/logs.log')
   process.stdout.write = process.stderr.write = logFile.write.bind(logFile)
 
   new Launcher(baselineConfig, baselineOpts)

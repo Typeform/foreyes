@@ -4,8 +4,10 @@ exports.builder = {}
 exports.handler = () => {
   const fs = require('fs')
   const path = require('path')
-  const pathToExamples = require(path.resolve(process.cwd(), 'katt.config.js'))
-    .path_to_examples
+  const pathToExamples = require(path.resolve(
+    process.cwd(),
+    'foreyes.config.js'
+  )).path_to_examples
 
   const components = fs.readdirSync(pathToExamples).map(value => {
     const [componentName, exampleType] = value.split('.')
@@ -16,7 +18,7 @@ exports.handler = () => {
   })
 
   const urls = fs.readFileSync(
-    path.resolve(process.cwd(), 'kattConfig/fixtureUrls.json')
+    path.resolve(process.cwd(), 'foreyesConfig/fixtureUrls.json')
   )
 
   require(path.resolve(__dirname, 'support', 'runWdio.js'))(

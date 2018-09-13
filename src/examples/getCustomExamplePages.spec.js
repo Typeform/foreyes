@@ -5,7 +5,7 @@ const getCustomExamplePages = require(path.resolve(
 ))
 
 jest.mock('fs')
-jest.mock('../../katt.config')
+jest.mock('../../foreyes.config')
 
 describe('getCustomExamplePages', () => {
   describe("given a path to the components' folder", () => {

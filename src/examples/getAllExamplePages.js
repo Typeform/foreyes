@@ -1,6 +1,6 @@
 const path = require('path')
 const file = require('fs')
-const config = require(path.resolve(process.cwd(), 'katt.config'))
+const config = require(path.resolve(process.cwd(), 'foreyes.config'))
 module.exports = components => {
   const examplePath = config.path_to_examples
   const sourcePath = config.path_to_components

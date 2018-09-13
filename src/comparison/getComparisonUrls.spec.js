@@ -1,5 +1,5 @@
 const path = require('path')
-jest.mock('../../katt.config.js')
+jest.mock('../../foreyes.config.js')
 
 describe('generateAllCombinations', () => {
   describe('Given components and urls', () => {
@@ -13,7 +13,7 @@ describe('generateAllCombinations', () => {
         type: 'custom'
       }
     ])
-    process.env.KATT_URLS = JSON.stringify([
+    process.env.FOREYES_URLS = JSON.stringify([
       'https://admin.typeform.com/login/',
       'https://username1.typeform.com/to/abcdef'
     ])

@@ -6,7 +6,7 @@ language: node_js
 node_js:
   - "10"
 
-before_script: touch katt.config.js
+before_script: touch foreyes.config.js
 
 cache:
   yarn: true

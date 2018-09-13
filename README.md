@@ -1,12 +1,11 @@
 #### (This README is a WIP subject to change.)
 
-# KATT
+# Foreyes
 ## 📺  Visually detects changes accross browsers in any of your projects! 
 
-[![Build Status](https://travis-ci.com/Typeform/kitt.svg?token=axsNaJqw6sjfoKFeCyDk&branch=master)](https://travis-ci.com/Typeform/KATT)
+[![Build Status](https://travis-ci.com/Typeform/kitt.svg?token=axsNaJqw6sjfoKFeCyDk&branch=master)](https://travis-ci.com/Typeform/Foreyes)
 
-
-KATT allows you to visually compare pages using many different approaches:
+Foreyes allows you to visually compare pages using many different approaches:
 - Any given URL (See [running against a URL](#Running-against-a-URL))
 - Pages mounted with every component's visual combination \([kitchen sink pages](https://medium.com/eightshapes-llc/component-qa-in-design-systems-b18cb4decb9c)), 
 - Your custom templates. There are also helpers to create these pages. 
@@ -17,7 +16,7 @@ After creating the pages, they will be visually compared across browsers. Chrome
 
 ### Prerequisites
 
-KATT uses `node.js` and `yarn` to execute the urls or components and compare the differences. Your project should work with these 3 technologies to work seamlessly.
+Foreyes uses `node.js` and `yarn` to execute the urls or components and compare the differences. Your project should work with these 3 technologies to work seamlessly.
 
 At the moment, IE11 is run on browserstack. Be sure to add these ENV vars on your machine with your data.
 ```
@@ -27,12 +26,12 @@ BROWSERSTACK_KEY
 
 ### Installing
 
-KATT is a Typeform's **private** NPM package. So configure your NPM token in your project, then add the package:
+Foreyes is a Typeform's **private** NPM package. So configure your NPM token in your project, then add the package:
 
 ```bash
 echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
-yarn add @typeform/katt
-yarn katt setup
+yarn add @typeform/foreyes
+yarn foreyes setup
 ```
 
 ### (Optional) Configuring in Travis
@@ -40,8 +39,8 @@ yarn katt setup
 In package.json, add:
 ```
 scripts: {
-    "katt-start-server": "yarn katt run-server &",
-    "katt-run-tests": "yarn katt test-all"
+    "foreyes-start-server": "yarn foreyes run-server &",
+    "foreyes-run-tests": "yarn foreyes test-all"
     //...
 ```
 
@@ -55,16 +54,16 @@ before_install:
   - export MOZ_HEADLESS=1
 
 before_script:
-  - yarn katt-start-server
+  - yarn foreyes-start-server
 
 script:
-  - yarn katt-run-tests
+  - yarn foreyes-run-tests
 ```
 
 ## Execution
 ### Running against a URL
 
-KATT can visually compare URLs directly. Add URLs to the list in the `kattConfig/fixturesUrls.json`. Then use `yarn katt test-urls`
+Foreyes can visually compare URLs directly. Add URLs to the list in the `foreyesConfig/fixturesUrls.json`. Then use `yarn foreyes test-urls`
 
 
 *Next steps: Refactor so .storybook config folder doesn't need to be pasted into the root*
