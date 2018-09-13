@@ -1,21 +1,22 @@
 #### (This README is a WIP subject to change.)
 
 # Foreyes
-## 📺 Visually detects changes accross browsers in any of your projects! 
+## 📺  Visually detects changes accross browsers in any of your projects! 
 
 [![Build Status](https://travis-ci.com/Typeform/kitt.svg?token=axsNaJqw6sjfoKFeCyDk&branch=master)](https://travis-ci.com/Typeform/Foreyes)
 
+Foreyes allows you to visually compare pages using many different approaches:
+- Any given URL (See [running against a URL](#Running-against-a-URL))
+- Pages mounted with every component's visual combination \([kitchen sink pages](https://medium.com/eightshapes-llc/component-qa-in-design-systems-b18cb4decb9c)), 
+- Your custom templates. There are also helpers to create these pages. 
 
-Foreyes allows you to mount pages with any component's every visual combination \([kitchen sink pages](https://medium.com/eightshapes-llc/component-qa-in-design-systems-b18cb4decb9c)), or your custom templates too. There are also helpers to create these pages. 
-It additionally supports any given url, opening the possibilities check the layout of any project.
-
-After creating the pages, they will be visually compared across browsers: currently Chrome (master) against Firefox and IE11.
+After creating the pages, they will be visually compared across browsers. Chrome acts as a master layout against Firefox and IE11.
 
 ## Getting Started
 
 ### Prerequisites
 
-Foreyes tests `React` components, so it also uses `node.js` and `yarn`. Your Design System project should work with these 3 technologies.
+Foreyes uses `node.js` and `yarn` to execute the urls or components and compare the differences. Your project should work with these 3 technologies to work seamlessly.
 
 At the moment, IE11 is run on browserstack. Be sure to add these ENV vars on your machine with your data.
 ```
