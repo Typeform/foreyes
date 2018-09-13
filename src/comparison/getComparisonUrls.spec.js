@@ -23,10 +23,10 @@ describe('generateAllCombinations', () => {
         './getComparisonUrls'
       ))
       const expected = [
-        {name: 'admin.typeform.com/login', url:'https://admin.typeform.com/login/'},
+        {name: 'admin.typeform.com/login/', url:'https://admin.typeform.com/login/'},
         {name: 'username1.typeform.com/to/abcdef', url:'https://username1.typeform.com/to/abcdef'},
-        {name: 'localhost:1234/iframe.html?full=1&selectedStory=default&selectedKind=button', url:'http://localhost:1234/iframe.html?full=1&selectedStory=default&selectedKind=button'},
-        {name: 'localhost:1234/iframe.html?full=1&selectedStory=custom&selectedKind=split', url:'http://localhost:1234/iframe.html?full=1&selectedStory=custom&selectedKind=split'},
+        {name: 'button', url:'http://localhost:1234/iframe.html?full=1&selectedStory=default&selectedKind=button'},
+        {name: 'split', url:'http://localhost:1234/iframe.html?full=1&selectedStory=custom&selectedKind=split'},
       ]
       expect(result).toEqual(expected)
     })
