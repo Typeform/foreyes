@@ -1,9 +1,8 @@
-const path = require('path')
-const urls = require(path.resolve(__dirname, 'getComparisonUrls'))
+const testCases = JSON.parse(process.env.FOREYES_TESTCASES)
 const green = require('chalk').green
 
 describe('baseline_', () => {
-  urls.forEach(({name, url}) => {
+  testCases.forEach(({name, url}) => {
     it(name, () => {
       browser
         .url(url)

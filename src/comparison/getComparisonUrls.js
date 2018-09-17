@@ -16,16 +16,12 @@ componentsToStorybookUrls = components => {
   })
 }
 
-parseUrls = urls => {
-  return urls.map(url => {
-    const u = new URL(url)
+parseUrls = urls => urls.map(url => {
+  const {host, pathname} = new URL(url)
     return {
-      name: `${u.host}${u.pathname}`,
+    name: `${host}${pathname}`,
       url: url
     }
-  })
-}
+})
 
-const components = JSON.parse(process.env.COMPONENTS)
-const urls = parseUrls(JSON.parse(process.env.FOREYES_URLS))
-module.exports = urls.concat(componentsToStorybookUrls(components))
+module.exports = (components, urls) => parseUrls(urls).concat(componentsToStorybookUrls(components))

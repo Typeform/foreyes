@@ -1,7 +1,4 @@
 module.exports = (components, urls) => {
-  process.env.COMPONENTS = JSON.stringify(components)
-  process.env.FOREYES_URLS = JSON.stringify(urls)
-
   const fs = require('fs')
   const path = require('path')
   const blue = require('chalk').blue
@@ -11,6 +8,14 @@ module.exports = (components, urls) => {
     console.error(error.stacktrace)
     process.exit(1)
   }
+
+  const testCases = require(path.resolve(
+    localPath,
+    'src',
+    'comparison',
+    'getComparisonUrls'
+  ))(components, urls)
+  process.env.FOREYES_TESTCASES = JSON.stringify(testCases)
 
   const baselineConfig = path.resolve(localPath, 'wdio.reference.conf.js')
   const baselineOpts = {
