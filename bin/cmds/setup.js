@@ -102,6 +102,10 @@ const interactiveConfigSetup = () => {
       serverPort: {
         description: 'Port in which the example pages will be mounted',
         default: '8080'
+      },
+      browsers: {
+        description: 'Browsers to test (chrome is always baseline)',
+        default: 'firefox,IE11'
       }
     }
   }
@@ -114,6 +118,8 @@ const interactiveConfigSetup = () => {
     result.component_folder_blacklist = result.component_folder_blacklist
       .trim()
       .split(',')
+
+    result.browsers = result.browsers.trim().split(',')
 
     result.viewports = result.viewports
       .trim()
