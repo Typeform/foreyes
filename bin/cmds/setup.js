@@ -56,51 +56,57 @@ configure(examples, customExamples)`
     )
   }
 
-  interactiveConfigSetup()
+  promptSetup()
 }
 
-const interactiveConfigSetup = () => {
+const promptSetup = () => {
   const prompt = require('prompt')
   prompt.message = ''
   prompt.delimiter = ''
   prompt.start()
+  const isDesignSystem = () => prompt.history('is_design_system').value
 
   var schema = {
     properties: {
+      viewports: {
+        description: 'All screen sizes to test: 1024,600;1280;720.',
+        default: '1024,600'
+      },
+      ignoreComparison: {
+        description:
+          'What details to ignore from: nothing, colors, antialiasing',
+        default: 'antialiasing',
+        pattern: /^nothing|colors|antialiasing$/
+      },
+      misMatchTolerance: {
+        description: 'What % of difference do we allow between browsers',
+        default: 2,
+        type: 'number'
+      },
+      is_design_system: {
+        description: 'Are you installing this on a design system?',
+        type: 'boolean',
+        default: false
+      },
       path_to_components: {
         description: 'Where are your components?',
         default: 'src/components/',
-        required: true
+        ask: isDesignSystem
       },
       path_to_examples: {
         description: 'Where will your Foreyes examples be?',
         default: 'tests/',
-        required: true
+        ask: isDesignSystem
       },
       component_folder_blacklist: {
         description:
           'Are there any folders there that are not components? (separate by comma)',
-        default: ''
-      },
-      misMatchTolerance: {
-        description:
-          'In %, how many pixels of difference do we allow between browsers',
-        default: 2,
-        type: 'number'
-      },
-      ignoreComparison: {
-        description:
-          'Choose what details to ignore from: nothing, colors, antialiasing',
-        default: 'antialiasing',
-        pattern: /^nothing|colors|antialiasing$/
-      },
-      viewports: {
-        description:
-          'One or more screen sizes the browser should take: 1024,600;1280;720.',
-        default: '1024,600'
+        default: '',
+        ask: isDesignSystem
       },
       serverPort: {
         description: 'Port in which the example pages will be mounted',
+        type: 'number',
         default: '8080'
       }
     }
