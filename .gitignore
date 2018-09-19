@@ -30,7 +30,7 @@ componentsWithVisualTest.js
 componentsWithCustomExamplePages.js
 path_to_components
 decorator.js
-foreyes.config.js
+./foreyes.config.js
 
 pids
 logs
