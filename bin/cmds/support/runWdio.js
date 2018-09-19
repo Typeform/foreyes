@@ -4,6 +4,11 @@ module.exports = (components, urls) => {
   const blue = require('chalk').blue
   const Launcher = require('webdriverio').Launcher
   const localPath = `${__dirname}/../../..`
+  const generateReport = require(path.resolve(
+    localPath,
+    'src/comparison',
+    'generateReport'
+  ))
   const onPromiseFailed = error => {
     console.error(error.stacktrace)
     process.exit(1)
@@ -41,5 +46,8 @@ module.exports = (components, urls) => {
     .run()
     .then(() => new Launcher(firefoxConfig, comparisonOpts).run())
     .then(() => new Launcher(ie11Config, comparisonOpts).run())
-    .then(code => process.exit(code), onPromiseFailed)
+    .then(code => {
+      generateReport()
+      process.exit(code)
+    }, onPromiseFailed)
 }
