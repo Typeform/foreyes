@@ -102,6 +102,10 @@ const interactiveConfigSetup = () => {
       serverPort: {
         description: 'Port in which the example pages will be mounted',
         default: '8080'
+      },
+      screenshotsFolder: {
+        description: 'Directory where screenshots will be saved',
+        default: './screenshots'
       }
     }
   }
