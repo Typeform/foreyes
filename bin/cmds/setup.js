@@ -1,12 +1,13 @@
+const path = require('path')
+const destinationConfigPath = 'foreyesConfig'
+
 exports.command = 'setup'
 exports.desc =
   'Copies necessary config files into your root, under foreyesConfig folder'
 exports.builder = {}
 exports.handler = () => {
-  const path = require('path')
   const fs = require('fs')
   const packagePath = path.resolve(__dirname, '..', '..')
-  const destinationConfigPath = 'foreyesConfig'
   const storyBookPath = 'foreyesConfig/.storybook'
 
   const copyFile = (from, to) => {
@@ -130,7 +131,7 @@ const interactiveConfigSetup = () => {
       })
 
     require('fs').writeFileSync(
-      'foreyes.config.js',
+      path.resolve(destinationConfigPath, 'foreyesConfig', 'foreyes.config.js'),
       `module.exports=${JSON.stringify(result, null, ' ')}`
     )
   })

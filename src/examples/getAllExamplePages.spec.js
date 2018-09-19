@@ -5,7 +5,7 @@ const getAllExamplePages = require(path.resolve(
 ))
 
 jest.mock('fs')
-jest.mock('../../foreyes.config')
+jest.mock('../../foreyesConfig/foreyes.config')
 describe('getAllExamplePages', () => {
   describe("given a path to the components' folder", () => {
     it('returns a js-readable list of component paths and combination paths', () => {

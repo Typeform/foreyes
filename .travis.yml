@@ -6,7 +6,9 @@ language: node_js
 node_js:
   - "10"
 
-before_script: touch foreyes.config.js
+before_script: 
+  - mkdir foreyesConfig
+  - touch foreyesConfig/foreyes.config.js
 
 cache:
   yarn: true

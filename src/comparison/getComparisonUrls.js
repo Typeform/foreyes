@@ -1,5 +1,5 @@
 const path = require('path')
-const port = require(path.resolve(process.cwd(), 'foreyes.config')).serverPort
+const port = require(path.resolve(process.cwd(), 'foreyesConfig', 'foreyes.config')).serverPort
 const URL = require('url').URL
 
 componentsToStorybookUrls = components => {

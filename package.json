@@ -8,7 +8,7 @@
   "scripts": {
     "install:token": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc",
     "precommit": "yarn lint-staged && yarn test",
-    "test": "touch foreyes.config.js; yarn run jest; rm foreyes.config.js"
+    "test": "touch foreyesConfig/foreyes.config.js; yarn run jest; rm foreyesConfig/foreyes.config.js"
   },
   "keywords": [
     "testing",

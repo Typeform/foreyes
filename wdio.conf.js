@@ -1,5 +1,5 @@
 const path = require('path')
-const config = require(path.resolve(process.cwd(), 'foreyes.config'))
+const config = require(path.resolve(process.cwd(), 'foreyesConfig', 'foreyes.config'))
 
 exports.config = {
   //

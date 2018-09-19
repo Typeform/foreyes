@@ -3,7 +3,7 @@ const wdioConf = require('./wdio.conf.js')
 const VisualRegressionCompare = require('wdio-visual-regression-service/compare')
 
 const path = require('path')
-const config = require(path.resolve(process.cwd(), 'foreyes.config'))
+const config = require(path.resolve(process.cwd(), 'foreyesConfig', 'foreyes.config'))
 
 const { baseline, actual, diff } = require(path.resolve(__dirname, 'src', 'comparison', 'screenshotName.js'))
 const browser = 'firefox'
