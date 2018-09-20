@@ -6,6 +6,7 @@
     "foreyes": "bin/index.js"
   },
   "scripts": {
+    "build-report-page": "yarn webpack --config report/webpack.config.js",
     "install:token": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc",
     "precommit": "yarn lint-staged && yarn test",
     "test": "touch foreyes.config.js; yarn run jest; rm foreyes.config.js"
@@ -72,7 +73,8 @@
       "*/__fixtures__/*",
       "*/__mocks__/*",
       "src/comparison/*",
-      "wdio*"
+      "wdio*",
+      "*/dist/*"
     ]
   }
 }

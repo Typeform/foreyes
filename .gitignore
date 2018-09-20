@@ -61,7 +61,7 @@ coverage
 # nodemon
 .monitor
 
-dist
+
 public
 lib
 .out
