@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Comparer</title>
+    <link rel='stylesheet' type='text/css' href='./style.css' />
+    <style>
+      body {
+        text-align: center;
+      }
+      img {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <span>Click anywhere to see hide the differences</span>
+    <div><img /></div>
+  </body>
+  <script>
+    const queryString = new URLSearchParams(window.location.search)
+    const showDifference = () => show('difference')
+    const showReference = () => show('reference')
+    const show = (query, title) => document.getElementsByTagName('img')[0].src = queryString.get(query)
+
+    document.onmousedown = showReference
+    document.onmouseup = showDifference
+    showDifference()
+  </script>
+</html>
