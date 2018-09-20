@@ -33,11 +33,8 @@ module.exports = (components, urls) => {
   }
   const ie11Config = path.resolve(localPath, 'wdio.ie11Browserstack.conf.js')
 
-  console.log(
-    blue(
-      'Look into foreyesConfig/logs.log for more information on the execution.'
-    )
-  )
+  const outwrite = process.stdout.write
+  const errwrite = process.stderr.write
   fs.writeFileSync('foreyesConfig/logs.log')
   const logFile = fs.createWriteStream('foreyesConfig/logs.log')
   process.stdout.write = process.stderr.write = logFile.write.bind(logFile)
@@ -47,7 +44,16 @@ module.exports = (components, urls) => {
     .then(() => new Launcher(firefoxConfig, comparisonOpts).run())
     .then(() => new Launcher(ie11Config, comparisonOpts).run())
     .then(code => {
-      generateReport()
+      if (code !== 0) {
+        generateReport()
+        process.stdout.write = outwrite
+        process.stderr.write = errwrite
+        console.log(
+          blue(
+            `Some tests failed. Here's the report: ${process.cwd()}/foreyesConfig/report/index.html`
+          )
+        )
+      }
       process.exit(code)
     }, onPromiseFailed)
 }
