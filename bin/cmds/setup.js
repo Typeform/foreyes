@@ -3,11 +3,13 @@ exports.desc =
   'Copies necessary config files into your root, under foreyesConfig folder'
 exports.builder = {}
 exports.handler = () => {
-  const path = require('path')
+  const path = require('path').resolve
   const fs = require('fs')
-  const packagePath = path.resolve(__dirname, '..', '..')
+  const packagePath = path(__dirname, '..', '..')
   const destinationConfigPath = 'foreyesConfig'
-  const storyBookPath = 'foreyesConfig/.storybook'
+  const storyBookPath = path('foreyesConfig', '.storybook')
+  const reportPath = path('foreyesConfig', 'report')
+  const copyDirSync = require('copy-dir').sync
 
   const copyFile = (from, to) => {
     if (!fs.existsSync(to)) {
@@ -22,39 +24,37 @@ exports.handler = () => {
 
   makeDirectory(destinationConfigPath)
   copyFile(
-    path.resolve(packagePath, 'decorator.dist.js'),
-    path.resolve(destinationConfigPath, 'decorator.js')
+    path(packagePath, 'decorator.dist.js'),
+    path(destinationConfigPath, 'decorator.js')
+  )
+  copyFile(
+    path(packagePath, 'fixtureUrls.dist.json'),
+    path(destinationConfigPath, 'fixtureUrls.json')
   )
 
   makeDirectory(storyBookPath)
   copyFile(
-    path.resolve(packagePath, '.storybook', '.babelrc'),
-    path.resolve(storyBookPath, '.babelrc')
+    path(packagePath, '.storybook', '.babelrc'),
+    path(storyBookPath, '.babelrc')
   )
   copyFile(
-    path.resolve(packagePath, '.storybook', 'webpack.config.js'),
-    path.resolve(storyBookPath, 'webpack.config.js')
+    path(packagePath, '.storybook', 'webpack.config.js'),
+    path(storyBookPath, 'webpack.config.js')
   )
-  copyFile(
-    path.resolve(packagePath, 'fixtureUrls.dist.json'),
-    path.resolve(destinationConfigPath, 'fixtureUrls.json')
-  )
-
-  const configPath = path.resolve(destinationConfigPath, '.storybook/config.js')
+  const configPath = path(destinationConfigPath, '.storybook/config.js')
   if (!fs.existsSync(configPath)) {
     fs.writeFileSync(
       configPath,
       `import examples from './componentsWithExamplePages'
 import customExamples from './componentsWithCustomExamplePages'
 import '../decorator'
-import configure from '${path.resolve(
-    __dirname,
-    '../../',
-    '.storybook/config.js'
-  )}'
+import configure from '${path(__dirname, '../../', '.storybook/config.js')}'
 configure(examples, customExamples)`
     )
   }
+
+  makeDirectory(reportPath)
+  copyDirSync(path(packagePath, 'report', 'dist'), reportPath)
 
   interactiveConfigSetup()
 }

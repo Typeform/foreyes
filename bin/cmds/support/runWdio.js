@@ -5,6 +5,11 @@ module.exports = (components, urls) => {
   const Launcher = require('webdriverio').Launcher
   const { browsers } = require(path.resolve(process.cwd(), 'foreyes.config'))
   const localPath = `${__dirname}/../../..`
+  const generateReport = require(path.resolve(
+    localPath,
+    'src/comparison',
+    'generateReport'
+  ))
   const onPromiseFailed = error => {
     console.error(error.stacktrace)
     process.exit(1)
@@ -29,11 +34,8 @@ module.exports = (components, urls) => {
   }
   const ie11Config = path.resolve(localPath, 'wdio.ie11Browserstack.conf.js')
 
-  console.log(
-    blue(
-      'Look into foreyesConfig/logs.log for more information on the execution.'
-    )
-  )
+  const outwrite = process.stdout.write
+  const errwrite = process.stderr.write
   fs.writeFileSync('foreyesConfig/logs.log')
   const logFile = fs.createWriteStream('foreyesConfig/logs.log')
   process.stdout.write = process.stderr.write = logFile.write.bind(logFile)
@@ -48,5 +50,17 @@ module.exports = (components, urls) => {
       if (!browsers.includes('IE11')) return
       return new Launcher(ie11Config, comparisonOpts).run()
     })
-    .then(code => process.exit(code), onPromiseFailed)
+    .then(code => {
+      if (code !== 0) {
+        generateReport()
+        process.stdout.write = outwrite
+        process.stderr.write = errwrite
+        console.log(
+          blue(
+            `Some tests failed. Here's the report: ${process.cwd()}/foreyesConfig/report/index.html`
+          )
+        )
+      }
+      process.exit(code)
+    }, onPromiseFailed)
 }
