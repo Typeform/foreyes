@@ -32,5 +32,5 @@ module.exports = () => {
     return acc1
   }, {})
 
-  writeFileSync(path('foreyesConfig', 'report.json'), JSON.stringify(report,undefined,2))
+  writeFileSync(path('foreyesConfig', 'report', 'report.js'), `const report = ${JSON.stringify(report,undefined,2)}`)
 }

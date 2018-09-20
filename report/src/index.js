@@ -1,6 +1,5 @@
-import reportData from '../report.json'
 import Report from './report.js'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-ReactDOM.render(<Report data={reportData} />, document.getElementById('root'))
+ReactDOM.render(<Report data={report} />, document.getElementById('root'))

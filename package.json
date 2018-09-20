@@ -51,7 +51,8 @@
     "lint-staged": "^7.1.2",
     "prettier-standard": "^8.0.1",
     "semantic-release": "^15.7.0",
-    "standard": "^11.0.1"
+    "standard": "^11.0.1",
+    "webpack-cli": "^3.1.0"
   },
   "jest": {
     "testPathIgnorePatterns": [
@@ -75,7 +76,8 @@
       "*/__mocks__/*",
       "src/comparison/*",
       "wdio*",
-      "*/dist/*"
+      "*/dist/*",
+      "report/src/index.js"
     ]
   }
 }
