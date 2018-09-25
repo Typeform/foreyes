@@ -3,6 +3,7 @@ module.exports = (components, urls) => {
   const path = require('path')
   const blue = require('chalk').blue
   const Launcher = require('webdriverio').Launcher
+  const { browsers } = require(path.resolve(process.cwd(), 'foreyes.config'))
   const localPath = `${__dirname}/../../..`
   const generateReport = require(path.resolve(
     localPath,
@@ -41,8 +42,14 @@ module.exports = (components, urls) => {
 
   new Launcher(baselineConfig, baselineOpts)
     .run()
-    .then(() => new Launcher(firefoxConfig, comparisonOpts).run())
-    .then(() => new Launcher(ie11Config, comparisonOpts).run())
+    .then(() => {
+      if (!browsers.includes('firefox')) return
+      return new Launcher(firefoxConfig, comparisonOpts).run()
+    })
+    .then(() => {
+      if (!browsers.includes('IE11')) return
+      return new Launcher(ie11Config, comparisonOpts).run()
+    })
     .then(code => {
       if (code !== 0) {
         generateReport()
