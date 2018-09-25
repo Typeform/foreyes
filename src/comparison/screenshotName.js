@@ -1,4 +1,5 @@
 const path = require('path')
+const { screenshotsFolder } = require(path.resolve(process.cwd(), 'foreyes.config'))
 
 const getBaseName = ({ test, meta }) => `${test.title}_${meta.viewport.width}x${meta.viewport.height}`
 const getPath = (context, suffix) => path.resolve(exports.screenshotsFolder, `${getBaseName(context)}${suffix}.png`)

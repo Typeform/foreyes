@@ -103,6 +103,10 @@ const interactiveConfigSetup = () => {
         description: 'Port in which the example pages will be mounted',
         default: '8080'
       },
+      screenshotsFolder: {
+        description: 'Directory where screenshots will be saved',
+        default: './screenshots'
+      },
       browsers: {
         description: 'Browsers to test (chrome is always baseline)',
         default: 'firefox,IE11'
