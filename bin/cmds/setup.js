@@ -119,7 +119,19 @@ const interactiveConfigSetup = () => {
       .trim()
       .split(',')
 
-    result.browsers = result.browsers.trim().split(',')
+    const supportedBrowsers = ['firefox', 'ie11']
+    result.browsers = result.browsers
+      .trim()
+      .toLowerCase()
+      .split(',')
+      .filter(browser => {
+        if (supportedBrowsers.includes(browser)) {
+          return true
+        } else {
+          console.log(`Unknown/Unsupported browser ${browser}`)
+          return false
+        }
+      })
 
     result.viewports = result.viewports
       .trim()
