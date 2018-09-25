@@ -1,29 +1,23 @@
-const path = require('path')
-const getPropTypesAsArray = require(path.resolve(
-  __dirname,
-  './getPropTypesAsArray'
-))
-const getAttributeCombinationsFromArray = require(path.resolve(
+const path = require('path').resolve
+const getPropTypesAsArray = require(path(__dirname, './getPropTypesAsArray'))
+const getAttributeCombinationsFromArray = require(path(
   __dirname,
   './getAttributeCombinationsFromArray'
 ))
 const file = require('fs')
-const config = require(path.resolve(
-  process.cwd(),
-  'foreyesConfig',
-  'foreyes.config'
-))
+const { configFilePath } = require(path(__dirname, '..', '..', 'constants.js'))
+const { path_to_components, path_to_examples } = require(configFilePath)
 
 module.exports = componentName => {
-  const componentPath = path.resolve(
+  const componentPath = path(
     process.cwd(),
-    config.path_to_components,
+    path_to_components,
     componentName,
     `${componentName}.js`
   )
-  const examplePath = path.resolve(
+  const examplePath = path(
     process.cwd(),
-    config.path_to_examples,
+    path_to_examples,
     `${componentName}.exampleCombinations.js`
   )
   let somePropTypeWasUnparseable = false

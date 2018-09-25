@@ -3,14 +3,16 @@ exports.desc = 'Test Chrome against Firefox and IE11 for every example'
 exports.builder = {}
 exports.handler = () => {
   const fs = require('fs')
-  const path = require('path')
-  const pathToExamples = require(path.resolve(
-    process.cwd(),
-    'foreyesConfig',
-    'foreyes.config.js'
-  )).path_to_examples
+  const path = require('path').resolve
+  const { configFilePath, configFolder } = require(path(
+    __dirname,
+    '..',
+    '..',
+    'constants.js'
+  ))
+  const { path_to_examples } = require(configFilePath)
 
-  const components = fs.readdirSync(pathToExamples).map(value => {
+  const components = fs.readdirSync(path_to_examples).map(value => {
     const [componentName, exampleType] = value.split('.')
     return {
       componentName: componentName,
@@ -19,10 +21,10 @@ exports.handler = () => {
   })
 
   const urls = fs.readFileSync(
-    path.resolve(process.cwd(), 'foreyesConfig/fixtureUrls.json')
+    path(process.cwd(), configFolder, 'fixtureUrls.json')
   )
 
-  require(path.resolve(__dirname, 'support', 'runWdio.js'))(
+  require(path(__dirname, 'support', 'runWdio.js'))(
     components,
     JSON.parse(urls)
   )

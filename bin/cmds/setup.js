@@ -1,17 +1,15 @@
-const path = require('path')
-const destinationConfigPath = 'foreyesConfig'
+const path = require('path').resolve
+const packagePath = path(__dirname, '..', '..')
+const { configFolder } = require(path(packagePath, 'constants.js'))
+const fs = require('fs')
 
 exports.command = 'setup'
 exports.desc =
   'Copies necessary config files into your root, under foreyesConfig folder'
 exports.builder = {}
 exports.handler = () => {
-  const path = require('path').resolve
-  const fs = require('fs')
-  const packagePath = path(__dirname, '..', '..')
-  const destinationConfigPath = 'foreyesConfig'
-  const storyBookPath = path('foreyesConfig', '.storybook')
-  const reportPath = path('foreyesConfig', 'report')
+  const storyBookPath = path(configFolder, '.storybook')
+  const reportPath = path(configFolder, 'report')
   const copyDirSync = require('copy-dir').sync
 
   const copyFile = (from, to) => {
@@ -25,14 +23,14 @@ exports.handler = () => {
     }
   }
 
-  makeDirectory(destinationConfigPath)
+  makeDirectory(configFolder)
   copyFile(
     path(packagePath, 'decorator.dist.js'),
-    path(destinationConfigPath, 'decorator.js')
+    path(configFolder, 'decorator.js')
   )
   copyFile(
     path(packagePath, 'fixtureUrls.dist.json'),
-    path(destinationConfigPath, 'fixtureUrls.json')
+    path(configFolder, 'fixtureUrls.json')
   )
 
   makeDirectory(storyBookPath)
@@ -44,7 +42,7 @@ exports.handler = () => {
     path(packagePath, '.storybook', 'webpack.config.js'),
     path(storyBookPath, 'webpack.config.js')
   )
-  const configPath = path(destinationConfigPath, '.storybook/config.js')
+  const configPath = path(configFolder, '.storybook/config.js')
   if (!fs.existsSync(configPath)) {
     fs.writeFileSync(
       configPath,
@@ -161,8 +159,8 @@ const promptSetup = () => {
         }
       })
 
-    require('fs').writeFileSync(
-      path.resolve(destinationConfigPath, 'foreyesConfig', 'foreyes.config.js'),
+    fs.writeFileSync(
+      path(configFolder, 'foreyes.config.js'),
       `module.exports=${JSON.stringify(result, null, ' ')}`
     )
   })

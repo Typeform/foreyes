@@ -1,15 +1,12 @@
-const path = require('path')
-const file = require('fs')
-const config = require(path.resolve(
-  process.cwd(),
-  'foreyesConfig',
-  'foreyes.config'
-))
+const path = require('path').resolve
+const { existsSync } = require('fs')
+const { configFilePath } = require(path(__dirname, '..', '..', 'constants.js'))
+const { path_to_examples } = require(configFilePath)
 
 module.exports = components => {
-  const examplePath = config.path_to_examples
+  const examplePath = path_to_examples
   const examples = components.reduce((acc, componentName) => {
-    if (file.existsSync(`${examplePath}/${componentName}.customExample.js`)) {
+    if (existsSync(`${examplePath}/${componentName}.customExample.js`)) {
       acc.push(`
     ${componentName.replace(
     /-/g,
