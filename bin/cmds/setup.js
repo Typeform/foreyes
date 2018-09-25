@@ -68,9 +68,17 @@ const promptSetup = () => {
 
   var schema = {
     properties: {
+      browsers: {
+        description: 'Browsers to test (chrome is always baseline)',
+        default: 'firefox,IE11'
+      },
       viewports: {
         description: 'All screen sizes to test: 1024,600;1280;720.',
         default: '1024,600'
+      },
+      screenshotsFolder: {
+        description: 'Directory where screenshots will be saved',
+        default: './screenshots'
       },
       ignoreComparison: {
         description:
@@ -84,7 +92,7 @@ const promptSetup = () => {
         type: 'number'
       },
       is_design_system: {
-        description: 'Are you installing this on a design system?',
+        description: 'Are you configuring foreyes for a design system?',
         type: 'boolean',
         default: false
       },
@@ -107,15 +115,8 @@ const promptSetup = () => {
       serverPort: {
         description: 'Port in which the example pages will be mounted',
         type: 'number',
-        default: '8080'
-      },
-      screenshotsFolder: {
-        description: 'Directory where screenshots will be saved',
-        default: './screenshots'
-      },
-      browsers: {
-        description: 'Browsers to test (chrome is always baseline)',
-        default: 'firefox,IE11'
+        default: '8080',
+        ask: isDesignSystem
       }
     }
   }
