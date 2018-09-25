@@ -1,3 +1,6 @@
+const path = require('path')
+const destinationConfigPath = 'foreyesConfig'
+
 exports.command = 'setup'
 exports.desc =
   'Copies necessary config files into your root, under foreyesConfig folder'
@@ -159,7 +162,7 @@ const promptSetup = () => {
       })
 
     require('fs').writeFileSync(
-      'foreyes.config.js',
+      path.resolve(destinationConfigPath, 'foreyesConfig', 'foreyes.config.js'),
       `module.exports=${JSON.stringify(result, null, ' ')}`
     )
   })

@@ -5,7 +5,7 @@ const generateCombinationsFor = require(path.resolve(
 ))
 
 jest.mock('fs')
-jest.mock('../../foreyes.config.js')
+jest.mock('../../foreyesConfig/foreyes.config.js')
 const fs = require('fs')
 
 describe('generateCombinationsFor', () => {
