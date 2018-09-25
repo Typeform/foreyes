@@ -30,7 +30,7 @@ componentsWithVisualTest.js
 componentsWithCustomExamplePages.js
 path_to_components
 decorator.js
-foreyes.config.js
+./foreyes.config.js
 
 pids
 logs
@@ -61,7 +61,7 @@ coverage
 # nodemon
 .monitor
 
-dist
+
 public
 lib
 .out
