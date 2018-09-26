@@ -1,5 +1,5 @@
 const path = require('path')
-const getCustomExamplePages = require(path.resolve(
+const getCustomExamplePages = require(path.join(
   __dirname,
   './getCustomExamplePages'
 ))

@@ -2,11 +2,11 @@ const merge = require('deepmerge')
 const wdioConf = require('./wdio.conf.js')
 const VisualRegressionCompare = require('wdio-visual-regression-service/compare')
 
-const path = require('path').resolve
+const path = require('path')
 const { configFilePath } = require('./constants.js')
 const { misMatchTolerance, ignoreComparison } = require(configFilePath)
 
-const { baseline, actual, diff } = require(path(__dirname, 'src', 'comparison', 'screenshotName.js'))
+const { baseline, actual, diff } = require(path.join(__dirname, 'src', 'comparison', 'screenshotName.js'))
 const browser = 'firefox'
 
 exports.config = merge(

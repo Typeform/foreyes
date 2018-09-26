@@ -1,23 +1,31 @@
-const path = require('path').resolve
-const getPropTypesAsArray = require(path(__dirname, './getPropTypesAsArray'))
-const getAttributeCombinationsFromArray = require(path(
+const path = require('path')
+const getPropTypesAsArray = require(path.join(
+  __dirname,
+  './getPropTypesAsArray'
+))
+const getAttributeCombinationsFromArray = require(path.join(
   __dirname,
   './getAttributeCombinationsFromArray'
 ))
 const file = require('fs')
-const { configFilePath } = require(path(__dirname, '..', '..', 'constants.js'))
-const { path_to_components, path_to_examples } = require(configFilePath)
+const { configFilePath } = require(path.join(
+  __dirname,
+  '..',
+  '..',
+  'constants.js'
+))
+const config = require(configFilePath)
 
 module.exports = componentName => {
-  const componentPath = path(
+  const componentPath = path.join(
     process.cwd(),
-    path_to_components,
+    config.path_to_components,
     componentName,
     `${componentName}.js`
   )
-  const examplePath = path(
+  const examplePath = path.join(
     process.cwd(),
-    path_to_examples,
+    config.path_to_examples,
     `${componentName}.exampleCombinations.js`
   )
   let somePropTypeWasUnparseable = false

@@ -1,14 +1,14 @@
 module.exports = () => {
   const { screenshotsFolder, referenceSuffix, differenceSuffix } = require('./screenshotName')
   const { readdirSync,  writeFileSync } = require('fs')
-  const path = require('path').resolve
+  const path = require('path')
 
   const testCases = readdirSync(screenshotsFolder)
   const report = testCases.reduce((acc1, testCase) => {
-    const screenshots = readdirSync(path(screenshotsFolder, testCase))
+    const screenshots = readdirSync(path.join(screenshotsFolder, testCase))
     
     acc1[testCase] = screenshots.reduce((acc2, screenshotName) => {
-      const fullPath = path(screenshotsFolder, testCase, screenshotName)
+      const fullPath = path.join(screenshotsFolder, testCase, screenshotName)
       const screenshotData = screenshotName.substring(1).split('.')[0].split('_')
       const viewport = screenshotData[0]
       acc2[viewport] = acc2[viewport] || {}
@@ -32,5 +32,5 @@ module.exports = () => {
     return acc1
   }, {})
 
-  writeFileSync(path('foreyesConfig', 'report', 'report.js'), `const report = ${JSON.stringify(report,undefined,2)}`)
+  writeFileSync(path.join('foreyesConfig', 'report', 'report.js'), `const report = ${JSON.stringify(report,undefined,2)}`)
 }

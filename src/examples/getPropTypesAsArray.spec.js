@@ -1,5 +1,5 @@
 const path = require('path')
-const getPropTypesAsArray = require(path.resolve(
+const getPropTypesAsArray = require(path.join(
   __dirname,
   './getPropTypesAsArray'
 ))

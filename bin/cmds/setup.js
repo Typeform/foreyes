@@ -1,6 +1,6 @@
-const path = require('path').resolve
-const packagePath = path(__dirname, '..', '..')
-const { configFolder } = require(path(packagePath, 'constants.js'))
+const path = require('path')
+const packagePath = path.join(__dirname, '..', '..')
+const { configFolder } = require(path.join(packagePath, 'constants.js'))
 const fs = require('fs')
 
 exports.command = 'setup'
@@ -8,8 +8,8 @@ exports.desc =
   'Copies necessary config files into your root, under foreyesConfig folder'
 exports.builder = {}
 exports.handler = () => {
-  const storyBookPath = path(configFolder, '.storybook')
-  const reportPath = path(configFolder, 'report')
+  const storyBookPath = path.join(configFolder, '.storybook')
+  const reportPath = path.join(configFolder, 'report')
   const copyDirSync = require('copy-dir').sync
 
   const copyFile = (from, to) => {
@@ -25,37 +25,41 @@ exports.handler = () => {
 
   makeDirectory(configFolder)
   copyFile(
-    path(packagePath, 'decorator.dist.js'),
-    path(configFolder, 'decorator.js')
+    path.join(packagePath, 'decorator.dist.js'),
+    path.join(configFolder, 'decorator.js')
   )
   copyFile(
-    path(packagePath, 'fixtureUrls.dist.json'),
-    path(configFolder, 'fixtureUrls.json')
+    path.join(packagePath, 'fixtureUrls.dist.json'),
+    path.join(configFolder, 'fixtureUrls.json')
   )
 
   makeDirectory(storyBookPath)
   copyFile(
-    path(packagePath, '.storybook', '.babelrc'),
-    path(storyBookPath, '.babelrc')
+    path.join(packagePath, '.storybook', '.babelrc'),
+    path.join(storyBookPath, '.babelrc')
   )
   copyFile(
-    path(packagePath, '.storybook', 'webpack.config.js'),
-    path(storyBookPath, 'webpack.config.js')
+    path.join(packagePath, '.storybook', 'webpack.config.js'),
+    path.join(storyBookPath, 'webpack.config.js')
   )
-  const configPath = path(configFolder, '.storybook/config.js')
+  const configPath = path.join(configFolder, '.storybook/config.js')
   if (!fs.existsSync(configPath)) {
     fs.writeFileSync(
       configPath,
       `import examples from './componentsWithExamplePages'
 import customExamples from './componentsWithCustomExamplePages'
 import '../decorator'
-import configure from '${path(__dirname, '../../', '.storybook/config.js')}'
+import configure from '${path.join(
+    __dirname,
+    '../../',
+    '.storybook/config.js'
+  )}'
 configure(examples, customExamples)`
     )
   }
 
   makeDirectory(reportPath)
-  copyDirSync(path(packagePath, 'report', 'dist'), reportPath)
+  copyDirSync(path.join(packagePath, 'report', 'dist'), reportPath)
 
   promptSetup()
 }
@@ -160,7 +164,7 @@ const promptSetup = () => {
       })
 
     fs.writeFileSync(
-      path(configFolder, 'foreyes.config.js'),
+      path.join(configFolder, 'foreyes.config.js'),
       `module.exports=${JSON.stringify(result, null, ' ')}`
     )
   })

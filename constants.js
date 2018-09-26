@@ -1,6 +1,6 @@
-const path = require('path').resolve
+const path = require('path')
 exports.configFolder = 'foreyesConfig'
-exports.configFilePath = path(
+exports.configFilePath = path.join(
   process.cwd(),
   exports.configFolder,
   'foreyes.config.js'

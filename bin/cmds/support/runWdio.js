@@ -3,9 +3,16 @@ module.exports = (components, urls) => {
   const path = require('path')
   const blue = require('chalk').blue
   const Launcher = require('webdriverio').Launcher
-  const { browsers } = require(path.resolve(process.cwd(), 'foreyes.config'))
+  const { configFilePath } = require(path.join(
+    __dirname,
+    '..',
+    '..',
+    '..',
+    'constants.js'
+  ))
+  const { browsers } = require(configFilePath)
   const localPath = `${__dirname}/../../..`
-  const generateReport = require(path.resolve(
+  const generateReport = require(path.join(
     localPath,
     'src/comparison',
     'generateReport'
@@ -15,7 +22,7 @@ module.exports = (components, urls) => {
     process.exit(1)
   }
 
-  const testCases = require(path.resolve(
+  const testCases = require(path.join(
     localPath,
     'src',
     'comparison',
@@ -23,16 +30,16 @@ module.exports = (components, urls) => {
   ))(components, urls)
   process.env.FOREYES_TESTCASES = JSON.stringify(testCases)
 
-  const baselineConfig = path.resolve(localPath, 'wdio.reference.conf.js')
+  const baselineConfig = path.join(localPath, 'wdio.reference.conf.js')
   const baselineOpts = {
-    spec: path.resolve(localPath, 'src/comparison/runBaseline.js')
+    spec: path.join(localPath, 'src/comparison/runBaseline.js')
   }
 
-  const firefoxConfig = path.resolve(localPath, 'wdio.firefox.conf.js')
+  const firefoxConfig = path.join(localPath, 'wdio.firefox.conf.js')
   const comparisonOpts = {
-    spec: path.resolve(localPath, 'src/comparison/runComparison.js')
+    spec: path.join(localPath, 'src/comparison/runComparison.js')
   }
-  const ie11Config = path.resolve(localPath, 'wdio.ie11Browserstack.conf.js')
+  const ie11Config = path.join(localPath, 'wdio.ie11Browserstack.conf.js')
 
   const outwrite = process.stdout.write
   const errwrite = process.stderr.write
@@ -47,7 +54,7 @@ module.exports = (components, urls) => {
       return new Launcher(firefoxConfig, comparisonOpts).run()
     })
     .then(() => {
-      if (!browsers.includes('IE11')) return
+      if (!browsers.includes('ie11')) return
       return new Launcher(ie11Config, comparisonOpts).run()
     })
     .then(code => {

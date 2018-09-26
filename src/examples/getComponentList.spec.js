@@ -1,5 +1,5 @@
 const path = require('path')
-const getComponentList = require(path.resolve(__dirname, './getComponentList'))
+const getComponentList = require(path.join(__dirname, './getComponentList'))
 
 jest.mock('fs')
 jest.mock('../../foreyesConfig/foreyes.config.js')
