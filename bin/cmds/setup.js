@@ -1,17 +1,15 @@
 const path = require('path')
-const destinationConfigPath = 'foreyesConfig'
+const packagePath = path.join(__dirname, '..', '..')
+const { configFolder } = require(path.join(packagePath, 'constants.js'))
+const fs = require('fs')
 
 exports.command = 'setup'
 exports.desc =
   'Copies necessary config files into your root, under foreyesConfig folder'
 exports.builder = {}
 exports.handler = () => {
-  const path = require('path').resolve
-  const fs = require('fs')
-  const packagePath = path(__dirname, '..', '..')
-  const destinationConfigPath = 'foreyesConfig'
-  const storyBookPath = path('foreyesConfig', '.storybook')
-  const reportPath = path('foreyesConfig', 'report')
+  const storyBookPath = path.join(configFolder, '.storybook')
+  const reportPath = path.join(configFolder, 'report')
   const copyDirSync = require('copy-dir').sync
 
   const copyFile = (from, to) => {
@@ -25,39 +23,43 @@ exports.handler = () => {
     }
   }
 
-  makeDirectory(destinationConfigPath)
+  makeDirectory(configFolder)
   copyFile(
-    path(packagePath, 'decorator.dist.js'),
-    path(destinationConfigPath, 'decorator.js')
+    path.join(packagePath, 'decorator.dist.js'),
+    path.join(configFolder, 'decorator.js')
   )
   copyFile(
-    path(packagePath, 'fixtureUrls.dist.json'),
-    path(destinationConfigPath, 'fixtureUrls.json')
+    path.join(packagePath, 'fixtureUrls.dist.json'),
+    path.join(configFolder, 'fixtureUrls.json')
   )
 
   makeDirectory(storyBookPath)
   copyFile(
-    path(packagePath, '.storybook', '.babelrc'),
-    path(storyBookPath, '.babelrc')
+    path.join(packagePath, '.storybook', '.babelrc'),
+    path.join(storyBookPath, '.babelrc')
   )
   copyFile(
-    path(packagePath, '.storybook', 'webpack.config.js'),
-    path(storyBookPath, 'webpack.config.js')
+    path.join(packagePath, '.storybook', 'webpack.config.js'),
+    path.join(storyBookPath, 'webpack.config.js')
   )
-  const configPath = path(destinationConfigPath, '.storybook/config.js')
+  const configPath = path.join(configFolder, '.storybook/config.js')
   if (!fs.existsSync(configPath)) {
     fs.writeFileSync(
       configPath,
       `import examples from './componentsWithExamplePages'
 import customExamples from './componentsWithCustomExamplePages'
 import '../decorator'
-import configure from '${path(__dirname, '../../', '.storybook/config.js')}'
+import configure from '${path.join(
+    __dirname,
+    '../../',
+    '.storybook/config.js'
+  )}'
 configure(examples, customExamples)`
     )
   }
 
   makeDirectory(reportPath)
-  copyDirSync(path(packagePath, 'report', 'dist'), reportPath)
+  copyDirSync(path.join(packagePath, 'report', 'dist'), reportPath)
 
   promptSetup()
 }
@@ -161,8 +163,8 @@ const promptSetup = () => {
         }
       })
 
-    require('fs').writeFileSync(
-      path.resolve(destinationConfigPath, 'foreyesConfig', 'foreyes.config.js'),
+    fs.writeFileSync(
+      path.join(configFolder, 'foreyes.config.js'),
       `module.exports=${JSON.stringify(result, null, ' ')}`
     )
   })

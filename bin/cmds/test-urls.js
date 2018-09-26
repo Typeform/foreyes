@@ -6,11 +6,8 @@ exports.handler = () => {
   const path = require('path')
 
   const urls = fs.readFileSync(
-    path.resolve(process.cwd(), 'foreyesConfig/fixtureUrls.json')
+    path.join(process.cwd(), 'foreyesConfig/fixtureUrls.json')
   )
 
-  require(path.resolve(__dirname, 'support', 'runWdio.js'))(
-    [],
-    JSON.parse(urls)
-  )
+  require(path.join(__dirname, 'support', 'runWdio.js'))([], JSON.parse(urls))
 }

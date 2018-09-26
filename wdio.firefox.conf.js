@@ -3,9 +3,10 @@ const wdioConf = require('./wdio.conf.js')
 const VisualRegressionCompare = require('wdio-visual-regression-service/compare')
 
 const path = require('path')
-const config = require(path.resolve(process.cwd(), 'foreyesConfig', 'foreyes.config'))
+const { configFilePath } = require('./constants.js')
+const { misMatchTolerance, ignoreComparison } = require(configFilePath)
 
-const { baseline, actual, diff } = require(path.resolve(__dirname, 'src', 'comparison', 'screenshotName.js'))
+const { baseline, actual, diff } = require(path.join(__dirname, 'src', 'comparison', 'screenshotName.js'))
 const browser = 'firefox'
 
 exports.config = merge(
@@ -23,8 +24,8 @@ exports.config = merge(
         referenceName: context => baseline(context),
         screenshotName: context => actual(context, browser),
         diffName: context => diff(context, browser),
-        misMatchTolerance: config.misMatchTolerance,
-        ignoreComparison: config.ignoreComparison
+        misMatchTolerance: misMatchTolerance,
+        ignoreComparison: ignoreComparison
       })
     }
   },

@@ -1,27 +1,29 @@
 const path = require('path')
-const getPropTypesAsArray = require(path.resolve(
+const getPropTypesAsArray = require(path.join(
   __dirname,
   './getPropTypesAsArray'
 ))
-const getAttributeCombinationsFromArray = require(path.resolve(
+const getAttributeCombinationsFromArray = require(path.join(
   __dirname,
   './getAttributeCombinationsFromArray'
 ))
 const file = require('fs')
-const config = require(path.resolve(
-  process.cwd(),
-  'foreyesConfig',
-  'foreyes.config'
+const { configFilePath } = require(path.join(
+  __dirname,
+  '..',
+  '..',
+  'constants.js'
 ))
+const config = require(configFilePath)
 
 module.exports = componentName => {
-  const componentPath = path.resolve(
+  const componentPath = path.join(
     process.cwd(),
     config.path_to_components,
     componentName,
     `${componentName}.js`
   )
-  const examplePath = path.resolve(
+  const examplePath = path.join(
     process.cwd(),
     config.path_to_examples,
     `${componentName}.exampleCombinations.js`

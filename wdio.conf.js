@@ -1,5 +1,5 @@
-const path = require('path')
-const config = require(path.resolve(process.cwd(), 'foreyesConfig', 'foreyes.config'))
+const { configFilePath } = require('./constants.js')
+const { viewports } = require(configFilePath)
 
 exports.config = {
   //
@@ -126,7 +126,7 @@ exports.config = {
   },
   visualRegression: {
     viewportChangePause: 500,
-    viewports: config.viewports
+    viewports: viewports
   }
   //
   // =====
