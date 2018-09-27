@@ -1,21 +1,68 @@
-module.exports = (components, urls) => {
+const path = require('path')
+const localPath = path.join(__dirname, '..', '..', '..')
+const { configFolder, configFilePath } = require(path.join(
+  localPath,
+  'constants.js'
+))
+const { browsers } = require(configFilePath)
+const outwrite = process.stdout.write
+const errwrite = process.stderr.write
+
+const mute = () => {
   const fs = require('fs')
-  const path = require('path')
-  const blue = require('chalk').blue
-  const Launcher = require('webdriverio').Launcher
-  const { browsers } = require(path.resolve(process.cwd(), 'foreyes.config'))
-  const localPath = `${__dirname}/../../..`
-  const generateReport = require(path.resolve(
+  const logFilePath = path.join(configFolder, 'logs.log')
+  fs.writeFileSync(logFilePath)
+  const logFile = fs.createWriteStream(logFilePath)
+  process.stdout.write = process.stderr.write = logFile.write.bind(logFile)
+}
+
+const unmute = () => {
+  process.stdout.write = outwrite
+  process.stderr.write = errwrite
+}
+
+const launchChrome = () =>
+  launchBrowser('wdio.reference.conf.js', 'runBaseline.js')
+const launchFirefox = () =>
+  browsers.includes('firefox')
+    ? launchBrowser('wdio.firefox.conf.js', 'runComparison.js')
+    : undefined
+const launchie11 = () =>
+  browsers.includes('ie11')
+    ? launchBrowser('wdio.ie11Browserstack.conf.js', 'runComparison.js')
+    : undefined
+
+const launchBrowser = (config, opts) => {
+  const { Launcher } = require('webdriverio')
+  const configPath = path.join(localPath, config)
+  const optsPath = {
+    spec: path.join(localPath, 'src/comparison/', opts)
+  }
+  return new Launcher(configPath, optsPath).run()
+}
+
+const report = () => {
+  const { blue } = require('chalk')
+  const generateReport = require(path.join(
     localPath,
     'src/comparison',
     'generateReport'
   ))
-  const onPromiseFailed = error => {
-    console.error(error.stacktrace)
-    process.exit(1)
-  }
 
-  const testCases = require(path.resolve(
+  generateReport()
+
+  unmute()
+  console.log(
+    blue(
+      `Here's the execution report: ${process.cwd()}/${configFolder}/report/index.html`
+    )
+  )
+}
+
+module.exports = (components, urls) => {
+  mute()
+
+  const testCases = require(path.join(
     localPath,
     'src',
     'comparison',
@@ -23,42 +70,8 @@ module.exports = (components, urls) => {
   ))(components, urls)
   process.env.FOREYES_TESTCASES = JSON.stringify(testCases)
 
-  const baselineConfig = path.resolve(localPath, 'wdio.reference.conf.js')
-  const baselineOpts = {
-    spec: path.resolve(localPath, 'src/comparison/runBaseline.js')
-  }
-
-  const firefoxConfig = path.resolve(localPath, 'wdio.firefox.conf.js')
-  const comparisonOpts = {
-    spec: path.resolve(localPath, 'src/comparison/runComparison.js')
-  }
-  const ie11Config = path.resolve(localPath, 'wdio.ie11Browserstack.conf.js')
-
-  const outwrite = process.stdout.write
-  const errwrite = process.stderr.write
-  fs.writeFileSync('foreyesConfig/logs.log')
-  const logFile = fs.createWriteStream('foreyesConfig/logs.log')
-  process.stdout.write = process.stderr.write = logFile.write.bind(logFile)
-
-  new Launcher(baselineConfig, baselineOpts)
-    .run()
-    .then(() => {
-      if (!browsers.includes('firefox')) return
-      return new Launcher(firefoxConfig, comparisonOpts).run()
-    })
-    .then(() => {
-      if (!browsers.includes('ie11')) return
-      return new Launcher(ie11Config, comparisonOpts).run()
-    })
-    .then(code => {
-      generateReport()
-      process.stdout.write = outwrite
-      process.stderr.write = errwrite
-      console.log(
-        blue(
-          `Here's the execution report: ${process.cwd()}/foreyesConfig/report/index.html`
-        )
-      )
-      process.exit(code)
-    }, onPromiseFailed)
+  launchChrome()
+    .then(launchFirefox)
+    .then(launchie11)
+    .finally(report)
 }
