@@ -1,15 +1,15 @@
+const fs = require('fs')
 const path = require('path')
 const localPath = path.join(__dirname, '..', '..', '..')
 const { configFolder, configFilePath } = require(path.join(
   localPath,
   'constants.js'
 ))
-const { browsers } = require(configFilePath)
+const { browsers } = JSON.parse(fs.readFileSync(configFilePath))
 const outwrite = process.stdout.write
 const errwrite = process.stderr.write
 
 const mute = () => {
-  const fs = require('fs')
   const logFilePath = path.join(configFolder, 'logs.log')
   fs.writeFileSync(logFilePath)
   const logFile = fs.createWriteStream(logFilePath)

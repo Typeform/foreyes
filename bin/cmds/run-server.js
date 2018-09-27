@@ -4,12 +4,12 @@ exports.builder = {}
 exports.handler = () => {
   const path = require('path')
   const localPath = path.join(__dirname, '..', '..')
-  const { writeFileSync } = require('fs')
+  const { writeFileSync, readFileSync } = require('fs')
   const { configFolder, configFilePath } = require(path.join(
     localPath,
     'constants.js'
   ))
-  const { serverPort } = require(configFilePath)
+  const { serverPort } = JSON.parse(readFileSync(configFilePath))
 
   const componentList = require(path.join(
     localPath,

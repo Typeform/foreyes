@@ -1,63 +1,65 @@
 const path = require('path')
-const destinationConfigPath = 'foreyesConfig'
+const localPath = path.join(__dirname, '..', '..')
+const { configFolder, configFilePath } = require(path.join(
+  localPath,
+  'constants.js'
+))
+const fs = require('fs')
+
+const copyFile = (from, to) => {
+  if (!fs.existsSync(to)) {
+    fs.copyFileSync(from, to)
+  }
+}
+
+const makeDirectory = dir => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir)
+  }
+}
 
 exports.command = 'setup'
 exports.desc =
   'Copies necessary config files into your root, under foreyesConfig folder'
 exports.builder = {}
 exports.handler = () => {
-  const path = require('path').resolve
-  const fs = require('fs')
-  const packagePath = path(__dirname, '..', '..')
-  const destinationConfigPath = 'foreyesConfig'
-  const storyBookPath = path('foreyesConfig', '.storybook')
-  const reportPath = path('foreyesConfig', 'report')
+  const reportPath = path.join(configFolder, 'report')
+  const storyBookPath = path.join(configFolder, '.storybook')
+  const storybookConfigFile = path.join(storyBookPath, 'config.js')
   const copyDirSync = require('copy-dir').sync
 
-  const copyFile = (from, to) => {
-    if (!fs.existsSync(to)) {
-      fs.copyFileSync(from, to)
-    }
-  }
-  const makeDirectory = dir => {
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir)
-    }
-  }
-
-  makeDirectory(destinationConfigPath)
+  makeDirectory(configFolder)
   copyFile(
-    path(packagePath, 'decorator.dist.js'),
-    path(destinationConfigPath, 'decorator.js')
+    path.join(localPath, 'decorator.dist.js'),
+    path.join(configFolder, 'decorator.js')
   )
   copyFile(
-    path(packagePath, 'fixtureUrls.dist.json'),
-    path(destinationConfigPath, 'fixtureUrls.json')
+    path.join(localPath, 'fixtureUrls.dist.json'),
+    path.join(configFolder, 'fixtureUrls.json')
   )
 
   makeDirectory(storyBookPath)
   copyFile(
-    path(packagePath, '.storybook', '.babelrc'),
-    path(storyBookPath, '.babelrc')
+    path.join(localPath, '.storybook', '.babelrc'),
+    path.join(storyBookPath, '.babelrc')
   )
   copyFile(
-    path(packagePath, '.storybook', 'webpack.config.js'),
-    path(storyBookPath, 'webpack.config.js')
+    path.join(localPath, '.storybook', 'webpack.config.js'),
+    path.join(storyBookPath, 'webpack.config.js')
   )
-  const configPath = path(destinationConfigPath, '.storybook/config.js')
-  if (!fs.existsSync(configPath)) {
+  if (!fs.existsSync(storybookConfigFile)) {
     fs.writeFileSync(
-      configPath,
+      storybookConfigFile,
       `import examples from './componentsWithExamplePages'
 import customExamples from './componentsWithCustomExamplePages'
 import '../decorator'
-import configure from '${path(__dirname, '../../', '.storybook/config.js')}'
+import configure from '${storybookConfigFile}'
 configure(examples, customExamples)`
     )
   }
 
   makeDirectory(reportPath)
-  copyDirSync(path(packagePath, 'report', 'dist'), reportPath)
+  copyDirSync(path.join(localPath, 'report', 'dist'), reportPath)
 
   promptSetup()
 }
@@ -66,18 +68,48 @@ const promptSetup = () => {
   const prompt = require('prompt')
   prompt.message = ''
   prompt.delimiter = ''
+  const isDesignSystem = () => prompt.history('isDesignSystem').value
   prompt.start()
-  const isDesignSystem = () => prompt.history('is_design_system').value
 
-  var schema = {
+  const schema = {
     properties: {
       browsers: {
         description: 'Browsers to test (chrome is always baseline)',
-        default: 'firefox,IE11'
+        default: 'firefox,IE11',
+        before: browsers => {
+          const supportedBrowsers = ['firefox', 'ie11']
+          return browsers
+            .trim()
+            .toLowerCase()
+            .split(',')
+            .filter(browser => {
+              if (supportedBrowsers.includes(browser)) {
+                return true
+              } else {
+                console.log(`Unknown/Unsupported browser ${browser}`)
+                return false
+              }
+            })
+        }
       },
       viewports: {
         description: 'All screen sizes to test: 1024,600;1280;720.',
-        default: '1024,600'
+        default: '1024,600',
+        before: viewports => {
+          return viewports
+            .trim()
+            .split(';')
+            .map(viewport => {
+              const [width, height] = viewport.split(',')
+              if (!width || !height) {
+                return
+              }
+              return {
+                width: parseInt(width),
+                height: parseInt(height)
+              }
+            })
+        }
       },
       screenshotsFolder: {
         description: 'Directory where screenshots will be saved',
@@ -94,7 +126,7 @@ const promptSetup = () => {
         default: 2,
         type: 'number'
       },
-      is_design_system: {
+      isDesignSystem: {
         description: 'Are you configuring foreyes for a design system?',
         type: 'boolean',
         default: false
@@ -113,7 +145,8 @@ const promptSetup = () => {
         description:
           'Are there any folders there that are not components? (separate by comma)',
         default: '',
-        ask: isDesignSystem
+        ask: isDesignSystem,
+        before: blacklist => blacklist.trim().split(',')
       },
       serverPort: {
         description: 'Port in which the example pages will be mounted',
@@ -129,41 +162,6 @@ const promptSetup = () => {
       return err
     }
 
-    result.component_folder_blacklist = result.component_folder_blacklist
-      .trim()
-      .split(',')
-
-    const supportedBrowsers = ['firefox', 'ie11']
-    result.browsers = result.browsers
-      .trim()
-      .toLowerCase()
-      .split(',')
-      .filter(browser => {
-        if (supportedBrowsers.includes(browser)) {
-          return true
-        } else {
-          console.log(`Unknown/Unsupported browser ${browser}`)
-          return false
-        }
-      })
-
-    result.viewports = result.viewports
-      .trim()
-      .split(';')
-      .map(viewport => {
-        const [width, height] = viewport.split(',')
-        if (!width || !height) {
-          return
-        }
-        return {
-          width: parseInt(width),
-          height: parseInt(height)
-        }
-      })
-
-    require('fs').writeFileSync(
-      path.resolve(destinationConfigPath, 'foreyes.config.js'),
-      `module.exports=${JSON.stringify(result, null, ' ')}`
-    )
+    fs.writeFileSync(configFilePath, JSON.stringify(result, null, 4))
   })
 }
