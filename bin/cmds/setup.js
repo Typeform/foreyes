@@ -162,7 +162,7 @@ const promptSetup = () => {
       })
 
     require('fs').writeFileSync(
-      path.resolve(destinationConfigPath, 'foreyesConfig', 'foreyes.config.js'),
+      path.resolve(destinationConfigPath, 'foreyes.config.js'),
       `module.exports=${JSON.stringify(result, null, ' ')}`
     )
   })

@@ -14,13 +14,13 @@
   </head>
   <body>
     <span>Click anywhere to see hide the differences</span>
-    <div><img /></div>
+    <div><img id='screenshot' /></div>
   </body>
   <script>
     const queryString = new URLSearchParams(window.location.search)
     const showDifference = () => show('difference')
     const showReference = () => show('reference')
-    const show = (query, title) => document.getElementsByTagName('img')[0].src = queryString.get(query)
+    const show = (query, title) => document.getElementById('screenshot').src = queryString.get(query)
 
     document.onmousedown = showReference
     document.onmouseup = showDifference
