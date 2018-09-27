@@ -4,9 +4,15 @@ exports.builder = {}
 exports.handler = () => {
   const fs = require('fs')
   const path = require('path')
+  const { configFolder } = require(path.join(
+    __dirname,
+    '..',
+    '..',
+    'constants.js'
+  ))
 
   const urls = fs.readFileSync(
-    path.resolve(process.cwd(), 'foreyesConfig/fixtureUrls.json')
+    path.resolve(process.cwd(), configFolder, 'fixtureUrls.json')
   )
 
   require(path.resolve(__dirname, 'support', 'runWdio.js'))(

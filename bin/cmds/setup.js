@@ -131,17 +131,17 @@ const promptSetup = () => {
         type: 'boolean',
         default: false
       },
-      path_to_components: {
+      pathToComponents: {
         description: 'Where are your components?',
         default: 'src/components/',
         ask: isDesignSystem
       },
-      path_to_examples: {
+      pathToExamples: {
         description: 'Where will your Foreyes examples be?',
         default: 'tests/',
         ask: isDesignSystem
       },
-      component_folder_blacklist: {
+      componentFolderBlacklist: {
         description:
           'Are there any folders there that are not components? (separate by comma)',
         default: '',
