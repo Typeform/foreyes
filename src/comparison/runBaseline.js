@@ -1,5 +1,5 @@
 const testCases = JSON.parse(process.env.FOREYES_TESTCASES)
-const green = require('chalk').green
+const { green } = require('chalk')
 
 describe('baseline_', () => {
   testCases.forEach(({name, url}) => {
