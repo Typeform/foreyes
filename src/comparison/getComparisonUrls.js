@@ -1,4 +1,5 @@
 const path = require('path')
+const { readFileSync } = require('fs')
 const { URL } = require('url')
 const { configFilePath } = require(path.join(
   '..', '..',
