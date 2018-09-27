@@ -47,20 +47,18 @@ module.exports = (components, urls) => {
       return new Launcher(firefoxConfig, comparisonOpts).run()
     })
     .then(() => {
-      if (!browsers.includes('IE11')) return
+      if (!browsers.includes('ie11')) return
       return new Launcher(ie11Config, comparisonOpts).run()
     })
     .then(code => {
-      if (code !== 0) {
-        generateReport()
-        process.stdout.write = outwrite
-        process.stderr.write = errwrite
-        console.log(
-          blue(
-            `Some tests failed. Here's the report: ${process.cwd()}/foreyesConfig/report/index.html`
-          )
+      generateReport()
+      process.stdout.write = outwrite
+      process.stderr.write = errwrite
+      console.log(
+        blue(
+          `Here's the execution report: ${process.cwd()}/foreyesConfig/report/index.html`
         )
-      }
+      )
       process.exit(code)
     }, onPromiseFailed)
 }
