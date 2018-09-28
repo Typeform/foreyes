@@ -45,7 +45,7 @@ const launchBrowser = (config, opts) => {
   return new Launcher(configPath, optsPath).run()
 }
 
-const report = () => {
+const report = code => {
   const { blue } = require('chalk')
   const generateReport = require(path.join(
     localPath,
@@ -61,6 +61,7 @@ const report = () => {
       `Here's the execution report: ${process.cwd()}/${configFolder}/report/index.html`
     )
   )
+  process.exit(code)
 }
 
 module.exports = (components, urls) => {

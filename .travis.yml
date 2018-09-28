@@ -11,7 +11,9 @@ cache:
   directories:
     - node_modules
 
-script: yarn test
+script: 
+  - yarn test
+  - yarn functional-test
 
 after_success:
   - yarn install:token
