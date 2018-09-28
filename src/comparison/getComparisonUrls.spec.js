@@ -1,5 +1,4 @@
 const path = require('path')
-jest.mock('../../foreyesConfig/foreyes.config.js')
 
 describe('getComparisonUrls', () => {
   describe('Given components and urls', () => {
