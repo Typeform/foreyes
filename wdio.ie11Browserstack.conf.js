@@ -1,10 +1,16 @@
 const merge = require('deepmerge')
 const wdioConf = require('./wdio.conf.js')
 const VisualRegressionCompare = require('wdio-visual-regression-service/compare')
+const fs = require('fs')
 
 const path = require('path')
-const config = require(path.resolve(process.cwd(), 'foreyesConfig', 'foreyes.config'))
-
+const { configFilePath } = require(path.join(
+  __dirname,
+  'constants.js'
+))
+const config = JSON.parse(
+  fs.readFileSync(configFilePath)
+)
 const { baseline, actual, diff } = require(path.resolve(__dirname, 'src', 'comparison', 'screenshotName.js'))
 const browser = 'IE11'
 
