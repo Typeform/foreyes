@@ -1,3 +1,7 @@
 [
+<<<<<<< HEAD
   "http://localhost:8080"
+=======
+  "http://www.google.com"
+>>>>>>> tests: add basic test-urls command test
 ]
