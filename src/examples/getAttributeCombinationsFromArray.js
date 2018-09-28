@@ -15,12 +15,8 @@ module.exports = propType => {
           .split(',')
       }
     },
-    { name: 'default', matches: propType => true, getCombination: () => [] }
+    { name: 'default', matches: () => true, getCombination: () => [] }
   ]
 
-  for (let i in types) {
-    if (types[i].matches(propType)) {
-      return types[i].getCombination(propType)
-    }
-  }
+  return types.find(type => type.matches(propType)).getCombination(propType)
 }
