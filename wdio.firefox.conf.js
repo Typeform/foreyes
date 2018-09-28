@@ -3,9 +3,10 @@ const wdioConf = require('./wdio.conf.js')
 const VisualRegressionCompare = require('wdio-visual-regression-service/compare')
 
 const path = require('path')
-const config = require(path.resolve(process.cwd(), 'foreyes.config'))
+const config = require(path.resolve(process.cwd(), 'foreyesConfig', 'foreyes.config'))
 
-const getBaseName = ({test, meta}) => `${test.title}_${meta.viewport.width}x${meta.viewport.height}`
+const { baseline, actual, diff } = require(path.resolve(__dirname, 'src', 'comparison', 'screenshotName.js'))
+const browser = 'firefox'
 
 exports.config = merge(
   wdioConf.config,
@@ -13,15 +14,15 @@ exports.config = merge(
     capabilities: [
       {
         maxInstances: 1,
-        browserName: 'firefox',
+        browserName: browser,
         "moz:firefoxOptions":{"args":["-headless"]}
       }
     ],
     visualRegression: {
       compare: new VisualRegressionCompare.LocalCompare({
-        referenceName: context => `./screenshots/${getBaseName(context)}.png`,
-        screenshotName: context => `./screenshots/${getBaseName(context)}_actual_firefox.png`,
-        diffName: context => `./screenshots/${getBaseName(context)}_diff_with_firefox.png`,
+        referenceName: context => baseline(context),
+        screenshotName: context => actual(context, browser),
+        diffName: context => diff(context, browser),
         misMatchTolerance: config.misMatchTolerance,
         ignoreComparison: config.ignoreComparison
       })

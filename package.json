@@ -6,9 +6,10 @@
     "foreyes": "bin/index.js"
   },
   "scripts": {
+    "build-report-page": "yarn webpack --config report/webpack.config.js",
     "install:token": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc",
     "precommit": "yarn lint-staged && yarn test",
-    "test": "touch foreyes.config.js; yarn run jest; rm foreyes.config.js"
+    "test": "touch foreyesConfig/foreyes.config.js; yarn run jest; rm foreyesConfig/foreyes.config.js"
   },
   "keywords": [
     "testing",
@@ -31,6 +32,7 @@
     "browserstack-local": "^1.3.3",
     "cartesian-product": "^2.1.2",
     "chalk": "^2.4.1",
+    "copy-dir": "^0.4.0",
     "dotenv": "^5.0.1",
     "prompt": "^1.0.0",
     "react": "^16.3.2",
@@ -49,7 +51,8 @@
     "lint-staged": "^7.1.2",
     "prettier-standard": "^8.0.1",
     "semantic-release": "^15.7.0",
-    "standard": "^11.0.1"
+    "standard": "^11.0.1",
+    "webpack-cli": "^3.1.0"
   },
   "jest": {
     "testPathIgnorePatterns": [
@@ -72,7 +75,9 @@
       "*/__fixtures__/*",
       "*/__mocks__/*",
       "src/comparison/*",
-      "wdio*"
+      "wdio*",
+      "*/dist/*",
+      "report/src/index.js"
     ]
   }
 }

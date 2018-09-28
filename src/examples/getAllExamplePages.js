@@ -1,6 +1,10 @@
 const path = require('path')
 const file = require('fs')
-const config = require(path.resolve(process.cwd(), 'foreyes.config'))
+const config = require(path.resolve(
+  process.cwd(),
+  'foreyesConfig',
+  'foreyes.config'
+))
 module.exports = components => {
   const examplePath = config.path_to_examples
   const sourcePath = config.path_to_components
@@ -21,5 +25,5 @@ module.exports = components => {
     return acc
   }, [])
 
-  return `const examples =  {${examples}\n};\nexport default examples;`
+  return `const examples = {${examples}\n};\nexport default examples;`
 }

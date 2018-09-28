@@ -1,16 +1,27 @@
 module.exports = (components, urls) => {
-  process.env.COMPONENTS = JSON.stringify(components)
-  process.env.FOREYES_URLS = JSON.stringify(urls)
-
   const fs = require('fs')
   const path = require('path')
   const blue = require('chalk').blue
   const Launcher = require('webdriverio').Launcher
+  const { browsers } = require(path.resolve(process.cwd(), 'foreyes.config'))
   const localPath = `${__dirname}/../../..`
+  const generateReport = require(path.resolve(
+    localPath,
+    'src/comparison',
+    'generateReport'
+  ))
   const onPromiseFailed = error => {
     console.error(error.stacktrace)
     process.exit(1)
   }
+
+  const testCases = require(path.resolve(
+    localPath,
+    'src',
+    'comparison',
+    'getComparisonUrls'
+  ))(components, urls)
+  process.env.FOREYES_TESTCASES = JSON.stringify(testCases)
 
   const baselineConfig = path.resolve(localPath, 'wdio.reference.conf.js')
   const baselineOpts = {
@@ -23,18 +34,31 @@ module.exports = (components, urls) => {
   }
   const ie11Config = path.resolve(localPath, 'wdio.ie11Browserstack.conf.js')
 
-  console.log(
-    blue(
-      'Look into foreyesConfig/logs.log for more information on the execution.'
-    )
-  )
+  const outwrite = process.stdout.write
+  const errwrite = process.stderr.write
   fs.writeFileSync('foreyesConfig/logs.log')
   const logFile = fs.createWriteStream('foreyesConfig/logs.log')
   process.stdout.write = process.stderr.write = logFile.write.bind(logFile)
 
   new Launcher(baselineConfig, baselineOpts)
     .run()
-    .then(() => new Launcher(firefoxConfig, comparisonOpts).run())
-    .then(() => new Launcher(ie11Config, comparisonOpts).run())
-    .then(code => process.exit(code), onPromiseFailed)
+    .then(() => {
+      if (!browsers.includes('firefox')) return
+      return new Launcher(firefoxConfig, comparisonOpts).run()
+    })
+    .then(() => {
+      if (!browsers.includes('ie11')) return
+      return new Launcher(ie11Config, comparisonOpts).run()
+    })
+    .then(code => {
+      generateReport()
+      process.stdout.write = outwrite
+      process.stderr.write = errwrite
+      console.log(
+        blue(
+          `Here's the execution report: ${process.cwd()}/foreyesConfig/report/index.html`
+        )
+      )
+      process.exit(code)
+    }, onPromiseFailed)
 }

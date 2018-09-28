@@ -6,6 +6,7 @@ exports.handler = () => {
   const path = require('path')
   const pathToExamples = require(path.resolve(
     process.cwd(),
+    'foreyesConfig',
     'foreyes.config.js'
   )).path_to_examples
 

@@ -5,7 +5,11 @@ exports.handler = () => {
   const localPath = `${__dirname}/../..`
   const file = require('fs')
   const path = require('path')
-  const port = require(path.resolve(process.cwd(), 'foreyes.config')).serverPort
+  const port = require(path.resolve(
+    process.cwd(),
+    'foreyesConfig',
+    'foreyes.config'
+  )).serverPort
 
   const componentList = require(path.resolve(
     localPath,

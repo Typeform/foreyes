@@ -3,9 +3,10 @@ const wdioConf = require('./wdio.conf.js')
 const VisualRegressionCompare = require('wdio-visual-regression-service/compare')
 
 const path = require('path')
-const config = require(path.resolve(process.cwd(), 'foreyes.config'))
+const config = require(path.resolve(process.cwd(), 'foreyesConfig', 'foreyes.config'))
 
-const getBaseName = ({ test, meta }) => `${test.title}_${meta.viewport.width}x${meta.viewport.height}`
+const { baseline, actual, diff } = require(path.resolve(__dirname, 'src', 'comparison', 'screenshotName.js'))
+const browser = 'IE11'
 
 exports.config = merge(
   wdioConf.config,
@@ -16,7 +17,7 @@ exports.config = merge(
     browserstackLocal: true,
 
     capabilities: [{
-       browserName: 'IE11',
+       browserName: browser,
       'os': 'Windows',
       'os_version': '10',
       'browser': 'IE',
@@ -31,9 +32,9 @@ exports.config = merge(
     }],
     visualRegression: {
       compare: new VisualRegressionCompare.LocalCompare({
-        referenceName: context => `./screenshots/${getBaseName(context)}.png`,
-        screenshotName: context => `./screenshots/${getBaseName(context)}_actual_ie11.png`,
-        diffName: context => `./screenshots/${getBaseName(context)}_difference_with_ie11.png`,
+        referenceName: context => baseline(context),
+        screenshotName: context => actual(context, browser),
+        diffName: context => diff(context, browser),
         misMatchTolerance: config.misMatchTolerance,
         ignoreComparison: config.ignoreComparison
       })
