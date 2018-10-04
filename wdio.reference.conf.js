@@ -4,7 +4,7 @@ const wdioConf = require('./wdio.conf.js')
 const VisualRegressionCompare = require('wdio-visual-regression-service/compare')
 
 const path = require('path')
-const getScreenshotName = require(path.resolve(__dirname, 'src', 'comparison', 'screenshotName')).baseline
+const getScreenshotName = require(path.join(__dirname, 'src', 'comparison', 'screenshotName')).baseline
 
 exports.config = merge(
   wdioConf.config,

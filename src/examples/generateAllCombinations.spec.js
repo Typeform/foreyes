@@ -1,5 +1,5 @@
 const path = require('path')
-const generateAllCombinations = require(path.resolve(
+const generateAllCombinations = require(path.join(
   __dirname,
   './generateAllCombinations'
 ))

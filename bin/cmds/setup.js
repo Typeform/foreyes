@@ -93,7 +93,7 @@ const promptSetup = () => {
         }
       },
       viewports: {
-        description: 'All screen sizes to test: 1024,600;1280;720.',
+        description: 'All screen sizes to test: 1024,600;1280,720.',
         default: '1024,600',
         before: viewports => {
           return viewports

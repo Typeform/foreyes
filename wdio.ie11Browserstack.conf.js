@@ -11,7 +11,7 @@ const { configFilePath } = require(path.join(
 const config = JSON.parse(
   fs.readFileSync(configFilePath)
 )
-const { baseline, actual, diff } = require(path.resolve(__dirname, 'src', 'comparison', 'screenshotName.js'))
+const { baseline, actual, diff } = require(path.join(__dirname, 'src', 'comparison', 'screenshotName.js'))
 const browser = 'IE11'
 
 exports.config = merge(

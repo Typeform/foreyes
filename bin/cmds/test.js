@@ -31,5 +31,5 @@ exports.handler = ({ component, isTemplate, urls }) => {
     : []
   const url = urls ? urls.split(',') : []
 
-  require(path.resolve(__dirname, 'support', 'runWdio.js'))(components, url)
+  require(path.join(__dirname, 'support', 'runWdio.js'))(components, url)
 }

@@ -11,13 +11,13 @@ const { pathToComponents, componentFolderBlacklist } = JSON.parse(
 )
 
 module.exports = () => {
-  const isntBlacklisted = name =>
-    !componentFolderBlacklist.includes(path.basename(name))
+  const isBlacklisted = name =>
+    componentFolderBlacklist.includes(path.basename(name))
   const isFolder = name =>
     fs.lstatSync(`${pathToComponents}${name}`).isDirectory()
 
   return fs
     .readdirSync(pathToComponents)
     .filter(isFolder)
-    .filter(isntBlacklisted)
+    .filter(path => !isBlacklisted(path))
 }

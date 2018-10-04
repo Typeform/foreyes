@@ -12,11 +12,8 @@ exports.handler = () => {
   ))
 
   const urls = fs.readFileSync(
-    path.resolve(process.cwd(), configFolder, 'fixtureUrls.json')
+    path.join(process.cwd(), configFolder, 'fixtureUrls.json')
   )
 
-  require(path.resolve(__dirname, 'support', 'runWdio.js'))(
-    [],
-    JSON.parse(urls)
-  )
+  require(path.join(__dirname, 'support', 'runWdio.js'))([], JSON.parse(urls))
 }

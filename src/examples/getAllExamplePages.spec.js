@@ -1,5 +1,5 @@
 const path = require('path')
-const getAllExamplePages = require(path.resolve(
+const getAllExamplePages = require(path.join(
   __dirname,
   './getAllExamplePages'
 ))
