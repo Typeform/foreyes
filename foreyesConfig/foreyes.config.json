@@ -1,0 +1,20 @@
+{
+    "browsers": [
+        "firefox",
+        "ie11"
+    ],
+    "viewports": [
+        {
+            "width": 1280,
+            "height": 720
+        }
+    ],
+    "screenshotsFolder": "./screenshots",
+    "ignoreComparison": "antialiasing",
+    "misMatchTolerance": 100,
+    "isDesignSystem": false,
+    "pathToComponents": "src/",
+    "pathToExamples": "test/",
+    "componentFolderBlacklist": ["__mocks__", "css"],
+    "serverPort": 1234
+}

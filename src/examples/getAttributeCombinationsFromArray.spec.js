@@ -1,5 +1,5 @@
 const path = require('path')
-const getAttributeCombinationsFromArray = require(path.resolve(
+const getAttributeCombinationsFromArray = require(path.join(
   __dirname,
   './getAttributeCombinationsFromArray'
 ))

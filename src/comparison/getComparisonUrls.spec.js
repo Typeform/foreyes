@@ -1,5 +1,4 @@
 const path = require('path')
-jest.mock('../../foreyesConfig/foreyes.config.js')
 
 describe('getComparisonUrls', () => {
   describe('Given components and urls', () => {
@@ -18,7 +17,7 @@ describe('getComparisonUrls', () => {
       'https://username1.typeform.com/to/abcdef'
     ]
     it('generates a list of urls', () => {
-      const result = require(path.resolve(
+      const result = require(path.join(
         __dirname,
         './getComparisonUrls'
       ))(components, bareUrls)

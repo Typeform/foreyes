@@ -1,5 +1,5 @@
 const testCases = JSON.parse(process.env.FOREYES_TESTCASES)
-const chalk = require('chalk')
+const { green, red } = require('chalk')
 
 describe(`${browser.desiredCapabilities.browserName}_`, () => {
   testCases.forEach(({name, url}) => {
@@ -9,11 +9,12 @@ describe(`${browser.desiredCapabilities.browserName}_`, () => {
         .checkDocument()
 
       report.forEach(result => {
+        const generalInfo = `${name} in ${browser.desiredCapabilities.browserName}`
         if (result.isWithinMisMatchTolerance) {
-          console.log(chalk.green(`✨  PASS: ${name} in ${browser.desiredCapabilities.browserName}.`))
+          console.log(green(`✨  PASS: ${generalInfo}.`))
         } else {
-          const errorMsg = `💔  FAIL: ${name} in ${browser.desiredCapabilities.browserName} is ${result.misMatchPercentage}% different.`
-          console.log(chalk.red(errorMsg))
+          const errorMsg = `💔  FAIL: ${generalInfo} is ${result.misMatchPercentage}% different.`
+          console.log(red(errorMsg))
           throw new Error(errorMsg)
         }
       })

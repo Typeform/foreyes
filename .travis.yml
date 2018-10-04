@@ -6,14 +6,14 @@ language: node_js
 node_js:
   - "10"
 
-before_script: 
-  - mkdir foreyesConfig
-  - touch foreyesConfig/foreyes.config.js
-
 cache:
   yarn: true
   directories:
     - node_modules
+
+script: 
+  - yarn test
+  - yarn functional-test
 
 after_success:
   - yarn install:token

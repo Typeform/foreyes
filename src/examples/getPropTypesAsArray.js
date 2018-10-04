@@ -1,7 +1,6 @@
-const file = require('fs')
-
 module.exports = componentPath => {
-  const rawString = file.readFileSync(componentPath).toString()
+  const fs = require('fs')
+  const rawString = fs.readFileSync(componentPath).toString()
   const clean = cleanString(rawString)
   return stringToArray(clean)
 }

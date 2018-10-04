@@ -7,9 +7,11 @@
   },
   "scripts": {
     "build-report-page": "yarn webpack --config report/webpack.config.js",
+    "functional-test": "yarn start-sample && node tests/test-urls-command.js",
     "install:token": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc",
     "precommit": "yarn lint-staged && yarn test",
-    "test": "touch foreyesConfig/foreyes.config.js; yarn run jest; rm foreyesConfig/foreyes.config.js"
+    "start-sample": "yarn http-server tests &",
+    "test": "yarn run jest"
   },
   "keywords": [
     "testing",
@@ -37,6 +39,7 @@
     "prompt": "^1.0.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "rmdir": "^1.2.0",
     "wdio-browserstack-service": "^0.1.16",
     "wdio-mocha-framework": "^0.5.13",
     "wdio-selenium-standalone-service": "^0.0.10",
@@ -46,6 +49,7 @@
     "yargs": "^11.0.0"
   },
   "devDependencies": {
+    "http-server": "^0.11.1",
     "husky": "^0.14.3",
     "jest": "^22.4.3",
     "lint-staged": "^7.1.2",

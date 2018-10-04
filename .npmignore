@@ -1,5 +1,4 @@
 .travis.yml
-foreyes.config.js
 yarn-error.log
 *spec.js
 __mocks__
@@ -7,3 +6,4 @@ __fixtures__
 package-lock.json
 /tests/
 report/src/*
+foreyesConfig/*

@@ -1,11 +1,10 @@
 const path = require('path')
-const getCustomExamplePages = require(path.resolve(
+const getCustomExamplePages = require(path.join(
   __dirname,
   './getCustomExamplePages'
 ))
 
 jest.mock('fs')
-jest.mock('../../foreyesConfig/foreyes.config')
 
 describe('getCustomExamplePages', () => {
   describe("given a path to the components' folder", () => {

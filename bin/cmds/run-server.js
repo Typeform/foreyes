@@ -2,44 +2,41 @@ exports.command = 'run-server'
 exports.desc = 'Serve example pages'
 exports.builder = {}
 exports.handler = () => {
-  const localPath = `${__dirname}/../..`
-  const file = require('fs')
   const path = require('path')
-  const port = require(path.resolve(
-    process.cwd(),
-    'foreyesConfig',
-    'foreyes.config'
-  )).serverPort
+  const localPath = path.join(__dirname, '..', '..')
+  const { writeFileSync, readFileSync } = require('fs')
+  const { configFolder, configFilePath } = require(path.join(
+    localPath,
+    'constants.js'
+  ))
+  const { serverPort } = JSON.parse(readFileSync(configFilePath))
 
-  const componentList = require(path.resolve(
+  const componentList = require(path.join(
     localPath,
     'src/examples/getComponentList'
   ))
-  const allExamplePages = require(path.resolve(
+  const allExamplePages = require(path.join(
     localPath,
     'src/examples/getAllExamplePages'
   ))
-  const customExamplePages = require(path.resolve(
+  const customExamplePages = require(path.join(
     localPath,
     'src/examples/getCustomExamplePages'
   ))
   const componentPaths = componentList()
-  file.writeFileSync(
-    path.resolve('foreyesConfig', '.storybook/componentsWithExamplePages.js'),
+  writeFileSync(
+    path.join(configFolder, '.storybook/componentsWithExamplePages.js'),
     allExamplePages(componentPaths),
     { flag: 'w' }
   )
-  file.writeFileSync(
-    path.resolve(
-      'foreyesConfig',
-      '.storybook/componentsWithCustomExamplePages.js'
-    ),
+  writeFileSync(
+    path.join(configFolder, '.storybook/componentsWithCustomExamplePages.js'),
     customExamplePages(componentPaths),
     { flag: 'w' }
   )
 
   require('child_process').execSync(
-    `yarn start-storybook -p ${port} -c foreyesConfig/.storybook`,
+    `yarn start-storybook -p ${serverPort} -c ${configFolder}/.storybook`,
     { stdio: [0, 1, 2] }
   )
 }

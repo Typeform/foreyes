@@ -1,5 +1,5 @@
 exports.command = 'test'
-exports.desc = 'Test Chrome against Firefox and IE11'
+exports.desc = 'Test Chrome against Firefox and ie11'
 exports.builder = {
   component: {
     default: undefined
@@ -31,5 +31,5 @@ exports.handler = ({ component, isTemplate, urls }) => {
     : []
   const url = urls ? urls.split(',') : []
 
-  require(path.resolve(__dirname, 'support', 'runWdio.js'))(components, url)
+  require(path.join(__dirname, 'support', 'runWdio.js'))(components, url)
 }

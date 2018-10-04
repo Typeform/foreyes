@@ -65,6 +65,7 @@ script:
 
 Foreyes can visually compare URLs directly. Add URLs to the list in the `foreyesConfig/fixturesUrls.json`. Then use `yarn foreyes test-urls`
 
+Screenshots will be saved under the specified folder in the setup. Keep in mind each execution will replace the old screenshots.
 
 *Next steps: Refactor so .storybook config folder doesn't need to be pasted into the root*
 

@@ -1,19 +1,23 @@
+const fs = require('fs')
 const path = require('path')
-const config = require(path.resolve(
-  process.cwd(),
-  'foreyesConfig',
-  'foreyes.config'
+const { configFilePath } = require(path.join(
+  __dirname,
+  '..',
+  '..',
+  'constants.js'
 ))
-const file = require('fs')
+const { pathToComponents, componentFolderBlacklist } = JSON.parse(
+  fs.readFileSync(configFilePath)
+)
 
 module.exports = () => {
-  const basePath = config.path_to_components
-  const blacklist = config.component_folder_blacklist
-  const isntBlacklisted = name => !blacklist.includes(path.basename(name))
-  const isFolder = name => file.lstatSync(`${basePath}${name}`).isDirectory()
+  const isBlacklisted = name =>
+    componentFolderBlacklist.includes(path.basename(name))
+  const isFolder = name =>
+    fs.lstatSync(`${pathToComponents}${name}`).isDirectory()
 
-  return file
-    .readdirSync(basePath)
+  return fs
+    .readdirSync(pathToComponents)
     .filter(isFolder)
-    .filter(isntBlacklisted)
+    .filter(path => !isBlacklisted(path))
 }

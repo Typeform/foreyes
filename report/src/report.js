@@ -7,20 +7,23 @@ const generateTestCases = testCases => {
   })
 }
 
-const Report = ({ data }) => {
+const Report = ({ data, reportDate }) => {
   return (
-    <table>
-      <tr class='header'>
-        <td>Test Case</td>
-        <tr>
-          <td>Viewport</td>
-          <td>Baseline</td>
-          <td>Firefox</td>
-          <td>IE11</td>
+    <span>
+      <table>
+        <tr class='header'>
+          <td>Test Case</td>
+          <tr>
+            <td>Viewport</td>
+            <td>Baseline</td>
+            <td>Firefox</td>
+            <td>IE11</td>
+          </tr>
         </tr>
-      </tr>
-      {generateTestCases(data)}
-    </table>
+        {generateTestCases(data)}
+      </table>
+      <div id='footer'>Report generated on {reportDate}</div>
+    </span>
   )
 }
 

@@ -1,25 +1,23 @@
 const path = require('path')
-const file = require('fs')
-const config = require(path.resolve(
-  process.cwd(),
-  'foreyesConfig',
-  'foreyes.config'
-))
+const fs = require('fs')
+const { configFilePath } = require(path.join('..', '..', 'constants.js'))
+const { pathToComponents, pathToExamples } = JSON.parse(
+  fs.readFileSync(configFilePath)
+)
+
 module.exports = components => {
-  const examplePath = config.path_to_examples
-  const sourcePath = config.path_to_components
   const examples = components.reduce((acc, componentName) => {
-    const p = path.resolve(
+    const examplePath = path.join(
       process.cwd(),
-      examplePath,
+      pathToExamples,
       `${componentName}.exampleCombinations.js`
     )
-    if (file.existsSync(p)) {
+    if (fs.existsSync(examplePath)) {
       acc.push(
         `\n\t${componentName.replace(
           /-/g,
           '_'
-        )}: { component: require('../../${sourcePath}${componentName}').default, combinations: require('../../${examplePath}${componentName}.exampleCombinations.js').default }`
+        )}: { component: require('../../${pathToComponents}${componentName}').default, combinations: require('../../${pathToExamples}${componentName}.exampleCombinations.js').default }`
       )
     }
     return acc

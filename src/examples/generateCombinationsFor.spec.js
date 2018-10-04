@@ -1,11 +1,10 @@
 const path = require('path')
-const generateCombinationsFor = require(path.resolve(
+const generateCombinationsFor = require(path.join(
   __dirname,
   './generateCombinationsFor'
 ))
 
 jest.mock('fs')
-jest.mock('../../foreyesConfig/foreyes.config.js')
 const fs = require('fs')
 
 describe('generateCombinationsFor', () => {

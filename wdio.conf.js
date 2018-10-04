@@ -1,6 +1,12 @@
 const path = require('path')
-const config = require(path.resolve(process.cwd(), 'foreyesConfig', 'foreyes.config'))
-
+const fs = require('fs')
+const { configFilePath } = require(path.join(
+  __dirname,
+  'constants.js'
+))
+const config = JSON.parse(
+  fs.readFileSync(configFilePath)
+)
 exports.config = {
   //
   // ==================
