@@ -5,7 +5,9 @@ const { configFolder, configFilePath } = require(path.join(
   localPath,
   'constants.js'
 ))
-const { browsers } = JSON.parse(fs.readFileSync(configFilePath))
+const { browsers, screenshotsFolder } = JSON.parse(
+  fs.readFileSync(configFilePath)
+)
 const outwrite = process.stdout.write
 const errwrite = process.stderr.write
 
@@ -20,6 +22,8 @@ const unmute = () => {
   process.stdout.write = outwrite
   process.stderr.write = errwrite
 }
+
+const deleteOldScreenshots = () => require('rmdir')(screenshotsFolder)
 
 const launchChrome = () =>
   launchBrowser('wdio.reference.conf.js', 'runBaseline.js')
@@ -69,6 +73,8 @@ module.exports = (components, urls) => {
     'getComparisonUrls'
   ))(components, urls)
   process.env.FOREYES_TESTCASES = JSON.stringify(testCases)
+
+  deleteOldScreenshots()
 
   launchChrome()
     .then(launchFirefox)

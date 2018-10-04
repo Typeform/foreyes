@@ -38,6 +38,7 @@
     "prompt": "^1.0.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "rmdir": "^1.2.0",
     "wdio-browserstack-service": "^0.1.16",
     "wdio-mocha-framework": "^0.5.13",
     "wdio-selenium-standalone-service": "^0.0.10",
