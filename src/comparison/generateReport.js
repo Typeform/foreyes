@@ -36,5 +36,7 @@ module.exports = () => {
     return acc1
   }, {})
 
-  writeFileSync(path.join(configFolder, 'report', 'report.js'), `const report = ${JSON.stringify(report,undefined,2)}`)
+  writeFileSync(path.join(configFolder, 'report', 'report.js'), 
+  `const report = ${JSON.stringify(report,undefined,2)}
+const reportDate = "${Date()}"`)
 }

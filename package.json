@@ -7,6 +7,7 @@
   },
   "scripts": {
     "build-report-page": "yarn webpack --config report/webpack.config.js",
+    "functional-test": "node tests/test-urls-command.js",
     "install:token": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc",
     "precommit": "yarn lint-staged && yarn test",
     "test": "yarn run jest"
