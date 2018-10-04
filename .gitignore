@@ -71,3 +71,6 @@ bundle.js
 src/icons/available-icons.json
 package-lock.json
 npm-debug*
+
+foreyesConfig/logs.log
+screenshots/*
