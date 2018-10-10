@@ -5,9 +5,7 @@ const { configFolder, configFilePath } = require(path.join(
   localPath,
   'constants.js'
 ))
-const { browsers, screenshotsFolder } = JSON.parse(
-  fs.readFileSync(configFilePath)
-)
+const { screenshotsFolder } = JSON.parse(fs.readFileSync(configFilePath))
 const outwrite = process.stdout.write
 const errwrite = process.stderr.write
 
@@ -27,14 +25,11 @@ const deleteOldScreenshots = () => require('rmdir')(screenshotsFolder)
 
 const launchChrome = () =>
   launchBrowser('wdio.reference.conf.js', 'runBaseline.js')
-const launchFirefox = () =>
-  browsers.includes('firefox')
-    ? launchBrowser('wdio.firefox.conf.js', 'runComparison.js')
-    : undefined
-const launchie11 = () =>
-  browsers.includes('ie11')
-    ? launchBrowser('wdio.ie11Browserstack.conf.js', 'runComparison.js')
-    : undefined
+
+const launchMultibrowser = () => {
+  launchBrowser('wdio.firefox.conf.js', 'runComparison.js')
+  launchBrowser('wdio.ie11Browserstack.conf.js', 'runComparison.js')
+}
 
 const launchBrowser = (config, opts) => {
   const { Launcher } = require('webdriverio')
@@ -76,11 +71,6 @@ module.exports = (components, urls) => {
   process.env.FOREYES_TESTCASES = JSON.stringify(testCases)
 
   deleteOldScreenshots()
-
-  const launchMultibrowser = () => {
-    launchBrowser('wdio.firefox.conf.js', 'runComparison.js')
-    launchBrowser('wdio.ie11Browserstack.conf.js', 'runComparison.js')
-  }
 
   launchChrome()
     .then(launchMultibrowser)
