@@ -77,8 +77,12 @@ module.exports = (components, urls) => {
 
   deleteOldScreenshots()
 
+  const launchMultibrowser = () => {
+    launchBrowser('wdio.firefox.conf.js', 'runComparison.js')
+    launchBrowser('wdio.ie11Browserstack.conf.js', 'runComparison.js')
+  }
+
   launchChrome()
-    .then(launchFirefox)
-    .then(launchie11)
+    .then(launchMultibrowser)
     .finally(report)
 }
