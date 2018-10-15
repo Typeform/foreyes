@@ -19,9 +19,8 @@ exports.config = merge(
   {
     capabilities: [
       {
-        maxInstances: 1,
         browserName: browser,
-        "moz:firefoxOptions":{"args":["-headless"]}
+        "moz:firefoxOptions": { "args": ["-headless"] }
       }
     ],
     visualRegression: {
