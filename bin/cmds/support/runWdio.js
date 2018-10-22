@@ -5,7 +5,9 @@ const { configFolder, configFilePath } = require(path.join(
   localPath,
   'constants.js'
 ))
-const { screenshotsFolder } = JSON.parse(fs.readFileSync(configFilePath))
+const { screenshotsFolder, browsers } = JSON.parse(
+  fs.readFileSync(configFilePath)
+)
 const outwrite = process.stdout.write
 const errwrite = process.stderr.write
 
@@ -60,6 +62,19 @@ const report = code => {
 }
 
 module.exports = (components, urls) => {
+  if (
+    browsers.includes('ie11') &&
+    (!process.env.BROWSERSTACK_USERNAME || !process.env.BROWSERSTACK_KEY)
+  ) {
+    const { red } = require('chalk')
+    console.log(
+      red(
+        'IE11 requires browserstack credentials, but they are not present. Please export the following ENV variables: BROWSERSTACK_USERNAME, BROWSERSTACK_KEY'
+      )
+    )
+    return
+  }
+
   mute()
 
   const testCases = require(path.join(
