@@ -29,8 +29,21 @@ const launchChrome = () =>
   launchBrowser('wdio.reference.conf.js', 'runBaseline.js')
 
 const launchMultibrowser = () => {
-  launchBrowser('wdio.firefox.conf.js', 'runComparison.js')
-  launchBrowser('wdio.ie11Browserstack.conf.js', 'runComparison.js')
+  const firefox = new Promise(
+    resolve =>
+      browsers.includes('firefox')
+        ? resolve(launchBrowser('wdio.firefox.conf.js', 'runComparison.js'))
+        : resolve()
+  )
+  const ie11 = new Promise(
+    resolve =>
+      browsers.includes('ie11')
+        ? resolve(
+          launchBrowser('wdio.ie11Browserstack.conf.js', 'runComparison.js')
+        )
+        : resolve()
+  )
+  return Promise.all([firefox, ie11])
 }
 
 const launchBrowser = (config, opts) => {
