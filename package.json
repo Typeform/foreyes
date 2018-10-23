@@ -17,14 +17,16 @@
     "testing",
     "visual regression",
     "typeform",
-    "cross browser"
+    "cross browser",
+    "automation",
+    "screenshots"
   ],
   "contributors": [
     "Typeform (http://typeform.com)",
-    "Daniel Giralt Len <daniel.giralt@typeform.com>",
-    "Jordi Pons <jordi.pons@typeform.com>",
-    "Pau Boix <pau@typeform.com>",
-    "Toni Feliu <toni.feliu@typeform.com>"
+    "Daniel Giralt Len",
+    "Jordi Pons",
+    "Pau Boix",
+    "Toni Feliu"
   ],
   "license": "Apache-2.0",
   "dependencies": {

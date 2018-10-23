@@ -17,9 +17,9 @@ The currently supported browsers are Chrome (as the baseline), Firefox, and IE11
 
 ### Prerequisites
 
-Foreyes is a CLI tool that uses `node.js` and `yarn`; so be insured to have them installed. And because Foreyes uses Selenium, have `Java` installed too.
+Foreyes is a CLI tool that uses `node.js` and `yarn`; so ensure they are installed. And because Foreyes uses Selenium, have the latest `Java` installed, too.
 
-Additionally, at the moment IE11 is run on browserstack. Be sure to export these ENV vars.
+Additionally, at the moment IE11 is run on Browserstack. Be sure to export these ENV vars if you wish to use it.
 ```
 BROWSERSTACK_USERNAME
 BROWSERSTACK_KEY
@@ -27,10 +27,9 @@ BROWSERSTACK_KEY
 
 ### Installing
 
-Foreyes is a Typeform's **private** NPM package. So configure your NPM token in your project, then add the package:
+Use yarn to add the package:
 
 ```bash
-echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
 yarn add @typeform/foreyes
 ```
 
@@ -72,7 +71,6 @@ addons:
   chrome: stable
 
 before_install:
-  - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
   - export MOZ_HEADLESS=1
 
 script:
@@ -83,7 +81,7 @@ script:
 
 Refer to one of the authors for help and issues.
 
-* **Daniel Giralt Len** - *Coordinator and developer*
+* **Daniel Giralt Len** - *Coordinator and Developer*
 * **Jordi Pons Llauradó** - *Developer*
 * **Toni Feliu** - *Developer*
 * **Pau Boix** - *Developer*
