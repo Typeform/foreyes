@@ -7,7 +7,7 @@ We want to ensure our design is consistent across our supported browsers. Sadly,
 
 Here's how it works: Foreyes screenshoots a webpage in a baseline browser (the one where we usually develop), and then compares it with the screenshots of other browsers. Then announce the pixel differences, if any!
 
-The currently supported browsers are Chrome (as the baseline), Firefox, and IE11 (through Browserstack).
+The currently supported browsers are Chrome (as the baseline), Firefox, and IE11 & Safari (through Browserstack).
 
 ## Getting Started
 
@@ -15,7 +15,7 @@ The currently supported browsers are Chrome (as the baseline), Firefox, and IE11
 
 Foreyes is a CLI tool that uses `node.js` and `yarn`; so be insured to have them installed. And because Foreyes uses Selenium, have `Java` installed too.
 
-Additionally, at the moment IE11 is run on browserstack. Be sure to export these ENV vars.
+Additionally, at the moment IE11 and Safari are run on browserstack. If you use them, be sure to export these ENV vars.
 ```
 BROWSERSTACK_USERNAME
 BROWSERSTACK_KEY

@@ -1,5 +1,5 @@
 exports.command = 'test-all'
-exports.desc = 'Test Chrome against Firefox and ie11 for every example'
+exports.desc = 'Test Chrome against Firefox, ie11 and Safari for every example'
 exports.builder = {}
 exports.handler = () => {
   const fs = require('fs')

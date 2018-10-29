@@ -75,9 +75,9 @@ const promptSetup = () => {
     properties: {
       browsers: {
         description: 'Browsers to test (chrome is always baseline)',
-        default: 'firefox,ie11',
+        default: 'firefox,ie11,safari',
         before: browsers => {
-          const supportedBrowsers = ['firefox', 'ie11']
+          const supportedBrowsers = ['firefox', 'ie11', 'safari']
           return browsers
             .trim()
             .toLowerCase()
