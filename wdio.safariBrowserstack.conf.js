@@ -12,7 +12,7 @@ const config = JSON.parse(
   fs.readFileSync(configFilePath)
 )
 const { baseline, actual, diff } = require(path.join(__dirname, 'src', 'comparison', 'screenshotName.js'))
-const browser = 'IE11'
+const browser = 'Safari'
 
 exports.config = merge(
   wdioConf.config,
@@ -23,18 +23,18 @@ exports.config = merge(
     browserstackLocal: true,
 
     capabilities: [{
-       browserName: browser,
-      'os': 'Windows',
-      'os_version': '10',
-      'browser': 'IE',
-      'browser_version': '11.0',
+      browserName: browser,
+      'os': 'OS X',
+      'os_version': 'Mojave',
+      'browser': 'Safari',
+      'browser_version': '12.0',
+      'browserstack.local': 'false',
+      'browserstack.selenium_version': '3.5.2',
       'resolution': '1920x1080',
       'project': 'Foreyes',
-      'browserstack.ie.enablePopups': false,
       'browserstack.debug': true,
       'browserstack.video': false,
       'browserstack.local': true
-
     }],
     visualRegression: {
       compare: new VisualRegressionCompare.LocalCompare({
@@ -45,7 +45,7 @@ exports.config = merge(
         ignoreComparison: config.ignoreComparison
       })
     },
-    
+
   },
   { clone: false }
 )

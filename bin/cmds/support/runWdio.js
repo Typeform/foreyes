@@ -76,13 +76,13 @@ const report = code => {
 
 module.exports = (components, urls) => {
   if (
-    browsers.includes('ie11') &&
+    (browsers.includes('ie11') || browsers.includes('safari')) &&
     (!process.env.BROWSERSTACK_USERNAME || !process.env.BROWSERSTACK_KEY)
   ) {
     const { red } = require('chalk')
     console.log(
       red(
-        'IE11 requires browserstack credentials, but they are not present. Please export the following ENV variables: BROWSERSTACK_USERNAME, BROWSERSTACK_KEY'
+        'IE11 and/or Safari require browserstack credentials, but they are not present. Please export the following ENV variables: BROWSERSTACK_USERNAME, BROWSERSTACK_KEY'
       )
     )
     return
@@ -100,7 +100,17 @@ module.exports = (components, urls) => {
 
   deleteOldScreenshots()
 
+  const launchSafari = new Promise(
+    resolve =>
+      browsers.includes('safari')
+        ? resolve(
+          launchBrowser('wdio.safariBrowserstack.conf.js', 'runComparison.js')
+        )
+        : resolve()
+  )
+
   launchChrome()
     .then(launchMultibrowser)
+    .then(launchSafari)
     .finally(report)
 }

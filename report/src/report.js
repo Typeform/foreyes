@@ -18,6 +18,7 @@ const Report = ({ data, reportDate }) => {
             <td>Baseline</td>
             <td>Firefox</td>
             <td>IE11</td>
+            <td>Safari</td>
           </tr>
         </tr>
         {generateTestCases(data)}

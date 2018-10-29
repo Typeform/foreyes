@@ -1,7 +1,7 @@
 import React from 'react'
 import Browser from './browser.js'
 
-const Viewport = ({ name, baseline, firefox, IE11 }) => {
+const Viewport = ({ name, baseline, firefox, IE11, Safari }) => {
   return (
     <tr>
       <td>{name}</td>
@@ -10,6 +10,7 @@ const Viewport = ({ name, baseline, firefox, IE11 }) => {
       </td>
       <Browser {...firefox} baseline={baseline} />
       <Browser {...IE11} baseline={baseline} />
+      <Browser {...Safari} baseline={baseline} />
     </tr>
   )
 }
