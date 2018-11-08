@@ -77,6 +77,10 @@ script:
   - yarn foreyes test-urls
 ```
 
+## Contributing
+
+Head over to [CONTRIBUTING.md](CONTRIBUTING.md) for more information
+
 ## Authors
 
 Refer to one of the authors for help and issues.
@@ -85,3 +89,7 @@ Refer to one of the authors for help and issues.
 * **Jordi Pons Llauradó** - *Developer*
 * **Toni Feliu** - *Developer*
 * **Pau Boix** - *Developer*
+
+## License
+
+This code's license is [Apache-2.0](LICENSE-2.0.txt)
