@@ -64,7 +64,8 @@
       "/logs/",
       "/bin/"
     ],
-    "testURL": "http://localhost/"
+    "testURL": "http://localhost/",
+    "collectCoverage": true
   },
   "lint-staged": {
     "linters": {
