@@ -2,6 +2,10 @@
 ## 📺 Compare how your webpage looks in different browsers! 📺
 
 [![Build Status](https://travis-ci.com/Typeform/kitt.svg?token=axsNaJqw6sjfoKFeCyDk&branch=master)](https://travis-ci.com/Typeform/Foreyes)
+![Statements](coverage/badge-statements.svg)
+![Functions](coverage/badge-functions.svg)
+![Lines](coverage/badge-lines.svg)
+![Branches](coverage/badge-branches.svg)
 
 We want to ensure our design is consistent across our supported browsers. Sadly, this is typically done in a manual fashion. Foreyes aims to fix that problem.
 
