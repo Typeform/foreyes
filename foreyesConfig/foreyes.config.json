@@ -1,7 +1,6 @@
 {
     "browsers": [
-        "firefox",
-        "ie11"
+        "firefox"
     ],
     "viewports": [
         {
@@ -15,6 +14,9 @@
     "isDesignSystem": false,
     "pathToComponents": "src/",
     "pathToExamples": "test/",
-    "componentFolderBlacklist": ["__mocks__", "css"],
+    "componentFolderBlacklist": [
+        "__mocks__",
+        "css"
+    ],
     "serverPort": 1234
 }
