@@ -9,9 +9,9 @@
     "build-report-page": "yarn webpack --config report/webpack.config.js",
     "functional-test": "yarn start-sample && node tests/test-urls-command.js",
     "install:token": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc",
-    "precommit": "yarn lint-staged && yarn test",
+    "precommit": "yarn lint-staged && yarn test && git add coverage/*",
     "start-sample": "yarn http-server tests &",
-    "test": "yarn run jest"
+    "test": "yarn run jest && yarn jest-coverage-badges"
   },
   "keywords": [
     "testing",
@@ -52,6 +52,7 @@
     "http-server": "^0.11.1",
     "husky": "^0.14.3",
     "jest": "^22.4.3",
+    "jest-coverage-badges": "^1.0.0",
     "lint-staged": "^7.1.2",
     "prettier-standard": "^8.0.1",
     "semantic-release": "^15.7.0",
@@ -64,7 +65,11 @@
       "/logs/",
       "/bin/"
     ],
-    "testURL": "http://localhost/"
+    "testURL": "http://localhost/",
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json-summary"
+    ]
   },
   "lint-staged": {
     "linters": {

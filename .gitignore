@@ -56,7 +56,7 @@ build/Release # Compiled binary addons (http://nodejs.org/api/addons.html)
 *.sass-cache
 
 # Coverage directory used by tools like istanbul
-coverage
+coverage/coverage-summary.json
 
 # nodemon
 .monitor

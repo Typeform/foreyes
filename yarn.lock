@@ -6481,6 +6481,11 @@ jest-config@^22.4.4:
     jest-validate "^22.4.4"
     pretty-format "^22.4.0"
 
+jest-coverage-badges@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/jest-coverage-badges/-/jest-coverage-badges-1.0.0.tgz#ccf50d4155c02855f1143528ba366b7ccc0631cf"
+  integrity sha512-2PzLRTBMYxaRtDy3gAfVhzZcP5MGb90vzS/6v23tR67J7ejh2D6rGlGvl3IF0LJxqKKJlWSxkTNTzgXMsDb9ug==
+
 jest-diff@^22.4.0, jest-diff@^22.4.3:
   version "22.4.3"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-22.4.3.tgz#e18cc3feff0aeef159d02310f2686d4065378030"
