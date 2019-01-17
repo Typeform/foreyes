@@ -5,6 +5,10 @@
   "bin": {
     "foreyes": "bin/index.js"
   },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/Typeform/foreyes.git"
+  },
   "scripts": {
     "build-report-page": "yarn webpack --config report/webpack.config.js",
     "functional-test": "yarn start-sample; node tests/test-urls-command.js",
