@@ -14,7 +14,9 @@
     "functional-test": "yarn start-sample; node tests/test-urls-command.js",
     "install:token": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc",
     "start-sample": "yarn http-server tests &",
-    "test": "yarn run jest && yarn jest-coverage-badges"
+    "test": "yarn run jest && yarn jest-coverage-badges",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "keywords": [
     "testing",
@@ -51,7 +53,8 @@
     "wdio-visual-regression-service": "^0.9.0",
     "webdriverio": "^4.12.0",
     "webpack": "^4.14.0",
-    "yargs": "^12.0.2"
+    "yargs": "^12.0.2",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "http-server": "^0.11.1",
@@ -98,5 +101,6 @@
       "*/dist/*",
       "report/src/index.js"
     ]
-  }
+  },
+  "snyk": true
 }
